@@ -1,4 +1,4 @@
-@if(auth()->user()->role_id ==1)
+@if((auth()->user()->role_id ==1))
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
@@ -17,6 +17,7 @@
     </div>
 </x-app-layout>
 @else
-    <h2>ACCESO NO AUTORIZADO... despues implemento policies</h2>
+    <h2>ACCESO NO AUTORIZADO... </h2>
+{{--    TODO despues implementar policies--}}
     <a href="/dashboard" class="btn btn-blue">Regresar</a>
 @endif

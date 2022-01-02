@@ -22,6 +22,7 @@ class UserFactory extends Factory
             'password' => bcrypt("1234567.17"), // password
             'remember_token' => Str::random(10),
             'role_id'=>2,
+            'user_state'=>1
         ];
     }
 

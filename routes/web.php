@@ -23,6 +23,6 @@ Route::get('/dashboard', function () {
 
 Route::get('/admin',function (){
     return view('admin');
-});
+})->middleware(['auth','verified']);
 
 require __DIR__.'/auth.php';
