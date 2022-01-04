@@ -28,8 +28,14 @@
 @stop
 
 @section('content')
-    <p>Bienvenido al panel de administración </p>
-    crud
+    <div>
+        <p>Bienvenido al panel de administración </p>
+
+        <x-indexUser :users="$users">
+
+        </x-indexUser>
+    </div>
+
 @stop
 
 @section('css')

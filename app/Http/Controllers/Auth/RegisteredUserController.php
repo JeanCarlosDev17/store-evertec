@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
-
+use App\Http\Controllers\UserController;
 class RegisteredUserController extends Controller
 {
     /**
@@ -49,7 +49,7 @@ class RegisteredUserController extends Controller
         event(new Registered($user));
 
         Auth::login($user);
-
+        //Posterior a la creacion del usuario y el login redirigir a la home de usuarios
         return redirect(RouteServiceProvider::HOME);
     }
 }

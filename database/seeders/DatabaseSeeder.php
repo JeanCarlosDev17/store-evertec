@@ -7,6 +7,7 @@ use \App\Models\User;
 use \App\Models\Role;
 use Illuminate\Support\Facades\Hash;
 use Carbon\Carbon;
+use Illuminate\Support\Str;
 
 class DatabaseSeeder extends Seeder
 {
@@ -31,10 +32,12 @@ class DatabaseSeeder extends Seeder
         $userAdmin->name="jean Admin";
         $userAdmin->email="jeancarlosrecio@hotmail.com";
         $userAdmin->password=Hash::make("123456789");
+        $userAdmin->remember_token =Str::random(10);
         $userAdmin->email_verified_at= Carbon::now()->toDateTimeString();
         $userAdmin->role_id=1;
         $userAdmin->save();
 
         User::factory(10)->create();
+        //$this->call(ArticleSeeder::class)
     }
 }

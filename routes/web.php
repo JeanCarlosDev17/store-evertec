@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use \App\Http\Controllers\UserController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -21,8 +21,8 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth','verified'])->name('dashboard');
 
-Route::get('/admin',function (){
-    return view('admin');
-})->middleware(['auth','verified']);
+Route::get('/admin',[\App\Http\Controllers\UserController::class,'index'])->middleware(['auth','verified']);
+
+Route::resource('admin/users','1UserController');
 
 require __DIR__.'/auth.php';
