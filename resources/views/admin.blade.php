@@ -1,35 +1,23 @@
-@if((auth()->user()->role_id ==1))
-{{--<x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Dashboard') }}
-        </h2>
-    </x-slot>
+@if(isset(auth()->user()->role_id)and(auth()->user()->role_id ==1))
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 bg-white border-b border-gray-200">
-
-
-
-                </div>
-            </div>
-        </div>
-    </div>
-</x-app-layout>--}}
 
 @extends('adminlte::page')
 
-@section('title', 'Administrador')
+@section('title', 'Administrador Home')
 
 @section('content_header')
     <h1>Administrador</h1>
 @stop
 
 @section('content')
-    <p>Bienvenido al panel de administración </p>
-    crud
+    <div>
+        <p>Bienvenido al panel de administración </p>
+
+        <x-indexUser :users="$users">
+
+        </x-indexUser>
+    </div>
+
 @stop
 
 @section('css')

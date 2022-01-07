@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
-
+use App\Http\Controllers\UserController;
 class RegisteredUserController extends Controller
 {
     /**
@@ -39,17 +39,21 @@ class RegisteredUserController extends Controller
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
-        $user = User::create([
+        /*$user = User::create([
             'name' => $request->name,
             'email' => $request->email,
-            'password' => Hash::make($request->password),
-            'role_id'=>2
-        ]);
-
+            'password' => Hash::make($request->password)
+        ]);*/
+        $user= new User();
+        $user->name=$request->name;
+        $user->email=$request->email;
+        $user->password=Hash::make($request->password);
+        $user->role_id=2;
+        $user->save();
         event(new Registered($user));
 
         Auth::login($user);
-
+        //Posterior a la creacion del usuario y el login redirigir a la home de usuarios
         return redirect(RouteServiceProvider::HOME);
     }
 }
