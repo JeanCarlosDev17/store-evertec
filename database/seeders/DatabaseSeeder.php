@@ -37,6 +37,15 @@ class DatabaseSeeder extends Seeder
         $userAdmin->role_id=1;
         $userAdmin->save();
 
+        $userAdmin= new User();
+        $userAdmin->name="jean UserTest";
+        $userAdmin->email="jean@mail.com";
+        $userAdmin->password=Hash::make("123456789");
+        $userAdmin->remember_token =Str::random(10);
+        $userAdmin->email_verified_at= Carbon::now()->toDateTimeString();
+        $userAdmin->role_id=2;
+        $userAdmin->save();
+
         User::factory(10)->create();
         //$this->call(ArticleSeeder::class)
     }

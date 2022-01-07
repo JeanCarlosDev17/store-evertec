@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
@@ -24,6 +25,20 @@ class UserFactory extends Factory
             'role_id'=>2,
             'user_state'=>1
         ];
+    }
+    public function definitionTest()
+    {
+
+        $user= new User();
+        $user->name=$this->faker->name();
+        $user->email=$this->faker->unique()->safeEmail();
+        $user->email_verified_at=now();
+        $user->password=bcrypt("1234567.17");
+        $user->remember_token=Str::random(10);
+        $user->role_id=2;
+        $user->user_state=1;
+        return $user;
+
     }
 
     /**

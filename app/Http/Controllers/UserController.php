@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Support\Facades\DB;
+use Illuminate\View\View;
 
 class UserController extends Controller
 {
@@ -12,7 +14,7 @@ class UserController extends Controller
      * Mostrar todos los registros
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index():View
     {
         $users= User::all(['id','name','email','role_id','user_state']);
 
@@ -32,6 +34,7 @@ class UserController extends Controller
     {
         //
         //
+
     }
 
     /**
@@ -62,9 +65,14 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(int $id):View
     {
         //Mostrar vista para editar un registro
+
+        $user=$this->getUserDB($id);
+
+        return view('user.edit')->with('user',$user);
+
     }
 
     /**
@@ -76,7 +84,14 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // Editar un registro
+
+        $user=$this->getUserDB($id);
+
+        $user->name=$request->name;
+        $user->email=$request->email;
+
+        $user->save();
+        return redirect(route('admin.index'));
     }
 
     /**
@@ -88,5 +103,12 @@ class UserController extends Controller
     public function destroy($id)
     {
         //Eliminar un registro
+    }
+
+    public function getUserDB(int $id):User
+    {
+//            dd(User::find($id));
+
+           return User::find($id);
     }
 }
