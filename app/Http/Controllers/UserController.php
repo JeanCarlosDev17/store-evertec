@@ -103,6 +103,9 @@ class UserController extends Controller
     public function destroy($id)
     {
         //Eliminar un registro
+        $user=$this->getUserDB($id);
+        $user->delete();
+        return redirect(route('admin.index'));
     }
 
     public function getUserDB(int $id):User
