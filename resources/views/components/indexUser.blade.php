@@ -22,7 +22,7 @@
             <td>{{$user->id}}</td>
             <td>{{$user->name}}</td>
             <td>{{$user->email}}</td>
-            <td>{{$user->role_id==1 ? "Administrador":"Usuario"}}</td>
+            <td>{{$user->role=='admin' ? "Administrador":"Usuario"}}</td>
             <td>{{$user->user_state==1 ? "Activo":"Inactivo"}}</td>
             <td><a type="button" href="/admin/users/{{$user->id}}/edit" class="btn btn-info "><i class="fas fa-edit" style="max-width:min-content"></i>  </a></td>
             <td><form action="{{route('users.destroy',$user->id)}}" method="post">

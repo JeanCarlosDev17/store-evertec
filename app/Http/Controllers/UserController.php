@@ -16,7 +16,7 @@ class UserController extends Controller
      */
     public function index():View
     {
-        $users= User::all(['id','name','email','role_id','user_state']);
+        $users= User::all(['id','name','email','role','user_state']);
 
 
         return view('admin')->with('users',($users));
@@ -54,7 +54,7 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(User $id)
     {
         //Consultar un registro individualmente
     }
@@ -65,11 +65,11 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(int $id):View
+    public function edit(User $user):View
     {
         //Mostrar vista para editar un registro
 
-        $user=$this->getUserDB($id);
+        //$user=$this->getUserDB($id);
 
         return view('user.edit')->with('user',$user);
 
@@ -82,10 +82,10 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, User $user)
     {
 
-        $user=$this->getUserDB($id);
+        //$user=$this->getUserDB($id);
 
         $user->name=$request->name;
         $user->email=$request->email;
@@ -100,18 +100,18 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(User $user)
     {
         //Eliminar un registro
-        $user=$this->getUserDB($id);
+        //$user=$this->getUserDB($id);
         $user->delete();
         return redirect(route('admin.index'));
     }
 
-    public function getUserDB(int $id):User
+    /*public function getUserDB(int $id):User
     {
 //            dd(User::find($id));
 
            return User::find($id);
-    }
+    }*/
 }

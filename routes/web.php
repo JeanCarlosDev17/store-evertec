@@ -20,7 +20,6 @@ Route::get('/', function () {
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth','verified'])->name('dashboard');
-Route::get('admin/users/aa',[UserController::class,'edit'])->name('users.edit')->middleware(['auth','verified']);
 
 //Route::resource('admin/example','\App\Http\Controllers\UserController');
 Route::get('/admin',[UserController::class,'index'])->middleware(['auth','verified'])->name('admin.index');

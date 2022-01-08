@@ -39,11 +39,10 @@ class UserIndexTest extends TestCase
         $response->assertOk();
         $response->assertViewIs('admin');
 
-//        $responseUsers=$response->getOriginalContent(['users']);
-        $responseUsers=$response->getOriginalContent()['users'];
-       // $responseUsers = $responseUsers['users']->all();
 
-//        dd($responseUsers);
+        $responseUsers=$response->getOriginalContent()['users'];
+ 
+
         $userdata=[];
         foreach ($user as $userArray ){
 
