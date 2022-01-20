@@ -114,4 +114,13 @@ class UserController extends Controller
 
            return User::find($id);
     }*/
+
+    public function State(Request $request, User $user)
+    {
+
+        $user->user_state = $user->user_state==1 ? 0 : 1;
+        $user->save();
+        return redirect(route('admin.index'));
+    }
+
 }

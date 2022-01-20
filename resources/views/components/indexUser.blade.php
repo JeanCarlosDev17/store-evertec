@@ -26,6 +26,9 @@
             <td>{{$user->user_state==1 ? "Activo":"Inactivo"}}</td>
             <td>
                 <form action="{{route('users.edit',$user->id)}}" class="edit">
+
+                        @csrf
+                        @method('PUT')
                     <button type="submit" class="btn btn-info "><i class="fas fa-edit" style="max-width:min-content"></i>  </button>
                 </form>
 
@@ -39,9 +42,18 @@
                     <button type="submit"  class="btn btn-danger "><i class="fas fa-user-times" style="max-width:min-content"></i></button>
                 </form>
             </td>
-                </form>
 
-            <td class="d-flex justify-content-center "><a type="button"  href="" class="btn btn-warning text-center  " style="max-width:min-content "><i class="fas fa-toggle-on font-weight-bold  " style="color: black"> </i></a></td>
+
+            <td class="d-flex justify-content-center ">
+                
+                <form action="{{route('users.state',$user->id)}}" class="state" method="post">
+                    @csrf
+                    @method('PUT')
+                    <button type="submit"  href="" class="btn btn-{{$user->user_state==1 ? "warning":"success"}} text-center  " style="max-width:min-content ">
+                        <i class="fas fa-toggle-on font-weight-bold  " style="color: black"> </i>
+                    </button>
+                </form>
+            </td>
 
         </tr>
     @empty

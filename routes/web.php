@@ -31,6 +31,7 @@ Route::put('admin/users/{user}',[UserController::class,'update'])->name('users.u
 Route::patch('admin/users/{user}',[UserController::class,'update'])->name('users.patch')->middleware(['auth','verified']);
 Route::delete('admin/users/{user}',[UserController::class,'destroy'])->name('users.destroy')->middleware(['auth','verified']);
 Route::get('admin/users/{user}/edit',[UserController::class,'edit'])->name('users.edit')->middleware(['auth','verified']);
+Route::put('admin/users/{user}/state',[UserController::class,'state'])->name('users.state')->middleware(['auth','verified']);
 
 
 
