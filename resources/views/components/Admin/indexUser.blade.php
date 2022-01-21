@@ -1,4 +1,4 @@
-
+@props(['users'])
 <table class="table">
     @csrf
     <thead>
@@ -22,7 +22,7 @@
             <td>{{$user->id}}</td>
             <td>{{$user->name}}</td>
             <td>{{$user->email}}</td>
-            <td>{{$user->role=='admin' ? "Administrador":"Usuario"}}</td>
+            <td>{{$user->hasRole('admin')? "Administrador":"Usuario"}}</td>
             <td>{{$user->user_state==1 ? "Activo":"Inactivo"}}</td>
             <td>
                 <form action="{{route('users.edit',$user->id)}}" class="edit">
@@ -45,7 +45,7 @@
 
 
             <td class="d-flex justify-content-center ">
-                
+
                 <form action="{{route('users.state',$user->id)}}" class="state" method="post">
                     @csrf
                     @method('PUT')

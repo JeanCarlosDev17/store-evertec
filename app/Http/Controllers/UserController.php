@@ -16,10 +16,10 @@ class UserController extends Controller
      */
     public function index():View
     {
-        $users= User::all(['id','name','email','role','user_state']);
+        $users= User::all(['id','name','email','user_state']);
 
 
-        return view('admin')->with('users',($users));
+        return view('admin.admin')->with('users',($users));
 //        return view('admin',compact($users));
 
     }

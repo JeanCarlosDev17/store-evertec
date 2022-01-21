@@ -127,6 +127,8 @@ return [
     'uploaded'             => 'Subir :attribute ha fallado.',
     'url'                  => ':Attribute debe ser una URL válida.',
     'uuid'                 => 'El campo :attribute debe ser un UUID válido.',
+    'warning_Account'      => 'Su sesion ha terminado porque su cuenta ha sido suspendida',
+    'Your session has expired because your account is deactivated!.'     =>'Su sesion ha terminado porque su cuenta ha sido suspendida',
     'custom'               => [
         'email'    => [
             'unique' => 'El :attribute ya ha sido registrado.',
