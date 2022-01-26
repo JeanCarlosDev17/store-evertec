@@ -71,7 +71,7 @@ class UserController extends Controller
 
         //$user=$this->getUserDB($id);
 
-        return view('user.edit')->with('user',$user);
+        return view('admin.editUser')->with('user',$user);
 
     }
 
