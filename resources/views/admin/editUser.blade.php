@@ -15,12 +15,13 @@
                 @method('PUT')
                 <div class="row mb-3">
                     {{-- {{dd($user)}} --}}
-                    <label for="inputEmail3" class="col-sm-2 col-form-label">Nombre</label>
+                    <label for="inputName" class="col-sm-2 col-form-label">Nombre</label>
                     <div class="col-sm-10">
                         <input type="text" class="form-control" id="inputName" name="name" required
                                value="{{ $user->name }}">
                     </div>
                 </div>
+                {{--
                 <div class="row mb-3">
                     <label for="inputEmail" class="col-sm-2 col-form-label">Email</label>
                     <div class="col-sm-10">
@@ -28,6 +29,7 @@
                                value="{{ $user->email }}">
                     </div>
                 </div>
+                --}}
                  <div class="row mb-3">
                  <label for="inputNewPassword" class="col-sm-2 col-form-label">Nueva Password</label>
                  <div class="col-sm-10">
