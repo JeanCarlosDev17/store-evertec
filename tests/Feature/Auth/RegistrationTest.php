@@ -18,7 +18,7 @@ class RegistrationTest extends TestCase
 
         // Executed when a test database is created...
         ParallelTesting::setUpTestDatabase(function ($database, $token) {
-            $this->artisan('migrate:refresh --seed');
+            $this->artisan('db:seed');
         });
 
     }
