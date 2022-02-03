@@ -10,6 +10,15 @@ use Illuminate\Support\Facades\DB;
 
 class UserIndexTest extends TestCase
 {
+    use RefreshDatabase;
+
+    public function boot()
+    {
+        // Executed when a test database is created...
+        ParallelTesting::setUpTestDatabase(function ($database, $token) {
+            $this->artisan('db:seed');
+        });
+    }
     /**
      * A basic feature test example.
      *
@@ -29,6 +38,7 @@ class UserIndexTest extends TestCase
         $user = DB::table('users')
             ->where('email', '=', 'jeancarlosrecio@hotmail.com')
             ->get();
+        dump($user);
         $this->post('/login', [
             'email' => 'jeancarlosrecio@hotmail.com',
             'password' => '123456789',
@@ -37,11 +47,11 @@ class UserIndexTest extends TestCase
         $this->assertAuthenticated();
         $response=$this->get(route('admin.index'));
         $response->assertOk();
-        $response->assertViewIs('admin');
+        $response->assertViewIs('admin.admin');
 
 
         $responseUsers=$response->getOriginalContent()['users'];
- 
+
 
         $userdata=[];
         foreach ($user as $userArray ){

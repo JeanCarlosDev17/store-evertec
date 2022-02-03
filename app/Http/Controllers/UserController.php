@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Actions\Admin\UserPasswordUpdateValidator;
+use App\Contracts\Auth\UserRepository as ContractUserRepository;
+use App\Http\Requests\UserUpdateRequest;
+use App\Repositories\UserRepository;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
@@ -9,6 +13,13 @@ use Illuminate\View\View;
 
 class UserController extends Controller
 {
+
+
+    protected ContractUserRepository $contractUserRepository;
+    public function __construct(ContractUserRepository $contractUserRepository){
+
+        $this->contractUserRepository=$contractUserRepository;
+    }
     /**
      * Display a listing of the resource.
      * Mostrar todos los registros
@@ -16,13 +27,9 @@ class UserController extends Controller
      */
     public function index():View
     {
-        $users= User::role('user')->get(); ;
-
-
-
+        $users= $this->contractUserRepository->indexRoleUser(); ;
         return view('admin.admin')->with('users',($users));
 //        return view('admin',compact($users));
-
     }
 
 
@@ -70,8 +77,6 @@ class UserController extends Controller
     {
         //Mostrar vista para editar un registro
 
-        //$user=$this->getUserDB($id);
-
         return view('admin.editUser')->with('user',$user);
 
     }
@@ -83,15 +88,9 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $user)
+    public function update(UserUpdateRequest $request, User $user)
     {
-
-        //$user=$this->getUserDB($id);
-
-        $user->name=$request->name;
-        $user->email=$request->email;
-
-        $user->save();
+        $this->contractUserRepository->update($user,$request);
         return redirect(route('admin.index'));
     }
 

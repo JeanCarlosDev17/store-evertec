@@ -48,7 +48,7 @@ class RegisteredUserController extends Controller
     public function store(UserStoreRequest $request):RedirectResponse
     {
 
-        $user= $this->contractUserRepository->Store($request->all());
+        $user= $this->contractUserRepository->Store($request->validated());
         event(new Registered($user));
         Auth::login($user);
         //Posterior a la creacion del usuario y el login redirigir a la home de usuarios

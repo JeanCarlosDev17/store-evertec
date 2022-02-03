@@ -14,6 +14,17 @@ class EmailVerificationTest extends TestCase
 {
     use RefreshDatabase;
 
+    public function boot()
+    {
+
+
+        // Executed when a test database is created...
+        ParallelTesting::setUpTestDatabase(function ($database, $token) {
+            $this->artisan('db:seed');
+        });
+
+    }
+
     public function test_email_verification_screen_can_be_rendered()
     {
         $user = User::factory()->create([
