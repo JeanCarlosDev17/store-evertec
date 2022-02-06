@@ -8,6 +8,7 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use App\Actions\User\UserPasswordHash;
+use Spatie\Permission\Models\Role;
 
 class UserSeeder extends Seeder
 {
@@ -36,5 +37,8 @@ class UserSeeder extends Seeder
         $userRegular->email_verified_at= Carbon::now()->toDateTimeString();
         $userRegular->assignRole('user');
         $userRegular->save();
+        $users=User::factory(10)->create();
+        $role = Role::findByName('user');
+        $role->users()->attach($users);
     }
 }

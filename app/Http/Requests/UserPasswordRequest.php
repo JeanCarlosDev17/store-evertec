@@ -21,10 +21,10 @@ class UserPasswordRequest extends FormRequest
      *
      * @return array
      */
-    public function rules()
+    public function rules(): array
     {
         return [
-            ['newPassword' => [ 'confirmed', Rules\Password::defaults()],
+            ['newPassword' => [ 'confirmed', Rules\Password::defaults()]],
         ];
     }
 }

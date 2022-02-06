@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use \App\Http\Controllers\UserController;
+use App\Http\Controllers\ProductController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -20,6 +21,9 @@ Route::get('/', function () {
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth','verified','userStateActive','nocache'])->name('dashboard');
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth','verified','userStateActive','nocache'])->name('dashboard');
 
 //Route::resource('admin/example','\App\Http\Controllers\UserController');
 Route::middleware(['auth', 'verified','role:admin','nocache'])->group(function () {
@@ -35,8 +39,13 @@ Route::middleware(['auth', 'verified','role:admin','nocache'])->group(function (
     Route::put('admin/users/{user}/state',[UserController::class,'state'])->name('users.state');
 
 });
+Route::prefix('admin')->middleware(['auth', 'verified','role:admin','nocache'])->group(function () {
+    Route::resource('products', ProductController::class);
+});
 
 
 
+Route::prefix('admin')->group(function (){
 
+});
 require __DIR__.'/auth.php';

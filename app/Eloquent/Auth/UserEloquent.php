@@ -39,14 +39,14 @@ class UserEloquent implements UserRepository
     public function update(User $user,Request $data): void
     {
         // TODO: Implement update() method.
-        dump($data->all());
+//        dump($data->all());
         if (isset($data->newPassword)){
             UserPasswordUpdateValidator::validate($data);
 //            $data->validate(['newPassword' => [ 'confirmed', Rules\Password::defaults()],]);
             $user->password=$data->newPassword;
-            dump('ACTUALICE LA CONTRASEÑA');
+//            dump('ACTUALICE LA CONTRASEÑA');
         }else{
-            dump('no actualice la contraSEña');
+//            dump('no actualice la contraSEña');
         }
         $user->name=$data->name;
 //        $user->email=$data['email'];

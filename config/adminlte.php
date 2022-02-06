@@ -316,7 +316,7 @@ return [
         [
             'text'    => 'Tienda',
             'icon'    => 'fas fa-shopping-cart',
-            'url'     => '#'
+            'url'     => 'admin/products'
         ]/*,
         ['header' => 'labels'],
         [
