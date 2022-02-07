@@ -107,7 +107,7 @@ class UserController extends Controller
         //Eliminar un registro
         //$user=$this->getUserDB($id);
         $user->delete();
-        return redirect(route('admin.index'));
+        return redirect(route('admin.index'))->with('result','Usuario Eliminado');
     }
 
     /*public function getUserDB(int $id):User

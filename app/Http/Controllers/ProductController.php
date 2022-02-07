@@ -86,6 +86,17 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
-        //
+        $product->delete();
+        return redirect(route('products.index'))->with('result','Producto Eliminado');
+    }
+
+    public function State(Request $request, int $id)
+    {
+        $product=Product::find($id);
+        dump($product);
+
+        $product->state = $product->state=='active' ? 'inactive' : 'active';;
+        $product->save();
+        return redirect(route('products.index'));
     }
 }

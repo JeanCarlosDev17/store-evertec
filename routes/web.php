@@ -41,11 +41,10 @@ Route::middleware(['auth', 'verified','role:admin','nocache'])->group(function (
 });
 Route::prefix('admin')->middleware(['auth', 'verified','role:admin','nocache'])->group(function () {
     Route::resource('products', ProductController::class);
+    Route::put('product/{user}/state',[ProductController::class,'state'])->name('products.state');
 });
 
 
 
-Route::prefix('admin')->group(function (){
 
-});
 require __DIR__.'/auth.php';

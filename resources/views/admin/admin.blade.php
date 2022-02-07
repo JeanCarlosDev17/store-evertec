@@ -13,7 +13,7 @@
         @section('content')
             <div>
                 <p>Bienvenido al panel de administración </p>
-
+                <x-admin.validationSuccess ></x-admin.validationSuccess>
                 <x-admin.indexUser :users="$users">
 
                 </x-admin.indexUser>
