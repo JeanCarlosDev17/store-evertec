@@ -10,15 +10,9 @@
     @section('content')
         <div class="col-10 ml-4">
             <h1>Editar Usuario</h1>
-            @if($errors->any)
-                @forelse($errors->all() as $error)
-                    <ul>
-                        <li>{{$error}}</li>
-                    </ul>
-                @empty
-                @endforelse
-            @endif
 
+            <x-admin.validationErrors :errors="$errors"></x-admin.validationErrors>
+            <x-admin.validationSuccess ></x-admin.validationSuccess>
 
             <form action="/admin/users/{{ $user->id }}" method="post">
                 @csrf

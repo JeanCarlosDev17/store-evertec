@@ -91,7 +91,9 @@ class UserController extends Controller
     public function update(UserUpdateRequest $request, User $user)
     {
         $this->contractUserRepository->update($user,$request);
-        return redirect(route('admin.index'));
+//        return redirect(route('admin.index'));
+        return redirect()->back()->with('result','Actualizado Correctamente');
+
     }
 
     /**

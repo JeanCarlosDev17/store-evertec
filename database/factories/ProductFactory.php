@@ -14,7 +14,7 @@ class ProductFactory extends Factory
     public function definition()
     {
         return [
-            'code'=>$this->faker->unique()->numerify('COD###'),
+            'code'=>$this->faker->unique()->numerify('COD######'),
             'name'=>$this->faker->word(),
             'description'=>$this->faker->text(50),
 //            'price'=>$this->faker->numberBetween(1,10000),

@@ -2,48 +2,46 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ProductStoreRequest;
 use App\Models\Product;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 
 class ProductController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
         //
-        $products=Product::select('id','name','description','maker','quantity','state')->paginate(6);
+//        $products=Product::select('id','name','description','maker','quantity','state')->paginate(6);
+        $products=Product::select('id','name','description','maker','quantity','state')->get();
 
-//        (10,['id','name','description','maker','quantity']);
+
 //        $products=[];
 //        dd($products);
         return view('admin.products')->with('products',$products);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function create():View
     {
         //
         return view('admin.addProduct');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function store(ProductStoreRequest $request):RedirectResponse
     {
-        dump($request->all());
+        // dump($request->all());
+        $product=new Product();
+        $product->name=$request->input('name');
+        $product->description=$request->input('description');
+        $product->price=$request->input('price');
+        $product->maker=$request->input('maker');
+        $product->quantity=$request->input('quantity');
+        $product->save();
+        $result='Producto guardado exitosamente!';
+        return redirect()->back()->with('result',$result);
     }
 
     /**

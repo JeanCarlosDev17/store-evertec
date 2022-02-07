@@ -38,7 +38,7 @@ class UserIndexTest extends TestCase
         $user = DB::table('users')
             ->where('email', '=', 'jeancarlosrecio@hotmail.com')
             ->get();
-        dump($user);
+        // dump($user);
         $this->post('/login', [
             'email' => 'jeancarlosrecio@hotmail.com',
             'password' => '123456789',
