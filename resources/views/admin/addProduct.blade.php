@@ -25,7 +25,7 @@
 {{--            <div class="row mb-3">--}}
 {{--                <label for="inputCode" class="col-sm-2 col-form-label">Codigo del producto</label>--}}
 {{--                <div class="col-sm-10">--}}
-{{--                    <input type="text" class="form-control"    id="inputCode"    name="code"--}}
+{{--                    <input type="text" @class(['form-control','is-invalid'=>$errors->has('code')])    id="inputCode"    name="code"--}}
 {{--                           value="{{ old("productCode") }}">--}}
 {{--                </div>--}}
 {{--            </div>--}}
@@ -33,62 +33,58 @@
                 <label for="inputName" class="col-sm-2 col-form-label">Nombre</label>
                 <div class="col-sm-10">
                     <input type="text"  @class(['form-control','is-invalid'=>$errors->has('name')]) id="inputName" name="name" required value="{{ old("name") }}">
+{{--                    @error('name')--}}
+{{--                    <p class="text-red-500 text-xs italic" style="color: #dc3545">{{ $errors->first('name') }}</p>--}}
+{{--                    @enderror--}}
                 </div>
-                @if ($errors->has('name'))
-                    <span class="invalid-feedback">
-                        <strong>{{ $errors->first('name') }}</strong>
-                    </span>
-                @endif
+
+
 
             </div>
             <div class="row mb-3">
                 <label for="inputDescription" class="col-sm-2 col-form-label">Descripción</label>
                 <div class="col-sm-10">
-                    <textarea class="form-control" id="textAdescription" rows="3" name="description">{{old("description")}}</textarea>
+                    <textarea @class(['form-control','is-invalid'=>$errors->has('description')]) id="textAdescription" rows="3" name="description">{{old("description")}}</textarea>
 {{--                    <input type="textarea" class="form-control" name="" value="{{ old() }}">--}}
+{{--                    @error('description')--}}
+{{--                    <p class="text-red-500 text-xs italic" style="color: #dc3545">{{ $errors->first('description') }}</p>--}}
+{{--                    @enderror--}}
                 </div>
-                @if ($errors->has('description'))
-                    <span class="invalid-feedback">
-                        <strong>{{ $errors->first('description') }}</strong>
-                    </span>
-                @endif
+
             </div>
 
             <div class="row mb-3">
                 <label for="inputPrice" class="col-sm-2 col-form-label">Precio</label>
                 <div class="col-sm-10">
-                    <input type="number" class="form-control" id="inputPrice"  min="1" required  name="price" step="1"
+                    <input type="number" @class(['form-control','is-invalid'=>$errors->has('price')]) id="inputPrice"  min="1" required  name="price" step="1"
 {{--                    <input type="number" class="form-control" id="inputPrice"  min=".01" required  name="price" step=".01"--}}
                            value="{{ old("price") }}">
+{{--                    @error('price')--}}
+{{--                    <p class="text-red-500 text-xs italic" style="color: #dc3545">{{ $errors->first('price') }}</p>--}}
+{{--                    @enderror--}}
                 </div>
 
             </div>
             <div class="row mb-3">
                 <label for="inputMaker" class="col-sm-2 col-form-label">Marca</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control"  id="inputMaker"  name="maker" value="{{ old("marker") }}">
+                    <input type="text" @class(['form-control','is-invalid'=>$errors->has('maker')])  id="inputMaker"  name="maker" value="{{ old("maker") }}">
+{{--                    @error('maker')--}}
+{{--                    <p class="text-red-500 text-xs italic" style="color: #dc3545">{{ $errors->first('maker') }}</p>--}}
+{{--                    @enderror--}}
                 </div>
-                @if ($errors->has('maker'))
-                    <span class="invalid-feedback">
-                        <strong>{{ $errors->first('maker') }}</strong>
-                    </span>
-                @endif
+
             </div>
 
             <div class="row mb-3">
                 <label for="input" class="col-sm-2 col-form-label">Cantidad en Stock</label>
                 <div class="col-sm-10">
-                    <input type="number" class="form-control" min="1"  required  name="quantity"
+                    <input type="number" @class(['form-control','is-invalid'=>$errors->has('quantity')]) min="0" max="16770200" required  name="quantity"
                            value="{{ old('quantity'),'1' }}">
+{{--                    @error('quantity')--}}
+{{--                    <p class="text-red-500 text-xs italic" style="color: #dc3545">{{ $errors->first('quantity') }}</p>--}}
+{{--                    @enderror--}}
                 </div>
-                @if ($errors->has('quantity'))
-                    <span class="invalid-feedback">
-                        <strong>{{ $errors->first('quantity') }}</strong>
-                    </span>
-                @endif
-                @error('quantity')
-                     <div class="alert alert-danger">{{ $message }}</div>
-                @enderror
             </div>
 
             <button type="submit" class="btn btn-primary">Registrar</button>

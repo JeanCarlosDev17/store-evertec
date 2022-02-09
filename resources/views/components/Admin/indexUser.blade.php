@@ -25,10 +25,10 @@
             <td>{{$user->hasRole('admin')? "Administrador":"Usuario"}}</td>
             <td>{{$user->user_state==1 ? "Activo":"Inactivo"}}</td>
             <td>
-                <form action="{{route('users.edit',$user->id)}}" class="edit">
+                <form action="{{route('users.edit',$user->id)}}" class="edit" method="get">
 
                         @csrf
-                        @method('PUT')
+                        @method('GET')
                     <button type="submit" class="btn btn-info "><i class="fas fa-edit" style="max-width:min-content"></i>  </button>
                 </form>
 

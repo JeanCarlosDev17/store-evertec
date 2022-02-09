@@ -17,8 +17,8 @@ class CreateProductsTable extends Migration
             $table->bigInteger('price');
 //            $table->json('maker')->nullable();
             $table->string('maker',100)->nullable();
-            $table->enum('state',['active','inactive'])->default('active')->nullable();
             $table->unsignedMediumInteger('quantity');
+            $table->enum('state',['active','inactive'])->default('active')->nullable();
             $table->timestamp('soldOut_at')->nullable();
 //            $table->date('expired_at')->nullable();
             $table->timestamps();
