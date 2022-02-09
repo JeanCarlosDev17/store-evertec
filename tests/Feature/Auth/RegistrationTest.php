@@ -40,7 +40,7 @@ class RegistrationTest extends TestCase
             'password' => '123password',
             'password_confirmation' => '123password',
         ]);
-//        dump($response);
+
         $this->assertAuthenticated();
         $response->assertRedirect(RouteServiceProvider::HOME);
 

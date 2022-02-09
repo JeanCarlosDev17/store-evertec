@@ -30,9 +30,9 @@
                         <td>{{$product->state}}</td>
 
                         <td>
-                            <form action="{{route('products.edit',$product->id)}}" class="editProduct">
+                            <form action="{{route('products.edit',$product->id)}}" class="editProduct" method="get">
                                 @csrf
-                                @method('PUT')
+                                @method('GET')
                                 <button type="submit" class="btn btn-info "><i class="fas fa-edit" style="max-width:min-content"></i>  </button>
                             </form>
 

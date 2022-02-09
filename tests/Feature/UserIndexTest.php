@@ -38,7 +38,7 @@ class UserIndexTest extends TestCase
         $user = DB::table('users')
             ->where('email', '=', 'jeancarlosrecio@hotmail.com')
             ->get();
-        // dump($user);
+        
         $this->post('/login', [
             'email' => 'jeancarlosrecio@hotmail.com',
             'password' => '123456789',
@@ -61,7 +61,7 @@ class UserIndexTest extends TestCase
         }
         $responseUsers->each(function ($item) use ($user,$userdata){
 //            $this->assertEquals($user->id,$item->id);
-            var_dump($item);
+            
             $item->id==$userdata->id ? $this->assertEquals($userdata->id,$item->id):null;
         });
     }

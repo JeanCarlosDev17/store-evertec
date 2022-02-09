@@ -9,7 +9,7 @@ use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Support\Str;
 use Tests\TestCase;
 
-class StoreProductTest extends TestCase
+class ProductUpdateTest extends TestCase
 {
     /**
      * A basic feature test example.
@@ -24,34 +24,58 @@ class StoreProductTest extends TestCase
             $this->artisan('db:seed');
         });
     }
-    public function test_Store_Product()
+
+    public function test_Update_product()
     {
 
-        $data = [
+        $dataInsert = [
 
-                'name'=>'Product Test',
-                'description'=>'a description test',
-                'price'=>'123',
-                'maker'=>'maker test',
-                'quantity'=>'120',
+            'name'=>'Product Test Inicial',
+            'description'=>'a description test',
+            'price'=>'123',
+            'maker'=>'maker test',
+            'quantity'=>'120',
         ];
         $user=User::where('email','jeancarlosrecio@hotmail.com')->get();
-        $response = $this->actingAs($user[0])->post('/admin/products',$data);
+        $response = $this->actingAs($user[0])->post('/admin/products',$dataInsert);
+        $product=Product::where('name','Product Test Inicial')->get();
+        $this->assertDatabaseHas('products',$dataInsert);
+        $dataUpdate = [
 
-        $response->assertRedirect();
-        $this->assertDatabaseHas('products',$data);
+            'name'=>'Product Test Inicial ACTUALIZADO',
+            'description'=>'a description test ACTUALIZADO',
+            'price'=>'1237',
+            'maker'=>'FABRICANTE TEST ACTUALIZADO',
+            'quantity'=>'1207',
+        ];
+        
+        $response = $this->actingAs($user[0])->put('admin/products/'.$product[0]->id,$dataUpdate);
+        $this->assertDatabaseHas('products',$dataUpdate);
+        $response->assertSessionHas('result', 'Producto Actualizado exitosamente!');
     }
+
 
     /**
      * @param array $data
      * @param string $field
      * @dataProvider invalidDataProvider
      */
-    public function test_validations_store_product(array $data,string $field):void
+    public function test_validations_store_product(array $dataUpdate,string $field):void
     {
-        
+        $dataInsert = [
+
+            'name'=>'Product Test Inicial',
+            'description'=>'a description test',
+            'price'=>'123',
+            'maker'=>'maker test',
+            'quantity'=>'120',
+        ];
         $user=User::where('email','jeancarlosrecio@hotmail.com')->get();
-        $response = $this->actingAs($user[0])->post('/admin/products',$data);
+        $response = $this->actingAs($user[0])->post('/admin/products',$dataInsert);
+        $product=Product::where('name','Product Test Inicial')->get();
+        $this->assertDatabaseHas('products',$dataInsert);
+        
+        $response = $this->actingAs($user[0])->put('admin/products/'.$product[0]->id,$dataUpdate);
         $response->assertSessionHasErrors($field);
     }
 
@@ -63,8 +87,8 @@ class StoreProductTest extends TestCase
                 'field'=>'name'
             ],
             'validate name min3'=>[
-            'data'=>array_replace($this->productData(),['name'=>'jj']),
-            'field'=>'name'
+                'data'=>array_replace($this->productData(),['name'=>'jj']),
+                'field'=>'name'
             ],
             'validate name max 150'=>[
                 'data'=>array_replace($this->productData(),['name'=>Str::random(151)]),
@@ -123,11 +147,11 @@ class StoreProductTest extends TestCase
     public function productData():array{
         $data = [
 
-                'name'=>'Product Test',
-                'description'=>'a description test',
-                'price'=>'123',
-                'maker'=>'maker test',
-                'quantity'=>'120',
+            'name'=>'Product Test Inicial ACTUALIZADO',
+            'description'=>'a description test ACTUALIZADO',
+            'price'=>'1237',
+            'maker'=>'FABRICANTE TEST ACTUALIZADO',
+            'quantity'=>'1207',
         ];
         return $data;
     }

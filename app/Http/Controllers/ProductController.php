@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProductStoreRequest;
+use App\Http\Requests\ProductUpdateRequest;
 use App\Models\Product;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -32,7 +33,7 @@ class ProductController extends Controller
 
     public function store(ProductStoreRequest $request):RedirectResponse
     {
-        // dump($request->all());
+       
         $product=new Product();
         $product->name=$request->input('name');
         $product->description=$request->input('description');
@@ -61,9 +62,9 @@ class ProductController extends Controller
      * @param  \App\Models\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function edit(Product $product)
+    public function edit(Product $product):View
     {
-        //
+        return view('admin.editProduct')->with('product',$product);
     }
 
     /**
@@ -73,9 +74,16 @@ class ProductController extends Controller
      * @param  \App\Models\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Product $product)
+    public function update(ProductUpdateRequest  $request, Product $product)
     {
-        //
+        $product->name=$request->input('name');
+        $product->description=$request->input('description');
+        $product->price=$request->input('price');
+        $product->maker=$request->input('maker');
+        $product->quantity=$request->input('quantity');
+        $product->save();
+        $result='Producto Actualizado exitosamente!';
+        return redirect()->back()->with('result',$result);
     }
 
     /**
@@ -90,10 +98,16 @@ class ProductController extends Controller
         return redirect(route('products.index'))->with('result','Producto Eliminado');
     }
 
+    /*public function state(Product $product){
+        dump($product);
+    }*/
+    /*
+
+    */
     public function State(Request $request, int $id)
     {
         $product=Product::find($id);
-        dump($product);
+
 
         $product->state = $product->state=='active' ? 'inactive' : 'active';;
         $product->save();
