@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class ProductStoreRequest extends FormRequest
 {
@@ -28,8 +29,15 @@ class ProductStoreRequest extends FormRequest
             'description'=>'required|min:5|max:255',
             'price'=>'required|integer|min:1|max:750000000000000',
             'quantity'=>'required|integer|min:0|max:16770200',
-            'maker'=>'max:100'
-//            'image'=> 'image|max:2000|dimensions:min_width=100, max_width=800,min_height=200,max_height=400,ratio=3/2 '
+            'maker'=>'max:100',
+            'images' => ['array'],
+            //'images'=> 'image|max:2000|dimensions:min_width=100, max_width=800,min_height=200,max_height=400,ratio=3/2 '
+            'images.*' => [
+                'image',
+                'max:2500',
+                Rule::dimensions()->maxWidth(600)->maxHeight(600)->ratio(1),
+                'mimes:jpg,jpeg,png,bmp'
+            ]
         ];
     }
 

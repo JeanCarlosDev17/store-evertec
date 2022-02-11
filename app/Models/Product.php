@@ -9,8 +9,13 @@ class Product extends Model
 {
     use HasFactory;
 
-    public function images()
+    public function images(): HasMany
     {
-        return $this->hasMany(Image::class)->oldestOfMany();
+        return $this->hasMany(Image::class);
+    }
+
+    public function image(): HasOne
+    {
+        return $this->hasOne(Image::class)->oldestOfMany();
     }
 }

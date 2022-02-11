@@ -6,6 +6,8 @@ use App\Models\Product;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 use Tests\TestCase;
 
@@ -26,7 +28,6 @@ class StoreProductTest extends TestCase
     }
     public function test_Store_Product()
     {
-
         $data = [
 
                 'name'=>'Product Test',
@@ -39,7 +40,7 @@ class StoreProductTest extends TestCase
         $response = $this->actingAs($user[0])->post('/admin/products',$data);
 
         $response->assertRedirect();
-        $this->assertDatabaseHas('products',$data);
+        $this->assertDatabaseHas('products',Arr::except($data,['images']) );
     }
 
     /**
@@ -49,7 +50,8 @@ class StoreProductTest extends TestCase
      */
     public function test_validations_store_product(array $data,string $field):void
     {
-        
+        dump($data);
+
         $user=User::where('email','jeancarlosrecio@hotmail.com')->get();
         $response = $this->actingAs($user[0])->post('/admin/products',$data);
         $response->assertSessionHasErrors($field);
@@ -117,6 +119,35 @@ class StoreProductTest extends TestCase
                 'data'=>array_replace($this->productData(),['quantity'=>'16770201']),
                 'field'=>'quantity'
             ],
+            'validate image array'=>[
+                'data'=>array_replace($this->productData(),['images'=>'']),
+                'field'=>'images'
+            ],
+            'validate image has image '=>[
+                'data'=>array_replace($this->productData(),
+                    [
+                        'images'=> [UploadedFile::fake()->create('document.pdf', 500)]
+                    ]),
+                'field'=>'images.0'
+            ],
+            'validate image size '=>[
+                'data'=>array_replace($this->productData(),
+                    [
+                        'images'=> [
+                            UploadedFile::fake()->image('imageProductTest.jpg', 500, 250)->size(8000),
+                        ]
+                    ]),
+                'field'=>'images.0'
+            ],
+            'validate image dimentions '=>[
+                'data'=>array_replace($this->productData(),
+                    [
+                        'images'=> [
+                            UploadedFile::fake()->image('imageProductTest.jpg', 1500, 3250)->size(700),
+                        ]
+                    ]),
+                'field'=>'images.0'
+            ],
         ];
     }
 
@@ -128,7 +159,13 @@ class StoreProductTest extends TestCase
                 'price'=>'123',
                 'maker'=>'maker test',
                 'quantity'=>'120',
+                'images'=>[
+                    UploadedFile::fake()->image('imageProductTest.jpg', 500, 250)->size(500),
+                ],
+
         ];
+
+
         return $data;
     }
 }

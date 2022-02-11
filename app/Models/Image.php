@@ -12,4 +12,8 @@ class Image extends Model
     {
         return $this->belongsTo(Product::class);
     }
+    public function url(): string
+    {
+        return Storage::disk(config('filesystems.images_disk'))->url("{$this->product_id}/{$this->file_name}");
+    }
 }
