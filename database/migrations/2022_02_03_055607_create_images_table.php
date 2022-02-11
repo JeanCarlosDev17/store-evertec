@@ -19,7 +19,7 @@ class CreateImagesTable extends Migration
             $table->string('file_name');
 //            $table->bigInteger('user_id');
 //            $table->foreign('user_id')->references('id')->on('users');
-            $table->foreignId('user_id')->constrained('users');
+            $table->foreignId('product_id')->constrained('products');
             $table->timestamps();
         });
     }

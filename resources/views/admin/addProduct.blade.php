@@ -19,7 +19,7 @@
 {{--        @endif--}}
         <x-admin.validationErrors :errors="$errors"></x-admin.validationErrors>
         <x-admin.validationSuccess ></x-admin.validationSuccess>
-        <form action="{{ route('products.store')}}" method="post">
+        <form action="{{ route('products.store')}}" method="post" enctype="multipart/form-data">
             @csrf
             @method('POST')
 {{--            <div class="row mb-3">--}}
@@ -84,6 +84,14 @@
 {{--                    @error('quantity')--}}
 {{--                    <p class="text-red-500 text-xs italic" style="color: #dc3545">{{ $errors->first('quantity') }}</p>--}}
 {{--                    @enderror--}}
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label for="input" class="col-sm-2 col-form-label">Cantidad en Stock</label>
+                <div class="col-sm-10">
+
+                    <input  accept="image/jpg,image/jpeg,image/png,image/bmp" type="file" multiple @class(['form-control','form-control-lg','is-invalid'=>$errors->has('images')])  {{--required--}}  name="images[]">
+
                 </div>
             </div>
 

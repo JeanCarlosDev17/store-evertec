@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Actions\Admin\StoreProductImagesAction;
 use App\Http\Requests\ProductStoreRequest;
 use App\Http\Requests\ProductUpdateRequest;
 use App\Models\Product;
@@ -31,9 +32,12 @@ class ProductController extends Controller
         return view('admin.addProduct');
     }
 
-    public function store(ProductStoreRequest $request):RedirectResponse
+    public function store(Request $request,StoreProductImagesAction $productImagesAction):RedirectResponse
     {
-
+//        dump($request->images);
+//        foreach ($request->images as $image){
+//            dump($image->getClientOriginalName());
+//        }
         $product=new Product();
         $product->name=$request->input('name');
         $product->description=$request->input('description');
@@ -41,6 +45,7 @@ class ProductController extends Controller
         $product->maker=$request->input('maker');
         $product->quantity=$request->input('quantity');
         $product->save();
+        $productImagesAction->execute($request->images,$product);
         $result='Producto guardado exitosamente!';
         return redirect()->back()->with('result',$result);
     }
