@@ -33,7 +33,7 @@ class ProductController extends Controller
 
     public function store(ProductStoreRequest $request):RedirectResponse
     {
-       
+
         $product=new Product();
         $product->name=$request->input('name');
         $product->description=$request->input('description');
@@ -113,4 +113,12 @@ class ProductController extends Controller
         $product->save();
         return redirect(route('products.index'));
     }
+    public function allToStore(){
+        $products=Product::select('id','name','description','maker','quantity','state')->get();
+
+        $products=Product::where('state','!=','inactive')->paginate(6);
+//        dump($products);
+        return view('welcome')->with('products',$products);
+    }
+
 }

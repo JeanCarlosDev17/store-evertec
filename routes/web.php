@@ -17,9 +17,7 @@ use App\Http\Controllers\ProductController;
 /*Route::get('/', function () {
     return view('auth.login');
 });*/
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [ProductController::class,'allToStore']);
 
 
 Route::get('/dashboard', function () {
