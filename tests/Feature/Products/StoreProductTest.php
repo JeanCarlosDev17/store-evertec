@@ -28,6 +28,7 @@ class StoreProductTest extends TestCase
     }
     public function test_Store_Product()
     {
+
         $data = [
 
                 'name'=>'Product Test',
@@ -35,6 +36,7 @@ class StoreProductTest extends TestCase
                 'price'=>'123',
                 'maker'=>'maker test',
                 'quantity'=>'120',
+                'images'=>[]
         ];
         $user=User::where('email','jeancarlosrecio@hotmail.com')->get();
         $response = $this->actingAs($user[0])->post('/admin/products',$data);
@@ -50,7 +52,7 @@ class StoreProductTest extends TestCase
      */
     public function test_validations_store_product(array $data,string $field):void
     {
-        dump($data);
+//        dump($data);
 
         $user=User::where('email','jeancarlosrecio@hotmail.com')->get();
         $response = $this->actingAs($user[0])->post('/admin/products',$data);
@@ -152,8 +154,7 @@ class StoreProductTest extends TestCase
     }
 
     public function productData():array{
-        $data = [
-
+        return  [
                 'name'=>'Product Test',
                 'description'=>'a description test',
                 'price'=>'123',
@@ -162,10 +163,7 @@ class StoreProductTest extends TestCase
                 'images'=>[
                     UploadedFile::fake()->image('imageProductTest.jpg', 500, 250)->size(500),
                 ],
-
         ];
 
-
-        return $data;
     }
 }

@@ -22,7 +22,8 @@ class ProductEditTest extends TestCase
     public function test_can_access_to_Edit_products()
     {
         $user=User::where('email','jeancarlosrecio@hotmail.com')->get();
-        $response = $this->actingAs($user[0])->get(route('products.edit','3'));
+        dump($user);
+        $response = $this->actingAs($user[0])->get(route('products.edit','1'));
         $response->assertStatus(200);
         $response->assertViewIs('admin.editProduct');
         $response->viewData('product');

@@ -32,12 +32,9 @@ class ProductController extends Controller
         return view('admin.addProduct');
     }
 
-    public function store(Request $request,StoreProductImagesAction $productImagesAction):RedirectResponse
+    public function store(ProductStoreRequest  $request,StoreProductImagesAction $productImagesAction):RedirectResponse
     {
-//        dump($request->images);
-//        foreach ($request->images as $image){
-//            dump($image->getClientOriginalName());
-//        }
+
         $product=new Product();
         $product->name=$request->input('name');
         $product->description=$request->input('description');
