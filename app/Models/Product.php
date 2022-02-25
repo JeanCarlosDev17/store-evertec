@@ -19,4 +19,8 @@ class Product extends Model
     {
         return $this->hasOne(Image::class)->oldestOfMany();
     }
+    public function getImageUrl():string
+    {
+        return $this->image ? asset($this->image->url()) : asset('img/productDefault.png');
+    }
 }

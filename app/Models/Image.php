@@ -17,8 +17,8 @@ class Image extends Model
     }
     public function url(): string
     {
-        dump(config('filesystems.images_disk'));
-        dump(Storage::disk(config('filesystems.images_disk'))->url("{$this->product_id}/{$this->file_name}"));
+//        dump(config('filesystems.images_disk'));
+//        dump(Storage::disk(config('filesystems.images_disk'))->url("{$this->product_id}/{$this->file_name}"));
         return Storage::disk(config('filesystems.images_disk'))->url("{$this->product_id}/{$this->file_name}");
     }
 }

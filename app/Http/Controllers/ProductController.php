@@ -116,9 +116,9 @@ class ProductController extends Controller
         return redirect(route('products.index'));
     }
     public function allToStore(){
-        $products=Product::select('id','name','description','maker','quantity','state')->get();
+//        $products=Product::select('id','name','description','maker','quantity','state')->get();
 
-        $products=Product::where('state','!=','inactive')->paginate(6);
+        $products=Product::select('id','name','description','maker','quantity','state')->where('state','!=','inactive')->paginate(6);
 //        dump($products);
         return view('welcome')->with('products',$products);
     }

@@ -36,7 +36,9 @@ class StoreProductTest extends TestCase
                 'price'=>'123',
                 'maker'=>'maker test',
                 'quantity'=>'120',
-                'images'=>[]
+                'images'=>[
+                    UploadedFile::fake()->image('imageProductTest.jpg', 500, 500)->size(500),
+                ]
         ];
         $user=User::where('email','jeancarlosrecio@hotmail.com')->get();
         $response = $this->actingAs($user[0])->post('/admin/products',$data);
@@ -161,7 +163,7 @@ class StoreProductTest extends TestCase
                 'maker'=>'maker test',
                 'quantity'=>'120',
                 'images'=>[
-                    UploadedFile::fake()->image('imageProductTest.jpg', 500, 250)->size(500),
+                    UploadedFile::fake()->image('imageProductTest.jpg', 500, 500)->size(500),
                 ],
         ];
 

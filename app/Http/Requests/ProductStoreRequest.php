@@ -30,7 +30,7 @@ class ProductStoreRequest extends FormRequest
             'price'=>'required|integer|min:1|max:750000000000000',
             'quantity'=>'required|integer|min:0|max:16770200',
             'maker'=>'max:100',
-            'images' => ['array'],
+            'images' => ['required','array'],
             //'images'=> 'image|max:2000|dimensions:min_width=100, max_width=800,min_height=200,max_height=400,ratio=3/2 '
             'images.*' => [
                 'image',

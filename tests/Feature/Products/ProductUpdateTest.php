@@ -6,6 +6,8 @@ use App\Models\Product;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 use Tests\TestCase;
 
@@ -35,11 +37,14 @@ class ProductUpdateTest extends TestCase
             'price'=>'123',
             'maker'=>'maker test',
             'quantity'=>'120',
+            'images'=>[
+                UploadedFile::fake()->image('imageProductTest.jpg', 500, 500)->size(500),
+            ]
         ];
         $user=User::where('email','jeancarlosrecio@hotmail.com')->get();
         $response = $this->actingAs($user[0])->post('/admin/products',$dataInsert);
         $product=Product::where('name','Product Test Inicial')->get();
-        $this->assertDatabaseHas('products',$dataInsert);
+        $this->assertDatabaseHas('products',Arr::except($dataInsert,['images']));
         $dataUpdate = [
 
             'name'=>'Product Test Inicial ACTUALIZADO',
@@ -47,10 +52,13 @@ class ProductUpdateTest extends TestCase
             'price'=>'1237',
             'maker'=>'FABRICANTE TEST ACTUALIZADO',
             'quantity'=>'1207',
+            'images'=>[
+                UploadedFile::fake()->image('imageProductTest.jpg', 500, 500)->size(500),
+            ]
         ];
-        
+
         $response = $this->actingAs($user[0])->put('admin/products/'.$product[0]->id,$dataUpdate);
-        $this->assertDatabaseHas('products',$dataUpdate);
+        $this->assertDatabaseHas('products',Arr::except($dataUpdate,['images']));
         $response->assertSessionHas('result', 'Producto Actualizado exitosamente!');
     }
 
@@ -69,12 +77,15 @@ class ProductUpdateTest extends TestCase
             'price'=>'123',
             'maker'=>'maker test',
             'quantity'=>'120',
+            'images'=>[
+                UploadedFile::fake()->image('imageProductTest.jpg', 500, 500)->size(500),
+            ]
         ];
         $user=User::where('email','jeancarlosrecio@hotmail.com')->get();
         $response = $this->actingAs($user[0])->post('/admin/products',$dataInsert);
         $product=Product::where('name','Product Test Inicial')->get();
-        $this->assertDatabaseHas('products',$dataInsert);
-        
+        $this->assertDatabaseHas('products',Arr::except($dataInsert,['images']));
+
         $response = $this->actingAs($user[0])->put('admin/products/'.$product[0]->id,$dataUpdate);
         $response->assertSessionHasErrors($field);
     }
@@ -152,6 +163,9 @@ class ProductUpdateTest extends TestCase
             'price'=>'1237',
             'maker'=>'FABRICANTE TEST ACTUALIZADO',
             'quantity'=>'1207',
+            'images'=>[
+                UploadedFile::fake()->image('imageProductTest.jpg', 500, 500)->size(500),
+            ]
         ];
         return $data;
     }
