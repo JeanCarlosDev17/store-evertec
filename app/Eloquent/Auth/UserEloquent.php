@@ -49,4 +49,12 @@ class UserEloquent implements UserRepository
 //        $user->email=$data['email'];
         $user->save();
     }
+
+    public function state(User $user): void
+    {
+        $user->user_state = $user->user_state==1 ? 0 : 1;
+
+        $user->save();
+    }
+
 }

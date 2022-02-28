@@ -5,7 +5,7 @@ let formsState=document.querySelectorAll('form.state');
 let formsProductEdit=document.querySelectorAll('form.editProduct');
 let formsProductDelete=document.querySelectorAll('form.deleteProduct');
 let formsProductState=document.querySelectorAll('form.stateProduct');
-console.log(formsProductDelete);
+// console.log(formsProductDelete);
 const swalWithBootstrapButtons = Swal.mixin({
     customClass: {
         confirmButton: 'btn btn-success',

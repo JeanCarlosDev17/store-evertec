@@ -6,6 +6,7 @@ use App\Actions\Admin\UserPasswordUpdateValidator;
 use App\Contracts\Auth\UserRepository as ContractUserRepository;
 use App\Http\Requests\UserUpdateRequest;
 use App\Repositories\UserRepository;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
@@ -20,11 +21,7 @@ class UserController extends Controller
 
         $this->contractUserRepository=$contractUserRepository;
     }
-    /**
-     * Display a listing of the resource.
-     * Mostrar todos los registros
-     * @return \Illuminate\Http\Response
-     */
+
     public function index():View
     {
         $users= $this->contractUserRepository->indexRoleUser(); ;
@@ -34,8 +31,6 @@ class UserController extends Controller
 
 
     /**
-     * Show the form for creating a new resource.
-     * mostrar la vista para crear mas registros
      * @return \Illuminate\Http\Response
      */
     public function create()
@@ -45,12 +40,6 @@ class UserController extends Controller
 
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         //Crear nuevos Registros
@@ -88,7 +77,7 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UserUpdateRequest $request, User $user)
+    public function update(UserUpdateRequest $request, User $user):RedirectResponse
     {
         $this->contractUserRepository->update($user,$request);
 //        return redirect(route('admin.index'));
@@ -117,11 +106,10 @@ class UserController extends Controller
            return User::find($id);
     }*/
 
-    public function State(Request $request, User $user)
+    public function State(Request $request, User $user):RedirectResponse
     {
 
-        $user->user_state = $user->user_state==1 ? 0 : 1;
-        $user->save();
+        $this->contractUserRepository->state($user);
         return redirect(route('admin.index'));
     }
 

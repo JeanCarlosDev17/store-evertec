@@ -1,3 +1,4 @@
+{{--<div id="validationSuccess"></div>--}}
 @if (session('result'))
         <div id="success-alert">
             <div class="alert alert-success h3" role="alert">
