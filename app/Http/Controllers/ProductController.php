@@ -56,6 +56,7 @@ class ProductController extends Controller
     public function show(Product $product)
     {
         //
+        return view('productShowDetails')->with('product',$product);
     }
 
     /**
@@ -118,7 +119,7 @@ class ProductController extends Controller
     public function allToStore(){
 //        $products=Product::select('id','name','description','maker','quantity','state')->get();
 
-        $products=Product::select('id','name','description','maker','quantity','state')->where('state','!=','inactive')->paginate(6);
+        $products=Product::select('id','price','name','description','maker','quantity','state','discount')->where('state','!=','inactive')->paginate(6);
 //        dump($products);
         return view('welcome')->with('products',$products);
     }

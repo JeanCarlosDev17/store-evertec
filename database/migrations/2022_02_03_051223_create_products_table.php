@@ -15,6 +15,7 @@ class CreateProductsTable extends Migration
             $table->string('name',150)->nullable();
             $table->text('description')->nullable();
             $table->bigInteger('price');
+            $table->Integer('discount')->nullable()->default('0');
 //            $table->json('maker')->nullable();
             $table->string('maker',100)->nullable();
             $table->unsignedMediumInteger('quantity');

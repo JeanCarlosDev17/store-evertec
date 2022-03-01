@@ -17,7 +17,7 @@ use App\Http\Controllers\ProductController;
 /*Route::get('/', function () {
     return view('auth.login');
 });*/
-Route::get('/', [ProductController::class,'allToStore']);
+Route::get('/', [ProductController::class,'allToStore'])->name('home');
 
 
 Route::get('/dashboard', function () {
@@ -43,7 +43,7 @@ Route::prefix('admin')->middleware(['auth', 'verified','role:admin','nocache'])-
     Route::put('product/{user}/state',[ProductController::class,'state'])->name('products.state');
 });
 
-
+Route::get('/admin/products/{product}/detail', [ProductController::class,'show'])->name('products.detail');
 
 
 require __DIR__.'/auth.php';

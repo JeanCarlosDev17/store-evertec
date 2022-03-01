@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <meta charset="utf-8">
-    <title>BuyMe </title>
+    <title>@yield('title', 'BuyMe') </title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <meta content="shoes" name="keywords">
+{{--    <meta content="shoes" name="keywords">--}}
     <meta content="BuyMe shop yours shoes" name="description">
 
     <!-- Favicon -->
@@ -37,6 +37,7 @@
             font-family: 'Nunito', sans-serif;
         }
     </style>
+    @yield('css')
 </head>
 {{--    <body class="antialiased">--}}
 {{--        <div class="relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center py-4 sm:pt-0">--}}
@@ -67,7 +68,7 @@
 
             <div class="row align-items-center py-3 px-xl-5">
                 <div class="col-lg-3 d-none d-lg-block">
-                    <a href="" class="text-decoration-none">
+                    <a href="{{route('home')}}" class="text-decoration-none">
                         <h1 class="m-0 display-5 font-weight-semi-bold"><span class="text-primary font-weight-bold border px-3 mr-1">Buy</span>Me</h1>
                     </a>
                 </div>
@@ -133,7 +134,7 @@
 {{--                </div>--}}
                 <div class="col-lg-12">
                     <nav class="navbar navbar-expand-lg bg-light navbar-light py-3 py-lg-0 px-0">
-                        <a href="" class="text-decoration-none d-block d-lg-none">
+                        <a href="{{route('home')}}" class="text-decoration-none d-block d-lg-none">
                             <h1 class="m-0 display-5 font-weight-semi-bold"><span class="text-primary font-weight-bold border px-3 mr-1">Buy</span>Me</h1>
                         </a>
                         <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
@@ -238,7 +239,11 @@
 
     <!-- Page Header End -->
 
+    <!--Main content-->
+
     @yield('content')
+
+    <!--End Main content-->
 
     <!-- Footer-->
 
@@ -317,5 +322,7 @@
 
     <!-- Template Javascript -->
     <script src="{{asset('js/main.js')}}"></script>
+
+    @yield('js')
 </body>
 </html>

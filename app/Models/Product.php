@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use phpDocumentor\Reflection\Types\Integer;
+
 class Product extends Model
 {
     use HasFactory;
@@ -19,8 +21,27 @@ class Product extends Model
     {
         return $this->hasOne(Image::class)->oldestOfMany();
     }
+
+
+
     public function getImageUrl():string
     {
         return $this->image ? asset($this->image->url()) : asset('img/productDefault.png');
+    }
+    public function priceDiscount():int
+    {
+//        dd("precio ".$this->price." descuento ".($this->discount/100)."% es = " .($this->price*($this->discount/100)) ." y el precio final es  ".$this->price-($this->price*($this->discount/100)));
+
+        return $this->price-($this->price*($this->discount/100));
+    }
+
+    public function formatPrice()
+    {
+       return number_format((float)$this->price,0,'.',',');
+    }
+
+    public function formatDiscount()
+    {
+        return number_format((float)$this->priceDiscount(),0,'.',',');
     }
 }
