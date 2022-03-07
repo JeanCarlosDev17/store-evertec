@@ -3,7 +3,10 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Validation\Rule;
+use Illuminate\Contracts\Validation\Validator;
+use Illuminate\Validation\ValidationException;
 
 class ProductStoreRequest extends FormRequest
 {
@@ -35,7 +38,7 @@ class ProductStoreRequest extends FormRequest
             'images.*' => [
                 'image',
                 'max:2500',
-                Rule::dimensions()->maxWidth(600)->maxHeight(600)->ratio(1),
+                Rule::dimensions()->maxWidth(600)->maxHeight(600),
                 'mimes:jpg,jpeg,png,bmp'
             ]
         ];
@@ -43,12 +46,95 @@ class ProductStoreRequest extends FormRequest
 
     public function attributes():array
     {
-        return [
+        $files=[];
+        $msg=[
             'name'=>'Nombre del producto',
             'description'=>'Descripción',
             'maker'=>'Marca',
             'price'=>'Precio',
-            'quantity'=>'Cantidad en Stock'
+            'quantity'=>'Cantidad en Stock',
+
         ];
+        if (isset($this->images) and is_array($this->images))
+        {
+            foreach ($this->images as $key => $val) {
+        //            $files += ['images.' . $key => $key+1 .' '.  $val->getClientOriginalName() ];
+                $files += ['images.' . $key => $val->getClientOriginalName() ];
+        //                $files['images.' . $key . '.max']  = 'The document ' . $val->getClientOriginalName() . ' may not be greater than :max kilobytes.';
+
+            }
+        }
+        $msg +=$files;
+//        dump("ATRIBUTTES",$msg);
+
+        return $msg;
     }
+   /* public function messages()
+    {
+        $msg=[];
+        $msg=[];
+        if (isset($this->images))
+        {
+            $files=[];
+            $msg=[];
+
+            foreach ($this->images as $key => $val) {
+                $files += ['images.' . $key . '.mimes'=>'The document ' . $val->getClientOriginalName() . ' must be a file of type: :values.'];
+
+//                $files['images.' . $key . '.max']  = 'The document ' . $val->getClientOriginalName() . ' may not be greater than :max kilobytes.';
+
+            }
+
+//            dump(([$msg,...$files]));
+        }
+        dump("RESULTADO de los MESSAGES");
+        $msg+=$files;
+        dump($msg);
+        return $msg;
+    }*/
+
+    function replace( $string)
+    {
+        $pos = strpos($string,'.' );
+        $string[$pos]=" ";
+        $string[$pos+1]= $string[$pos + 1] +1;
+        return str_replace('images', 'imagen #', $string);
+    }
+
+    /*protected function failedValidation(Validator $validator)
+    {
+        if ($this->expectsJson()) {
+            $errors = (new ValidationException($validator))->errors();
+            throw new HttpResponseException(
+                response()->json(['data' => $errors], 422)
+            );
+        }
+
+        parent::failedValidation($validator);
+    }*/
+
+    protected function failedValidation(Validator $validator)
+    {
+        if($this->wantsJson())
+        {
+            $response = response()->json([
+                'success' => false,
+                'message' => 'Ops! Some errors occurred',
+                'errors' => $validator->errors()->all()
+            ],400);
+        }else{
+            $response = redirect()
+                ->back()
+                ->with('message', 'Ops! Some errors occurred')
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+        throw (new ValidationException($validator, $response))
+            ->errorBag($this->errorBag)
+            ->redirectTo($this->getRedirectUrl());
+    }
+
+
+
 }

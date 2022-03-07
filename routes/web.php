@@ -1,8 +1,10 @@
 <?php
 
+use App\Http\Requests\ProductStoreRequest;
 use Illuminate\Support\Facades\Route;
 use \App\Http\Controllers\UserController;
 use App\Http\Controllers\ProductController;
+use \App\Http\Controllers\UploadController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -18,6 +20,15 @@ use App\Http\Controllers\ProductController;
     return view('auth.login');
 });*/
 Route::get('/', [ProductController::class,'allToStore'])->name('home');
+
+Route::post('upload', [UploadController::class,'store']);
+
+
+Route::post('/prueba-ajax', function (ProductStoreRequest $request){
+    dump($request->all());
+    return "recibido";
+})->name('ajax');
+
 
 
 Route::get('/dashboard', function () {

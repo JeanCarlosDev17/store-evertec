@@ -43,7 +43,13 @@ class StoreProductTest extends TestCase
         $user=User::where('email','jeancarlosrecio@hotmail.com')->get();
         $response = $this->actingAs($user[0])->post('/admin/products',$data);
 
-        $response->assertRedirect();
+        $response
+            ->assertStatus(200)
+            ->assertJsonFragment([
+                'success' => 'Producto guardado exitosamente!',
+            ]);
+
+//        $response->assertRedirect();
         $this->assertDatabaseHas('products',Arr::except($data,['images']) );
     }
 
@@ -58,7 +64,13 @@ class StoreProductTest extends TestCase
 
         $user=User::where('email','jeancarlosrecio@hotmail.com')->get();
         $response = $this->actingAs($user[0])->post('/admin/products',$data);
+        dump($field);
+        if ($field=="images"){
+            dump($response);
+        }
         $response->assertSessionHasErrors($field);
+//        $response->assertStatus(400);
+
     }
 
     public function invalidDataProvider(){
@@ -124,7 +136,7 @@ class StoreProductTest extends TestCase
                 'field'=>'quantity'
             ],
             'validate image array'=>[
-                'data'=>array_replace($this->productData(),['images'=>'']),
+                'data'=>array_replace($this->productData(),['images'=>'no soy un array']),
                 'field'=>'images'
             ],
             'validate image has image '=>[
