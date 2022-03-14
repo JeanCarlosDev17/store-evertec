@@ -59,8 +59,15 @@ class ProductUpdateTest extends TestCase
 
         $response = $this->actingAs($user[0])->put('admin/products/'.$product[0]->id,$dataUpdate);
         $this->assertDatabaseHas('products',Arr::except($dataUpdate,['images']));
-        $response->assertSessionHas('result', 'Producto Actualizado exitosamente!');
+//        $response->assertSessionHas('result', 'Producto Actualizado exitosamente!');
+        $response
+            ->assertStatus(200)
+            ->assertJsonFragment([
+                'success' => 'Producto Actualizado exitosamente!',
+            ]);
+
     }
+
 
 
     /**

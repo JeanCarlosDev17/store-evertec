@@ -10,7 +10,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Illuminate\View\View;
-
+use App\Actions\Admin\UpdateProductImagesAction;
 use Illuminate\Support\Facades\Validator;
 
 
@@ -111,16 +111,24 @@ class ProductController extends Controller
      * @param  \App\Models\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function update(ProductUpdateRequest  $request, Product $product)
+    public function update(ProductUpdateRequest  $request, Product $product,UpdateProductImagesAction $updateProductImagesAction)
     {
+//        dump($request->all());
+//
         $product->name=$request->input('name');
         $product->description=$request->input('description');
         $product->price=$request->input('price');
         $product->maker=$request->input('maker');
         $product->quantity=$request->input('quantity');
         $product->save();
+//        $result='Producto Actualizado exitosamente!';
+//        return redirect()->back()->with('result',$result);
+//
+//
+//        dump("imagenes",$request->images);
+        $updateProductImagesAction->execute($request->images,$product);
         $result='Producto Actualizado exitosamente!';
-        return redirect()->back()->with('result',$result);
+        return response()->json(['success'=>$result]);
     }
 
     /**
@@ -132,7 +140,7 @@ class ProductController extends Controller
     public function destroy(Product $product)
     {
         $product->delete();
-        return redirect(route('products.index'))->with('result','Producto Eliminado');
+        return redirect()->back()->with('result','Producto Eliminado');
     }
 
     /*public function state(Product $product){

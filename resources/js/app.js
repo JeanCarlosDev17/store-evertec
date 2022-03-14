@@ -115,15 +115,20 @@ $(document).ready(function() {
         const files = pond.getFiles()
         console.log(files)
 
+
+
         let myForm = document.getElementById('formProduct');
         var params = new FormData(myForm);
-        console.log("hay images? :  "+params.has("images[]"))
-
-
+        console.log("hay images en el formulario? :  "+params.has("images[]", params.getAll("images[]")))
+        params.delete("images[]")
+        console.log("limpiado formulario ahora hay images? :  "+params.has("images[]"))
         for ( var i in files) {
             params.append('images[]', files[i].file);
         }
-        console.log("images  es  ",params.getAll('images[]'))
+        console.log("imagenes del pond añadidas al param hay images en el param? :  "+params.has("images[]"))
+        console.log("images en param  es  ",params.getAll('images[]'))
+        console.log("valores del params")
+
 
         for (var pair of params.entries()) {
             console.log(pair[0]+ ',' + pair[1]);

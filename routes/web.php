@@ -21,14 +21,7 @@ use \App\Http\Controllers\UploadController;
 });*/
 Route::get('/', [ProductController::class,'allToStore'])->name('home');
 
-Route::post('upload', [UploadController::class,'store']);
-
-
-Route::post('/prueba-ajax', function (ProductStoreRequest $request){
-    dump($request->all());
-    return "recibido";
-})->name('ajax');
-
+Route::post('upload', [UploadController::class,'store'])->middleware(['auth', 'verified','role:admin','nocache']);
 
 
 Route::get('/dashboard', function () {
@@ -54,7 +47,8 @@ Route::prefix('admin')->middleware(['auth', 'verified','role:admin','nocache'])-
     Route::put('product/{user}/state',[ProductController::class,'state'])->name('products.state');
 });
 
-Route::get('/admin/products/{product}/detail', [ProductController::class,'show'])->name('products.detail');
+Route::get('/products/{product}/detail', [ProductController::class,'show'])->name('products.detail');
+Route::get('admin/products/{product}', [ProductController::class,'show'])->name('products.show')->middleware(['role:user','nocache']);
 
 
 require __DIR__.'/auth.php';

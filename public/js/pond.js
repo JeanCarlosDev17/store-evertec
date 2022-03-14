@@ -5437,237 +5437,6 @@ module.exports = {
 
 /***/ }),
 
-/***/ "./resources/js/app.js":
-/*!*****************************!*\
-  !*** ./resources/js/app.js ***!
-  \*****************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var alpinejs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! alpinejs */ "./node_modules/alpinejs/dist/module.esm.js");
-/* harmony import */ var filepond__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! filepond */ "./node_modules/filepond/dist/filepond.js");
-/* harmony import */ var filepond__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(filepond__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var filepond_plugin_file_validate_type__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! filepond-plugin-file-validate-type */ "./node_modules/filepond-plugin-file-validate-type/dist/filepond-plugin-file-validate-type.js");
-/* harmony import */ var filepond_plugin_file_validate_type__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(filepond_plugin_file_validate_type__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var filepond_plugin_file_validate_size__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! filepond-plugin-file-validate-size */ "./node_modules/filepond-plugin-file-validate-size/dist/filepond-plugin-file-validate-size.js");
-/* harmony import */ var filepond_plugin_file_validate_size__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(filepond_plugin_file_validate_size__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var filepond_plugin_image_exif_orientation__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! filepond-plugin-image-exif-orientation */ "./node_modules/filepond-plugin-image-exif-orientation/dist/filepond-plugin-image-exif-orientation.js");
-/* harmony import */ var filepond_plugin_image_exif_orientation__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(filepond_plugin_image_exif_orientation__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var filepond_plugin_image_preview__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! filepond-plugin-image-preview */ "./node_modules/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.js");
-/* harmony import */ var filepond_plugin_image_preview__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(filepond_plugin_image_preview__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var filepond_plugin_image_edit__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! filepond-plugin-image-edit */ "./node_modules/filepond-plugin-image-edit/dist/filepond-plugin-image-edit.js");
-/* harmony import */ var filepond_plugin_image_edit__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(filepond_plugin_image_edit__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var filepond_plugin_image_crop__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! filepond-plugin-image-crop */ "./node_modules/filepond-plugin-image-crop/dist/filepond-plugin-image-crop.js");
-/* harmony import */ var filepond_plugin_image_crop__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(filepond_plugin_image_crop__WEBPACK_IMPORTED_MODULE_7__);
-/* harmony import */ var filepond_plugin_image_transform__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! filepond-plugin-image-transform */ "./node_modules/filepond-plugin-image-transform/dist/filepond-plugin-image-transform.js");
-/* harmony import */ var filepond_plugin_image_transform__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(filepond_plugin_image_transform__WEBPACK_IMPORTED_MODULE_8__);
-/* harmony import */ var filepond_plugin_image_resize__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! filepond-plugin-image-resize */ "./node_modules/filepond-plugin-image-resize/dist/filepond-plugin-image-resize.js");
-/* harmony import */ var filepond_plugin_image_resize__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(filepond_plugin_image_resize__WEBPACK_IMPORTED_MODULE_9__);
-/* harmony import */ var filepond_plugin_image_validate_size__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! filepond-plugin-image-validate-size */ "./node_modules/filepond-plugin-image-validate-size/dist/filepond-plugin-image-validate-size.js");
-/* harmony import */ var filepond_plugin_image_validate_size__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(filepond_plugin_image_validate_size__WEBPACK_IMPORTED_MODULE_10__);
-function _createForOfIteratorHelper(o, allowArrayLike) { var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (!it) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = it.call(o); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
-
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
-__webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
-
-
-
-
-
-
-
-
-
-
-
-
-window.Alpine = alpinejs__WEBPACK_IMPORTED_MODULE_0__["default"];
-alpinejs__WEBPACK_IMPORTED_MODULE_0__["default"].start();
-var inputElement = document.querySelector('input[type="file"]');
-var inputName = document.querySelector('input[name="name"]');
-var inputDescription = document.querySelector('textarea[name="description"]');
-var inputPrice = document.querySelector('input[name="price"]');
-var inputMaker = document.querySelector('input[name="maker"]');
-var inputQuantity = document.querySelector('input[name="quantity"]');
-filepond__WEBPACK_IMPORTED_MODULE_1__.registerPlugin((filepond_plugin_file_validate_type__WEBPACK_IMPORTED_MODULE_2___default()), (filepond_plugin_file_validate_size__WEBPACK_IMPORTED_MODULE_3___default()), // corrects mobile image orientation
-(filepond_plugin_image_exif_orientation__WEBPACK_IMPORTED_MODULE_4___default()), // previews the image
-(filepond_plugin_image_preview__WEBPACK_IMPORTED_MODULE_5___default()), // crops the image to a certain aspect ratio
-(filepond_plugin_image_crop__WEBPACK_IMPORTED_MODULE_7___default()), // FilePondPluginImageEdit,
-// // applies crop and resize information on the client
-// FilePondPluginImageTransform,
-(filepond_plugin_image_resize__WEBPACK_IMPORTED_MODULE_9___default()), (filepond_plugin_image_validate_size__WEBPACK_IMPORTED_MODULE_10___default()));
-var pond = filepond__WEBPACK_IMPORTED_MODULE_1__.create(inputElement, {
-  credits: false,
-  required: true,
-  allowMultiple: true,
-  allowReorder: true,
-  // storeAsFile:true,
-  //     allowReorder:true,
-  maxFiles: 5,
-  dropValidation: true,
-  allowFileSizeValidation: true,
-  maxFileSize: '2MB',
-  allowFileTypeValidation: true,
-  acceptedFileTypes: ['image/jpg,image/jpeg,image/png,image/bmp'],
-  name: 'images[]',
-  allowImageExifOrientation: true,
-  allowImagePreview: true,
-  allowImageEdit: true,
-  allowImageCrop: true,
-  allowImageTransform: true,
-  allowImageValidateSize: true,
-  // imageValidateSizeMaxWidth:600,
-  // imageValidateSizeMaxHeight:600,
-  imageValidateSizeLabelImageSizeTooSmall: 'Image is too small',
-  imageValidateSizeLabelImageSizeTooBig: 'Image is too big',
-  imageValidateSizeLabelExpectedMaxSize: 'Maximum size is {maxWidth} × {maxHeight}',
-  labelIdle: "Drag & Drop your picture or <span class=\"filepond--label-action\">Browse</span>",
-  imagePreviewHeight: 170,
-  // imageCropAspectRatio: '1:1',
-  // imageResizeTargetWidth: 200,
-  // imageResizeTargetHeight: 200,
-  // stylePanelLayout: 'compact circle',
-  styleLoadIndicatorPosition: 'center bottom',
-  styleButtonRemoveItemPosition: 'center bottom'
-}); // FilePond.setOptions({
-//     server:'uploads',
-//     // server: {
-//     //     url: '/upload',
-//     //     process: {
-//     //         headers: {
-//     //             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-//     //         }
-//     //     }
-//     // },
-// });
-
-/*
-pond.setOptions({
-    server:{
-        url: 'http://127.0.0.1:8000/',
-        process: 'upload',
-        revert: '',
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
-    }
-
-});
-*/
-
-$(document).ready(function () {
-  $("#formProduct").submit(function (e) {
-    //---------------^---------------
-    e.preventDefault();
-    $.ajaxSetup({
-      headers: {
-        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-      }
-    });
-    var files = pond.getFiles();
-    console.log(files);
-    var myForm = document.getElementById('formProduct');
-    var params = new FormData(myForm);
-    console.log("hay images en el formulario? :  " + params.has("images[]", params.getAll("images[]")));
-    params["delete"]("images[]");
-    console.log("limpiado formulario ahora hay images? :  " + params.has("images[]"));
-
-    for (var i in files) {
-      params.append('images[]', files[i].file);
-    }
-
-    console.log("imagenes del pond añadidas al param hay images en el param? :  " + params.has("images[]"));
-    console.log("images en param  es  ", params.getAll('images[]'));
-    console.log("valores del params");
-
-    var _iterator = _createForOfIteratorHelper(params.entries()),
-        _step;
-
-    try {
-      for (_iterator.s(); !(_step = _iterator.n()).done;) {
-        var pair = _step.value;
-        console.log(pair[0] + ',' + pair[1]);
-      }
-    } catch (err) {
-      _iterator.e(err);
-    } finally {
-      _iterator.f();
-    }
-
-    $.ajax({
-      url: "/admin/products ",
-      type: "POST",
-      data: params,
-      error: function error(jqXHR, textStatus, errorThrown) {
-        // console.log('funtion Error ajax');
-        // console.log(jqXHR);
-        var responseText = jQuery.parseJSON(jqXHR.responseText);
-
-        if (jqXHR.status === 400) {
-          printErrorMsg(responseText.errors);
-        } else if (jqXHR.status == 500) {
-          printErrorMsgText("Error en el servidor al procesar la solictud");
-        }
-      },
-      success: function success(data) {
-        console.log(data);
-
-        if ($.isEmptyObject(data.errors)) {
-          console.log(data.success); // console.log("files en pond ", pond.getFiles())
-          // console.log(document.querySelector('#files'))
-          // let myForm = document.getElementById('formProduct');
-          // var params = new FormData(myForm);
-          //
-          // for (var pair of params.entries()) {
-          //     console.log(pair[0]+ ',' + pair[1]);
-          // }
-
-          printSuccessMsg(data.success);
-        } else {
-          printErrorMsg(data.errors);
-        }
-      },
-      processData: false,
-      contentType: false,
-      dataType: 'json'
-    });
-  });
-});
-
-function printErrorMsgText(msg) {
-  console.log("entre al mensaje error  ");
-  $("#listErrors").html('');
-  $("#errors").css('display', 'block');
-  $("#listErrors").append('<li>' + msg + '</li>');
-}
-
-function printErrorMsg(msg) {
-  console.log("entre al mensaje error  ");
-  $("#listErrors").html('');
-  $("#errors").css('display', 'block');
-  $.each(msg, function (key, value) {
-    $("#listErrors").append('<li>' + value + '</li>');
-  });
-}
-
-function printSuccessMsg(msg) {
-  $("#errors").css('display', 'none');
-  pond.removeFiles();
-  document.getElementById('formProduct').reset();
-  $("#success-alerts").html('');
-  $("#success-alerts").append('<div class="alert alert-success h3" role="alert">\n' + '  <span><i class="fas fa-check-circle text-white font"></i></span>  ' + msg + ' </div> ');
-  $("#success-alerts").css('display', 'block');
-  $("#success-alerts").fadeTo(6000, 500).slideUp(500, function () {
-    $("#success-alert").slideUp(500);
-  });
-}
-
-/***/ }),
-
 /***/ "./resources/js/bootstrap.js":
 /*!***********************************!*\
   !*** ./resources/js/bootstrap.js ***!
@@ -5696,97 +5465,6 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 //     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
 //     forceTLS: true
 // });
-
-/***/ }),
-
-/***/ "./resources/js/pond.js":
-/*!******************************!*\
-  !*** ./resources/js/pond.js ***!
-  \******************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var alpinejs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! alpinejs */ "./node_modules/alpinejs/dist/module.esm.js");
-/* harmony import */ var filepond__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! filepond */ "./node_modules/filepond/dist/filepond.js");
-/* harmony import */ var filepond__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(filepond__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var filepond_plugin_file_validate_type__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! filepond-plugin-file-validate-type */ "./node_modules/filepond-plugin-file-validate-type/dist/filepond-plugin-file-validate-type.js");
-/* harmony import */ var filepond_plugin_file_validate_type__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(filepond_plugin_file_validate_type__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var filepond_plugin_file_validate_size__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! filepond-plugin-file-validate-size */ "./node_modules/filepond-plugin-file-validate-size/dist/filepond-plugin-file-validate-size.js");
-/* harmony import */ var filepond_plugin_file_validate_size__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(filepond_plugin_file_validate_size__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var filepond_plugin_image_exif_orientation__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! filepond-plugin-image-exif-orientation */ "./node_modules/filepond-plugin-image-exif-orientation/dist/filepond-plugin-image-exif-orientation.js");
-/* harmony import */ var filepond_plugin_image_exif_orientation__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(filepond_plugin_image_exif_orientation__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var filepond_plugin_image_preview__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! filepond-plugin-image-preview */ "./node_modules/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.js");
-/* harmony import */ var filepond_plugin_image_preview__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(filepond_plugin_image_preview__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var filepond_plugin_image_edit__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! filepond-plugin-image-edit */ "./node_modules/filepond-plugin-image-edit/dist/filepond-plugin-image-edit.js");
-/* harmony import */ var filepond_plugin_image_edit__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(filepond_plugin_image_edit__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var filepond_plugin_image_crop__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! filepond-plugin-image-crop */ "./node_modules/filepond-plugin-image-crop/dist/filepond-plugin-image-crop.js");
-/* harmony import */ var filepond_plugin_image_crop__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(filepond_plugin_image_crop__WEBPACK_IMPORTED_MODULE_7__);
-/* harmony import */ var filepond_plugin_image_transform__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! filepond-plugin-image-transform */ "./node_modules/filepond-plugin-image-transform/dist/filepond-plugin-image-transform.js");
-/* harmony import */ var filepond_plugin_image_transform__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(filepond_plugin_image_transform__WEBPACK_IMPORTED_MODULE_8__);
-/* harmony import */ var filepond_plugin_image_resize__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! filepond-plugin-image-resize */ "./node_modules/filepond-plugin-image-resize/dist/filepond-plugin-image-resize.js");
-/* harmony import */ var filepond_plugin_image_resize__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(filepond_plugin_image_resize__WEBPACK_IMPORTED_MODULE_9__);
-/* harmony import */ var filepond_plugin_image_validate_size__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! filepond-plugin-image-validate-size */ "./node_modules/filepond-plugin-image-validate-size/dist/filepond-plugin-image-validate-size.js");
-/* harmony import */ var filepond_plugin_image_validate_size__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(filepond_plugin_image_validate_size__WEBPACK_IMPORTED_MODULE_10__);
-// hola mundo desde el pond
-__webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
-
-
-
-
-
-
-
-
-
-
-
-
-window.Alpine = alpinejs__WEBPACK_IMPORTED_MODULE_0__["default"];
-alpinejs__WEBPACK_IMPORTED_MODULE_0__["default"].start();
-var inputElement = document.querySelector('input[type="file"]');
-filepond__WEBPACK_IMPORTED_MODULE_1__.registerPlugin((filepond_plugin_file_validate_type__WEBPACK_IMPORTED_MODULE_2___default()), (filepond_plugin_file_validate_size__WEBPACK_IMPORTED_MODULE_3___default()), // corrects mobile image orientation
-(filepond_plugin_image_exif_orientation__WEBPACK_IMPORTED_MODULE_4___default()), // previews the image
-(filepond_plugin_image_preview__WEBPACK_IMPORTED_MODULE_5___default()), // crops the image to a certain aspect ratio
-(filepond_plugin_image_crop__WEBPACK_IMPORTED_MODULE_7___default()), // FilePondPluginImageEdit,
-// // applies crop and resize information on the client
-// FilePondPluginImageTransform,
-(filepond_plugin_image_resize__WEBPACK_IMPORTED_MODULE_9___default()), (filepond_plugin_image_validate_size__WEBPACK_IMPORTED_MODULE_10___default()));
-var pond = filepond__WEBPACK_IMPORTED_MODULE_1__.create(inputElement, {
-  credits: false,
-  required: true,
-  allowMultiple: true,
-  allowReorder: true,
-  // storeAsFile:true,
-  //     allowReorder:true,
-  maxFiles: 5,
-  dropValidation: true,
-  allowFileSizeValidation: true,
-  maxFileSize: '2MB',
-  allowFileTypeValidation: true,
-  acceptedFileTypes: ['image/jpg,image/jpeg,image/png,image/bmp'],
-  name: 'images[]',
-  allowImageExifOrientation: true,
-  allowImagePreview: true,
-  allowImageEdit: true,
-  allowImageCrop: true,
-  allowImageTransform: true,
-  allowImageValidateSize: true,
-  // imageValidateSizeMaxWidth:600,
-  // imageValidateSizeMaxHeight:600,
-  imageValidateSizeLabelImageSizeTooSmall: 'Image is too small',
-  imageValidateSizeLabelImageSizeTooBig: 'Image is too big',
-  imageValidateSizeLabelExpectedMaxSize: 'Maximum size is {maxWidth} × {maxHeight}',
-  labelIdle: "Drag & Drop your picture or <span class=\"filepond--label-action\">Browse</span>",
-  imagePreviewHeight: 170,
-  // imageCropAspectRatio: '1:1',
-  // imageResizeTargetWidth: 200,
-  // imageResizeTargetHeight: 200,
-  // stylePanelLayout: 'compact circle',
-  styleLoadIndicatorPosition: 'center bottom',
-  styleButtonRemoveItemPosition: 'center bottom'
-});
-window.filepond = __webpack_require__(/*! filepond */ "./node_modules/filepond/dist/filepond.js");
 
 /***/ }),
 
@@ -45025,19 +44703,6 @@ var __WEBPACK_AMD_DEFINE_RESULT__;/**
 
 /***/ }),
 
-/***/ "./resources/css/app.css":
-/*!*******************************!*\
-  !*** ./resources/css/app.css ***!
-  \*******************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-// extracted by mini-css-extract-plugin
-
-
-/***/ }),
-
 /***/ "./node_modules/process/browser.js":
 /*!*****************************************!*\
   !*** ./node_modules/process/browser.js ***!
@@ -45272,42 +44937,7 @@ module.exports = JSON.parse('{"name":"axios","version":"0.21.4","description":"P
 /******/ 		return module.exports;
 /******/ 	}
 /******/ 	
-/******/ 	// expose the modules object (__webpack_modules__)
-/******/ 	__webpack_require__.m = __webpack_modules__;
-/******/ 	
 /************************************************************************/
-/******/ 	/* webpack/runtime/chunk loaded */
-/******/ 	(() => {
-/******/ 		var deferred = [];
-/******/ 		__webpack_require__.O = (result, chunkIds, fn, priority) => {
-/******/ 			if(chunkIds) {
-/******/ 				priority = priority || 0;
-/******/ 				for(var i = deferred.length; i > 0 && deferred[i - 1][2] > priority; i--) deferred[i] = deferred[i - 1];
-/******/ 				deferred[i] = [chunkIds, fn, priority];
-/******/ 				return;
-/******/ 			}
-/******/ 			var notFulfilled = Infinity;
-/******/ 			for (var i = 0; i < deferred.length; i++) {
-/******/ 				var [chunkIds, fn, priority] = deferred[i];
-/******/ 				var fulfilled = true;
-/******/ 				for (var j = 0; j < chunkIds.length; j++) {
-/******/ 					if ((priority & 1 === 0 || notFulfilled >= priority) && Object.keys(__webpack_require__.O).every((key) => (__webpack_require__.O[key](chunkIds[j])))) {
-/******/ 						chunkIds.splice(j--, 1);
-/******/ 					} else {
-/******/ 						fulfilled = false;
-/******/ 						if(priority < notFulfilled) notFulfilled = priority;
-/******/ 					}
-/******/ 				}
-/******/ 				if(fulfilled) {
-/******/ 					deferred.splice(i--, 1)
-/******/ 					var r = fn();
-/******/ 					if (r !== undefined) result = r;
-/******/ 				}
-/******/ 			}
-/******/ 			return result;
-/******/ 		};
-/******/ 	})();
-/******/ 	
 /******/ 	/* webpack/runtime/compat get default export */
 /******/ 	(() => {
 /******/ 		// getDefaultExport function for compatibility with non-harmony modules
@@ -45369,69 +44999,96 @@ module.exports = JSON.parse('{"name":"axios","version":"0.21.4","description":"P
 /******/ 		};
 /******/ 	})();
 /******/ 	
-/******/ 	/* webpack/runtime/jsonp chunk loading */
-/******/ 	(() => {
-/******/ 		// no baseURI
-/******/ 		
-/******/ 		// object to store loaded and loading chunks
-/******/ 		// undefined = chunk not loaded, null = chunk preloaded/prefetched
-/******/ 		// [resolve, reject, Promise] = chunk loading, 0 = chunk loaded
-/******/ 		var installedChunks = {
-/******/ 			"/js/app": 0,
-/******/ 			"css/app": 0
-/******/ 		};
-/******/ 		
-/******/ 		// no chunk on demand loading
-/******/ 		
-/******/ 		// no prefetching
-/******/ 		
-/******/ 		// no preloaded
-/******/ 		
-/******/ 		// no HMR
-/******/ 		
-/******/ 		// no HMR manifest
-/******/ 		
-/******/ 		__webpack_require__.O.j = (chunkId) => (installedChunks[chunkId] === 0);
-/******/ 		
-/******/ 		// install a JSONP callback for chunk loading
-/******/ 		var webpackJsonpCallback = (parentChunkLoadingFunction, data) => {
-/******/ 			var [chunkIds, moreModules, runtime] = data;
-/******/ 			// add "moreModules" to the modules object,
-/******/ 			// then flag all "chunkIds" as loaded and fire callback
-/******/ 			var moduleId, chunkId, i = 0;
-/******/ 			if(chunkIds.some((id) => (installedChunks[id] !== 0))) {
-/******/ 				for(moduleId in moreModules) {
-/******/ 					if(__webpack_require__.o(moreModules, moduleId)) {
-/******/ 						__webpack_require__.m[moduleId] = moreModules[moduleId];
-/******/ 					}
-/******/ 				}
-/******/ 				if(runtime) var result = runtime(__webpack_require__);
-/******/ 			}
-/******/ 			if(parentChunkLoadingFunction) parentChunkLoadingFunction(data);
-/******/ 			for(;i < chunkIds.length; i++) {
-/******/ 				chunkId = chunkIds[i];
-/******/ 				if(__webpack_require__.o(installedChunks, chunkId) && installedChunks[chunkId]) {
-/******/ 					installedChunks[chunkId][0]();
-/******/ 				}
-/******/ 				installedChunks[chunkIds[i]] = 0;
-/******/ 			}
-/******/ 			return __webpack_require__.O(result);
-/******/ 		}
-/******/ 		
-/******/ 		var chunkLoadingGlobal = self["webpackChunk"] = self["webpackChunk"] || [];
-/******/ 		chunkLoadingGlobal.forEach(webpackJsonpCallback.bind(null, 0));
-/******/ 		chunkLoadingGlobal.push = webpackJsonpCallback.bind(null, chunkLoadingGlobal.push.bind(chunkLoadingGlobal));
-/******/ 	})();
-/******/ 	
 /************************************************************************/
-/******/ 	
-/******/ 	// startup
-/******/ 	// Load entry module and return exports
-/******/ 	// This entry module depends on other loaded chunks and execution need to be delayed
-/******/ 	__webpack_require__.O(undefined, ["css/app"], () => (__webpack_require__("./resources/js/app.js")))
-/******/ 	__webpack_require__.O(undefined, ["css/app"], () => (__webpack_require__("./resources/js/pond.js")))
-/******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, ["css/app"], () => (__webpack_require__("./resources/css/app.css")))
-/******/ 	__webpack_exports__ = __webpack_require__.O(__webpack_exports__);
-/******/ 	
+var __webpack_exports__ = {};
+// This entry need to be wrapped in an IIFE because it need to be in strict mode.
+(() => {
+"use strict";
+/*!******************************!*\
+  !*** ./resources/js/pond.js ***!
+  \******************************/
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var alpinejs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! alpinejs */ "./node_modules/alpinejs/dist/module.esm.js");
+/* harmony import */ var filepond__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! filepond */ "./node_modules/filepond/dist/filepond.js");
+/* harmony import */ var filepond__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(filepond__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var filepond_plugin_file_validate_type__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! filepond-plugin-file-validate-type */ "./node_modules/filepond-plugin-file-validate-type/dist/filepond-plugin-file-validate-type.js");
+/* harmony import */ var filepond_plugin_file_validate_type__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(filepond_plugin_file_validate_type__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var filepond_plugin_file_validate_size__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! filepond-plugin-file-validate-size */ "./node_modules/filepond-plugin-file-validate-size/dist/filepond-plugin-file-validate-size.js");
+/* harmony import */ var filepond_plugin_file_validate_size__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(filepond_plugin_file_validate_size__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var filepond_plugin_image_exif_orientation__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! filepond-plugin-image-exif-orientation */ "./node_modules/filepond-plugin-image-exif-orientation/dist/filepond-plugin-image-exif-orientation.js");
+/* harmony import */ var filepond_plugin_image_exif_orientation__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(filepond_plugin_image_exif_orientation__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var filepond_plugin_image_preview__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! filepond-plugin-image-preview */ "./node_modules/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.js");
+/* harmony import */ var filepond_plugin_image_preview__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(filepond_plugin_image_preview__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var filepond_plugin_image_edit__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! filepond-plugin-image-edit */ "./node_modules/filepond-plugin-image-edit/dist/filepond-plugin-image-edit.js");
+/* harmony import */ var filepond_plugin_image_edit__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(filepond_plugin_image_edit__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var filepond_plugin_image_crop__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! filepond-plugin-image-crop */ "./node_modules/filepond-plugin-image-crop/dist/filepond-plugin-image-crop.js");
+/* harmony import */ var filepond_plugin_image_crop__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(filepond_plugin_image_crop__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var filepond_plugin_image_transform__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! filepond-plugin-image-transform */ "./node_modules/filepond-plugin-image-transform/dist/filepond-plugin-image-transform.js");
+/* harmony import */ var filepond_plugin_image_transform__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(filepond_plugin_image_transform__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var filepond_plugin_image_resize__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! filepond-plugin-image-resize */ "./node_modules/filepond-plugin-image-resize/dist/filepond-plugin-image-resize.js");
+/* harmony import */ var filepond_plugin_image_resize__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(filepond_plugin_image_resize__WEBPACK_IMPORTED_MODULE_9__);
+/* harmony import */ var filepond_plugin_image_validate_size__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! filepond-plugin-image-validate-size */ "./node_modules/filepond-plugin-image-validate-size/dist/filepond-plugin-image-validate-size.js");
+/* harmony import */ var filepond_plugin_image_validate_size__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(filepond_plugin_image_validate_size__WEBPACK_IMPORTED_MODULE_10__);
+// hola mundo desde el pond
+__webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
+
+
+
+
+
+
+
+
+
+
+
+
+window.Alpine = alpinejs__WEBPACK_IMPORTED_MODULE_0__["default"];
+alpinejs__WEBPACK_IMPORTED_MODULE_0__["default"].start();
+var inputElement = document.querySelector('input[type="file"]');
+filepond__WEBPACK_IMPORTED_MODULE_1__.registerPlugin((filepond_plugin_file_validate_type__WEBPACK_IMPORTED_MODULE_2___default()), (filepond_plugin_file_validate_size__WEBPACK_IMPORTED_MODULE_3___default()), // corrects mobile image orientation
+(filepond_plugin_image_exif_orientation__WEBPACK_IMPORTED_MODULE_4___default()), // previews the image
+(filepond_plugin_image_preview__WEBPACK_IMPORTED_MODULE_5___default()), // crops the image to a certain aspect ratio
+(filepond_plugin_image_crop__WEBPACK_IMPORTED_MODULE_7___default()), // FilePondPluginImageEdit,
+// // applies crop and resize information on the client
+// FilePondPluginImageTransform,
+(filepond_plugin_image_resize__WEBPACK_IMPORTED_MODULE_9___default()), (filepond_plugin_image_validate_size__WEBPACK_IMPORTED_MODULE_10___default()));
+var pond = filepond__WEBPACK_IMPORTED_MODULE_1__.create(inputElement, {
+  credits: false,
+  required: true,
+  allowMultiple: true,
+  allowReorder: true,
+  // storeAsFile:true,
+  //     allowReorder:true,
+  maxFiles: 5,
+  dropValidation: true,
+  allowFileSizeValidation: true,
+  maxFileSize: '2MB',
+  allowFileTypeValidation: true,
+  acceptedFileTypes: ['image/jpg,image/jpeg,image/png,image/bmp'],
+  name: 'images[]',
+  allowImageExifOrientation: true,
+  allowImagePreview: true,
+  allowImageEdit: true,
+  allowImageCrop: true,
+  allowImageTransform: true,
+  allowImageValidateSize: true,
+  // imageValidateSizeMaxWidth:600,
+  // imageValidateSizeMaxHeight:600,
+  imageValidateSizeLabelImageSizeTooSmall: 'Image is too small',
+  imageValidateSizeLabelImageSizeTooBig: 'Image is too big',
+  imageValidateSizeLabelExpectedMaxSize: 'Maximum size is {maxWidth} × {maxHeight}',
+  labelIdle: "Drag & Drop your picture or <span class=\"filepond--label-action\">Browse</span>",
+  imagePreviewHeight: 170,
+  // imageCropAspectRatio: '1:1',
+  // imageResizeTargetWidth: 200,
+  // imageResizeTargetHeight: 200,
+  // stylePanelLayout: 'compact circle',
+  styleLoadIndicatorPosition: 'center bottom',
+  styleButtonRemoveItemPosition: 'center bottom'
+});
+window.filepond = __webpack_require__(/*! filepond */ "./node_modules/filepond/dist/filepond.js");
+})();
+
 /******/ })()
 ;

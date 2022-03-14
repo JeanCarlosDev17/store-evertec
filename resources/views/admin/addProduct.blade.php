@@ -35,6 +35,8 @@
 
         </div>
         <x-admin.validationSuccess ></x-admin.validationSuccess>
+
+
         <form action="{{ route('products.store')}}" id="formProduct" method="post" enctype="multipart/form-data">
             @csrf
             @method('POST')
