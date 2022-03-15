@@ -157,12 +157,39 @@
                                 </div>
 {{--                                <a href="contact.html" class="nav-item nav-link">Contact</a>--}}
                             </div>
-                            <div class="navbar-nav ml-auto py-0">
-                                <a href=" @auth() @role('admin') {{route('admin.index')}} @else {{route('dashboard')}} @endrole @endauth @guest() {{route('login')}}@endguest
-                                    " class="nav-item nav-link">Login</a>
-                                <a href="@auth() @role('admin') {{route('admin.index')}} @else {{route('dashboard')}} @endrole @endauth @guest() {{route('register')}}@endguest
-                                    " class="nav-item nav-link">Registrarse</a>
-                            </div>
+
+                            @guest()
+{{--                                <h1>no login</h1>--}}
+                                <div class="navbar-nav ml-auto py-0">
+                                    <a href=" @auth() @role('admin') {{route('admin.index')}} @else {{route('dashboard')}} @endrole @endauth @guest() {{route('login')}}@endguest
+                                        " class="nav-item nav-link">Login</a>
+                                    <a href="@auth() @role('admin') {{route('admin.index')}} @else {{route('dashboard')}} @endrole @endauth @guest() {{route('register')}}@endguest
+                                        " class="nav-item nav-link">Registrarse</a>
+                                </div>
+
+                            @endguest
+                            @auth()
+{{--                                <h1>logeado</h1>--}}
+
+                                <div class="nav-item dropdown">
+                                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">{{ auth()->user()->name }}</a>
+                                    <div class="dropdown-menu rounded-0 m-0">
+{{--                                        <a href="{{route('logout')}}" class="dropdown-item">Cerrar Sesión</a>--}}
+                                        <form method="POST" action="{{ route('logout') }}">
+                                            @csrf
+
+                                            <x-dropdown-link :href="route('logout')"
+                                                             onclick="event.preventDefault();
+                                                this.closest('form').submit();">
+                                                {{ __('Log Out') }}
+                                            </x-dropdown-link>
+                                        </form>
+{{--                                        <a href="#" class="dropdown-item">Checkout</a>--}}
+                                    </div>
+                                </div>
+
+
+                            @endauth
                         </div>
                     </nav>
                 </div>

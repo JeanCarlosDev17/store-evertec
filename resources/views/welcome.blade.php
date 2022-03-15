@@ -52,10 +52,10 @@
 {{--                @forelse($products->where('code','COD414931') as $product)--}}
 
                 @if(session()->has('products'))
-                    @dump('hola mundo si exito.jpg')
+{{--                    @dump('hola mundo si exito.jpg')--}}
                     @php($products=session('products'))
                 @endif
-                @dump($products)
+{{--                @dump($products)--}}
                 @forelse($products as $product)
 
                     <div class="col-lg-4 col-md-6 col-sm-12 pb-1">
