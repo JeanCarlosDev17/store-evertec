@@ -39,7 +39,7 @@ class ProductController extends Controller
     {
 
 //        dump($request);
-        dump($request->all());
+//        dump($request->all());
 
         /*$validator = Validator::make($request->all(), [
             'name'=>'required|min:3|max:150',
@@ -172,7 +172,30 @@ class ProductController extends Controller
         return redirect()->back()->with('result',$result);
     }
 
-    public function storeimages(){
+    public function search(Request $request){
 
+        $validator = Validator::make($request->all(), [
+            'search'=>'required|max:160'
+        ]);
+        if ($validator->fails()) {
+            $result="";
+            return view('welcome')->with('products',[]);
+            return redirect()->withErrors($validator);
+        }
+        $search=$request['search'];
+        $products=Product::select('id','price','name','description','maker','quantity','state','discount')
+            ->where([['state','!=','inactive'],['name','LIKE','%'.$search.'%']])
+            ->paginate(6);
+//        dump($products);
+        if (count($products)<1) {
+            $result = "Sin resultados";
+        }
+        else{
+            $result="";
+        }
+//        dump($products);
+//        return redirect()->back()->with('products',$products);
+//        return vii  ->with('products',$products);
+        return view('welcome')->with(['products'=>$products,'result'=>$result]);
     }
 }

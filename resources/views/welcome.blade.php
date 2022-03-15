@@ -24,12 +24,14 @@
             <div class="row pb-3">
                 <div class="col-12 pb-1">
                     <div class="d-flex align-items-center justify-content-between mb-4">
-                        <form action="">
+                        <form action="{{route('products.search')}}" method="get">
+                            @csrf
+                            @method('get')
                             <div class="input-group">
-                                <input type="text" class="form-control" placeholder="Buscar por nombre">
+                                <input type="text" class="form-control" placeholder="Buscar por nombre" name="search">
                                 <div class="input-group-append">
                                         <span class="input-group-text bg-transparent text-primary">
-                                            <a href=""><i class="fa fa-search"></i></a>
+                                            <button type="submit" ><i class="fa fa-search"></i></button>
                                         </span>
                                 </div>
                             </div>
@@ -48,6 +50,12 @@
                     </div>
                 </div>
 {{--                @forelse($products->where('code','COD414931') as $product)--}}
+
+                @if(session()->has('products'))
+                    @dump('hola mundo si exito.jpg')
+                    @php($products=session('products'))
+                @endif
+                @dump($products)
                 @forelse($products as $product)
 
                     <div class="col-lg-4 col-md-6 col-sm-12 pb-1">
@@ -72,14 +80,30 @@
                         </div>
                     </div>
                 @empty
-                    <h2>Tienda vacia, Actualizaciones Pronto...</h2>
+                    <h2>vacio</h2>
+                    @if($errors->isEmpty())
+                        @if(session()->has('result'))
+                            <h2>{{session('result')}}</h2>
+                        @elseif(! (session()->has('result')))
+                            <h2>Oops No hay productos relacionados, Actualizaciones Pronto...</h2>
+                        @endif
+
+                    @else
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+
+                    @endif
                 @endforelse
 
 
                 <div class="col-12 pb-1">
                     <nav aria-label="Page navigation">
                         <div class="d-flex justify-content-center">
-                            {!! $products->links() !!}
+
+                            @if(count($products)>0)
+                                {!! $products->links() !!}
+                            @endif
                         </div>
 
                     </nav>
