@@ -2,7 +2,10 @@
 
 namespace App\Providers;
 
+use App\Contracts\Auth\UserRepository;
+use App\Eloquent\Auth\UserEloquent;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Pagination\Paginator;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -14,6 +17,7 @@ class AppServiceProvider extends ServiceProvider
     public function register()
     {
         //
+        $this->app->singleton(UserRepository::class,UserEloquent::class);
     }
 
     /**
@@ -24,5 +28,6 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         //
+        Paginator::useBootstrap();
     }
 }

@@ -10,6 +10,17 @@ class PasswordConfirmationTest extends TestCase
 {
     use RefreshDatabase;
 
+    public function boot()
+    {
+
+
+        // Executed when a test database is created...
+        ParallelTesting::setUpTestDatabase(function ($database, $token) {
+            $this->artisan('db:seed');
+        });
+
+    }
+
     public function test_confirm_password_screen_can_be_rendered()
     {
         $user = User::factory()->create();
@@ -24,7 +35,7 @@ class PasswordConfirmationTest extends TestCase
         $user = User::factory()->create();
 
         $response = $this->actingAs($user)->post('/confirm-password', [
-            'password' => 'password',
+            'password' => '1234567',
         ]);
 
         $response->assertRedirect();

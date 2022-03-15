@@ -316,7 +316,7 @@ return [
         [
             'text'    => 'Tienda',
             'icon'    => 'fas fa-shopping-cart',
-            'url'     => '#'
+            'url'     => 'admin/products'
         ]/*,
         ['header' => 'labels'],
         [
@@ -377,12 +377,17 @@ return [
                 [
                     'type' => 'js',
                     'asset' => false,
-                    'location' => '//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js',
+                    'location' => '//code.jquery.com/jquery-3.5.1.js',
                 ],
                 [
                     'type' => 'js',
                     'asset' => false,
-                    'location' => '//cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js',
+                    'location' => '//cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js',
+                ],
+                [
+                    'type' => 'js',
+                    'asset' => false,
+                    'location' => '//cdn.datatables.net/1.11.4/js/dataTables.bootstrap4.min.js',
                 ],
                 [
                     'type' => 'css',
@@ -422,7 +427,12 @@ return [
                 [
                     'type' => 'js',
                     'asset' => false,
-                    'location' => '//cdn.jsdelivr.net/npm/sweetalert2@8',
+                    'location' => '//cdn.jsdelivr.net/npm/sweetalert2@11',
+                ],
+                [
+                    'type' => 'css',
+                    'asset' => false,
+                    'location' => '//cdn.jsdelivr.net/npm/sweetalert2@11.3.4/dist/sweetalert2.min.css',
                 ],
             ],
         ],

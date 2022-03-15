@@ -5,10 +5,24 @@ namespace Tests\Feature\Auth;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
+use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Illuminate\Support\Facades\Artisan;
 
 class RegistrationTest extends TestCase
 {
     use RefreshDatabase;
+
+    public function boot()
+    {
+
+
+        // Executed when a test database is created...
+        ParallelTesting::setUpTestDatabase(function ($database, $token) {
+            $this->artisan('db:seed');
+        });
+
+    }
+
 
     public function test_registration_screen_can_be_rendered()
     {
@@ -19,14 +33,18 @@ class RegistrationTest extends TestCase
 
     public function test_new_users_can_register()
     {
+//        $this->seed();
         $response = $this->post('/register', [
             'name' => 'Test User',
             'email' => 'test@example.com',
-            'password' => 'password',
-            'password_confirmation' => 'password',
+            'password' => '123password',
+            'password_confirmation' => '123password',
         ]);
 
         $this->assertAuthenticated();
         $response->assertRedirect(RouteServiceProvider::HOME);
+
     }
+
+
 }

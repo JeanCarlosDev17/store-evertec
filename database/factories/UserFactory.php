@@ -20,25 +20,23 @@ class UserFactory extends Factory
             'name' => $this->faker->name(),
             'email' => $this->faker->unique()->safeEmail(),
             'email_verified_at' => now(),
-            'password' => bcrypt("1234567.17"), // password
+            'password' => bcrypt("1234567"), // password
             'remember_token' => Str::random(10),
-            'role_id'=>2,
-            'user_state'=>1
+            'user_state' => 1
         ];
     }
     public function definitionTest()
     {
 
-        $user= new User();
-        $user->name=$this->faker->name();
-        $user->email=$this->faker->unique()->safeEmail();
-        $user->email_verified_at=now();
-        $user->password=bcrypt("1234567.17");
-        $user->remember_token=Str::random(10);
-        $user->role_id=2;
-        $user->user_state=1;
-        return $user;
+        $user = new User();
+        $user->name = $this->faker->name();
+        $user->email = $this->faker->unique()->safeEmail();
+        $user->email_verified_at = now();
+        $user->password = bcrypt("1234567.17");
+        $user->remember_token = Str::random(10);
+        $user->user_state = 1;
 
+        return $user;
     }
 
     /**

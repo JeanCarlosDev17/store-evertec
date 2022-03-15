@@ -104,6 +104,7 @@ return [
     'prohibited_if'        => 'El campo :attribute está prohibido cuando :other es :value.',
     'prohibited_unless'    => 'El campo :attribute está prohibido a menos que :other sea :values.',
     'prohibits'            => 'El campo :attribute prohibe que :other esté presente.',
+    'Whoops, something went wrong'=>'Oops Algo ha salido mal',
     'regex'                => 'El formato de :attribute es inválido.',
     'relatable'            => 'Este :attribute no se puede asociar con este recurso',
     'required'             => 'El campo :attribute es obligatorio.',
@@ -127,6 +128,8 @@ return [
     'uploaded'             => 'Subir :attribute ha fallado.',
     'url'                  => ':Attribute debe ser una URL válida.',
     'uuid'                 => 'El campo :attribute debe ser un UUID válido.',
+    'warning_Account'      => 'Su sesion ha terminado porque su cuenta ha sido suspendida',
+    'Your session has expired because your account is deactivated!.'     =>'Su sesion ha terminado porque su cuenta ha sido suspendida',
     'custom'               => [
         'email'    => [
             'unique' => 'El :attribute ya ha sido registrado.',
