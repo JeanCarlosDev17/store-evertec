@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use phpDocumentor\Reflection\Types\Integer;
@@ -22,6 +23,16 @@ class Product extends Model
         return $this->hasOne(Image::class)->oldestOfMany();
     }
 
+
+    public function carts():BelongsToMany
+    {
+        return $this->belongsToMany(Cart::class,'cart_product')->withPivot('quantity');
+    }
+
+    public function orders():BelongsToMany
+    {
+        return $this->belongsToMany(Order::class,'order_product')->withPivot('quantity');
+    }
 
 
     public function getImageUrl():string
