@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\CartController;
+use App\Http\Controllers\ProductCartController;
 use App\Http\Requests\ProductStoreRequest;
 use Illuminate\Support\Facades\Route;
 use \App\Http\Controllers\UserController;
@@ -50,6 +52,9 @@ Route::prefix('admin')->middleware(['auth', 'verified','role:admin','nocache'])-
 Route::get('/products/{product}/detail', [ProductController::class,'show'])->name('products.detail');
 Route::get('/products/search', [ProductController::class,'search'])->name('products.search');
 Route::get('admin/products/{product}', [ProductController::class,'show'])->name('products.show')->middleware(['role:user','nocache']);
+
+Route::resource('products.cart', ProductCartController::class);
+Route::resource('cart', CartController::class);
 
 
 require __DIR__.'/auth.php';

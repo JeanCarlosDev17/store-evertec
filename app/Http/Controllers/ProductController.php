@@ -19,13 +19,9 @@ class ProductController extends Controller
 
     public function index()
     {
-        //
+
 //        $products=Product::select('id','name','description','maker','quantity','state')->paginate(6);
         $products=Product::select('id','name','description','maker','quantity','state')->get();
-
-
-//        $products=[];
-//        dd($products);
         return view('admin.products')->with('products',$products);
     }
 
@@ -167,10 +163,10 @@ class ProductController extends Controller
     }
 
 
-    public function createimages(Request $request,Product $product){
-        $result='Producto creado exitosamente!';
-        return redirect()->back()->with('result',$result);
-    }
+//    public function createimages(Request $request,Product $product){
+//        $result='Producto creado exitosamente!';
+//        return redirect()->back()->with('result',$result);
+//    }
 
     public function search(Request $request){
 

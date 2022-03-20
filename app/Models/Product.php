@@ -48,7 +48,7 @@ class Product extends Model
 
     public function formatPrice()
     {
-       return number_format((float)$this->price,0,'.',',');
+       return number_format((float)$this->price,0,'.','');
     }
 
     public function formatDiscount()

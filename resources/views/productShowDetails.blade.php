@@ -87,19 +87,25 @@
                                 <p style="opacity: 1">{{$product->description}}</p>
                                 <ul>
 {{--                                    <li>Color: <span>Black</span></li>--}}
-                                    <li style="opacity: 1">Available: <span>{{$product->quantity}} in stock</span></li>
+                                    <li style="opacity: 1">
+                                        Available: <span>{{$product->quantity}} in stock</span>
+                                    </li>
 {{--                                    <li>Category: <span>Shoes</span></li>--}}
 {{--                                    <li>Shipping Area: <span>All over the world</span></li>--}}
 {{--                                    <li>Shipping Fee: <span>Free</span></li>--}}
                                 </ul>
                             </div>
 
-                            <div class = "purchase-info row">
-                                <input type = "number" min = "1"  max="{{$product->quantity}}" value = "1">
-                                <button type = "button" class = "btn bg-primary">
-                                    Añadir al Carrito <i class = "fas fa-shopping-cart"></i>
-                                </button>
-{{--                                <button type = "button" class = "btn">Compare</button>--}}
+                            <div class="purchase-info row">
+                                <form method="post" action="">
+                                    @csrf
+                                    <input type="number" min="1" max="{{$product->quantity}}" value="1" name="quantity">
+                                    <button type="submit" class="btn bg-primary">
+                                        Añadir al Carrito <i class="fas fa-shopping-cart"></i>
+                                    </button>
+                                </form>
+
+                                {{--                                <button type = "button" class = "btn">Compare</button>--}}
                             </div>
 
 {{--                            <div class = "social-links">--}}

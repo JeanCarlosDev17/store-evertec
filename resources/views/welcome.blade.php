@@ -74,8 +74,20 @@
 
                             </div>
                             <div class="card-footer d-flex justify-content-between bg-light border">
-                                <a href="{{route('products.detail',$product->id)}}" class="btn btn-sm text-dark p-0"><i class="fas fa-eye text-primary mr-1"></i>Ver Detalles</a>
-                                <a href="" class="btn btn-sm text-dark p-0"><i class="fas fa-shopping-cart text-primary mr-1"></i>Añadir al Carrito</a>
+                                <a href="{{route('products.detail',$product->id)}}" class="btn btn-sm text-dark p-0">
+                                    <i class="fas fa-eye text-primary mr-1"></i>Ver Detalles
+                                </a>
+{{--                                <a href="" class="btn btn-sm text-dark p-0"><i class="fas fa-shopping-cart text-primary mr-1"></i>Añadir al Carrito</a>--}}
+{{--                                <a href="@auth() {{route('admin.index')}}  @endauth @guest() {{route('login')}}@endguest--}}
+{{--                                    " class="btn btn-sm text-dark p-0"><i--}}
+{{--                                        class="fas fa-shopping-cart text-primary mr-1"></i>Añadir al Carrito--}}
+{{--                                </a>--}}
+                                <form action="{{route('products.cart.store',$product->id)}}" method="post">
+                                @csrf
+                                    <button type="submit" class="btn btn-sm text-dark p-0">
+                                        <i class="fas fa-shopping-cart text-primary mr-1"></i>Añadir al Carrito
+                                    </button>
+                                </form>
                             </div>
                         </div>
                     </div>
