@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Actions\User\getCartFromCookie;
+use App\Models\Order;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\ValidationException;
@@ -15,9 +16,19 @@ class OrderController extends Controller
         $this->getCartFromCookie=$getCartFromCookie;
     }
 
+    public  function index(Request $request){
+        $user=$request->user();
+        return view('ordersIndex')->with('orders',$user->orders);
+    }
+
     public function create()
     {
 
+    }
+
+    public function show(Order $order)
+    {
+        return view('orderShow')->with('order',$order);
     }
 
     public function store(Request $request)
@@ -36,34 +47,30 @@ class OrderController extends Controller
             $error=false;
             $messages=[];
             $cartProductWithQuantity=$cart->products
-                ->mapWithKeys(function ($product,$error,$messages){
-                    $element[$product->id]=['quantity'=>$product->pivot->quantity];
+                ->mapWithKeys(function ($product){
+
                     $quantity=$product->pivot->quantity;
                     if ($product->quantity < $quantity)
                     {
+
                         throw ValidationException::withMessages([
-                            'product'=>"Se ha alcanzado el stock maximo del producto  {$product->name} no puede agregar mas de {$product->quantity}",
+                            'product'=>"Se ha alcanzado el stock maximo del producto  {$product->name} , hay disponibles  {$product->quantity} unidades",
                         ]);
+
                     }
+                    $product->decrement('quantity',$quantity);
+
+                    $element[$product->id]=['quantity'=>$quantity];
                     return $element;
                 });
 
-            if ($error)
-            {
-                throw ValidationException::withMessages([
-                    'product'=>"Se ha alcanzado el stock maximo del producto  {$product->name} no puede agregar mas de {$product->quantity}",
-                ]);
-            }
-
-
             $order->products()->attach($cartProductWithQuantity->toArray());
-        if ($product->quantity < $quantity+1)
-        {
-            throw ValidationException::withMessages([
-                'product'=>"Se ha alcanzado el stock maximo del producto  {$product->name} no puede agregar mas de {$product->quantity}",
-            ]);
-        }
-            return $order;
+            $cart->products()->detach();
+
+            //conectarse a Checkout
+
+            return  redirect()->route('orders.show',[$order->id]);
+
         },5);
     }
 }

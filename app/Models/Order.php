@@ -2,10 +2,12 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+
 
 class Order extends Model
 {
@@ -30,9 +32,26 @@ class Order extends Model
         return $this->hasMany(Payment::class);
     }
 
-    public function getTotalAttribute(){
+    public function getTotalAttribute()
+    {
         return $this->products->pluck('total')->sum();
     }
+
+    public function getCountAttribute()
+    {
+        return $this->products->pluck('pivot.quantity')->sum();
+    }
+    public function getCreatedAtAttribute( )
+    {
+        return Carbon::createFromFormat('Y-m-d H:i:s', $this->attributes['created_at'] );
+
+    }
+    public function getCreatedAtDiffAttribute()
+    {
+        return $this->created_at;
+    }
+
+
 
 
 }

@@ -23,7 +23,7 @@
                             </thead>
                             <tbody class="align-middle">
                                 @foreach($cart->products as $product)
-                                    @dump($product->pivot->quantity)
+
                                     <tr>
                                         <td class="align-middle"><img src="{{$product->getImageUrl()}}" alt="" style="width: 50px;">
                                             {{$product->name}}</td>
