@@ -4,6 +4,7 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
     @endsection
     @section('content')
+            <x-Admin.validationErrors :errors="$errors"></x-Admin.validationErrors>
         <div class="container-fluid pt-5">
             <div class="row px-xl-5">
                 <div class = "card-wrapper">
@@ -97,9 +98,9 @@
                             </div>
 
                             <div class="purchase-info row">
-                                <form method="post" action="">
+                                <form method="post" action="{{route('products.cart.store',$product->id)}}">
                                     @csrf
-                                    <input type="number" min="1" max="{{$product->quantity}}" value="1" name="quantity">
+{{--                                    <input type="number" min="1" max="{{$product->quantity}}" value="1" name="quantity">--}}
                                     <button type="submit" class="btn bg-primary">
                                         Añadir al Carrito <i class="fas fa-shopping-cart"></i>
                                     </button>

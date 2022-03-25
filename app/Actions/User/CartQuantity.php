@@ -5,7 +5,7 @@ namespace App\Actions\User;
 use App\Models\Cart;
 use Illuminate\Support\Facades\Cookie;
 
-class getCartFromCookieOrCreateAction
+class CartQuantity
 {
     protected getCartFromCookie $getCartFromCookie;
     public function __construct(getCartFromCookie $getCartFromCookie)
@@ -13,11 +13,17 @@ class getCartFromCookieOrCreateAction
         $this->getCartFromCookie=$getCartFromCookie;
     }
 
-    public function execute():Cart
+    public function execute():int
     {
-
         $cart=$this->getCartFromCookie->execute();
-//        dump($cart);
-        return $cart ?? Cart::create();
+
+        if (isset($cart)){
+            return $cart->products->pluck('pivot.quantity')->sum();
+        }
+
+        return 0;
+
     }
+
+
 }

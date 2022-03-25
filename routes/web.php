@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductCartController;
 use App\Http\Requests\ProductStoreRequest;
 use Illuminate\Support\Facades\Route;
@@ -55,6 +56,7 @@ Route::get('admin/products/{product}', [ProductController::class,'show'])->name(
 
 Route::resource('products.cart', ProductCartController::class);
 Route::resource('cart', CartController::class);
+Route::resource('orders', OrderController::class)->middleware(['auth','verified','userStateActive','nocache']);
 
 
 require __DIR__.'/auth.php';

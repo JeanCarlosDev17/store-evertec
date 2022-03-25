@@ -1,4 +1,9 @@
 @extends('nav')
+
+@section('js')
+
+    <script src="https://kit.fontawesome.com/2ccb5d9a99.js" crossorigin="anonymous"></script>
+@stop
 @section('content')
 
 
@@ -19,6 +24,7 @@
 <div class="container-fluid pt-5">
     <div class="row px-xl-5">
 
+        <x-Admin.validationErrors :errors="$errors"></x-Admin.validationErrors>
         <!-- Shop Product Start -->
         <div class="col-lg-12 col-md-12">
             <div class="row pb-3">
@@ -36,17 +42,7 @@
                                 </div>
                             </div>
                         </form>
-{{--                        <div class="dropdown ml-4">--}}
-{{--                            <button class="btn border dropdown-toggle" type="button" id="triggerId" data-toggle="dropdown" aria-haspopup="true"--}}
-{{--                                    aria-expanded="false">--}}
-{{--                                Ordenar por--}}
-{{--                            </button>--}}
-{{--                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="triggerId">--}}
-{{--                                <a class="dropdown-item" href="#">Latest</a>--}}
-{{--                                <a class="dropdown-item" href="#">Popularity</a>--}}
-{{--                                <a class="dropdown-item" href="#">Best Rating</a>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
+
                     </div>
                 </div>
 {{--                @forelse($products->where('code','COD414931') as $product)--}}

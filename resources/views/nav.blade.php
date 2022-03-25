@@ -88,13 +88,16 @@
                     </form>
                 </div>
                 <div class="col-lg-3 col-6 text-right">
-                    <a href="" class="btn border">
-                        <i class="fas fa-heart text-primary"></i>
-                        <span class="badge">0</span>
-                    </a>
+{{--                    <a href="" class="btn border">--}}
+{{--                        <i class="fas fa-heart text-primary"></i>--}}
+{{--                        <span class="badge">0</span>--}}
+{{--                    </a>--}}
                     <a href="{{route('cart.index')}}" class="btn border">
                         <i class="fas fa-shopping-cart text-primary"></i>
-                        <span class="badge">0</span>
+                        <span class="badge">
+                            @inject('cartQuantity','App\Actions\User\CartQuantity')
+                            {{$cartQuantity->execute()}}
+                        </span>
                     </a>
                 </div>
             </div>

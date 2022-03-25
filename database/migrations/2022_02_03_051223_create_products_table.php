@@ -21,6 +21,7 @@ class CreateProductsTable extends Migration
             $table->unsignedMediumInteger('quantity');
             $table->enum('state',['active','inactive'])->default('active')->nullable();
             $table->timestamp('soldOut_at')->nullable();
+            $table->softDeletes();
             $table->date('expired_at')->nullable();
             $table->timestamps();
         });

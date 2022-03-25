@@ -20,4 +20,9 @@ class Cart extends Model
     {
         return $this->belongsToMany(Product::class,'cart_product')->withPivot('quantity');
     }
+
+    public function getTotalAttribute(){
+        return $this->products->pluck('total')->sum();
+    }
+
 }

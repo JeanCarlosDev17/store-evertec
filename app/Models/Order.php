@@ -11,6 +11,11 @@ class Order extends Model
 {
     use HasFactory;
 
+    protected $fillable=[
+        'user_id',
+        'status',
+    ];
+
     public function User():BelongsTo
     {
         return $this->belongsTo(User::class,'user_id');
@@ -20,4 +25,14 @@ class Order extends Model
     {
         return $this->belongsToMany(Product::class,'order_product')->withPivot('quantity');
     }
+    public function payments()
+    {
+        return $this->hasMany(Payment::class);
+    }
+
+    public function getTotalAttribute(){
+        return $this->products->pluck('total')->sum();
+    }
+
+
 }

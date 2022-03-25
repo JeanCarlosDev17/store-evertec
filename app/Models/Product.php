@@ -7,11 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use phpDocumentor\Reflection\Types\Integer;
 
 class Product extends Model
 {
-    use HasFactory;
+    use HasFactory,SoftDeletes;
 
     public function images(): HasMany
     {
@@ -54,5 +55,19 @@ class Product extends Model
     public function formatDiscount()
     {
         return number_format((float)$this->priceDiscount(),0,'.',',');
+    }
+
+    public function getTotalAttribute(){
+        return $this->price * $this->pivot->quantity;
+    }
+
+    public function scopeActive($query)
+    {
+        $query->where('state','!=','inactive');
+    }
+
+    public function scopeStock($query)
+    {
+        $query->where('quantity','>','0');
     }
 }

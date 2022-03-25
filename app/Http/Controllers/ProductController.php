@@ -34,36 +34,6 @@ class ProductController extends Controller
     public function store(ProductStoreRequest   $request,StoreProductImagesAction $productImagesAction)
     {
 
-//        dump($request);
-//        dump($request->all());
-
-        /*$validator = Validator::make($request->all(), [
-            'name'=>'required|min:3|max:150',
-            'description'=>'required|min:5|max:255',
-            'price'=>'required|integer|min:1|max:750000000000000',
-            'quantity'=>'required|integer|min:0|max:16770200',
-            'maker'=>'max:100',
-            'images' => ['required','array'],
-            //'images'=> 'image|max:2000|dimensions:min_width=100, max_width=800,min_height=200,max_height=400,ratio=3/2 '
-            'images.*' => [
-                'image',
-                'max:2500',
-                Rule::dimensions()->maxWidth(600)->maxHeight(600)
-//                    ->ratio(1)
-                ,
-                'mimes:jpg,jpeg,png,bmp'
-            ]
-        ]);
-
-        if ($validator->fails()) {
-            return response()->json(['errors'=>$validator->errors()->all()]);
-//            return redirect()->withErrors($validator)->withInput();
-//            return redirect()->back()
-//                ->withErrors($validator)
-//                ->withInput();
-        }*/
-
-
         $product=new Product();
         $product->name=$request->input('name');
         $product->description=$request->input('description');
@@ -157,7 +127,8 @@ class ProductController extends Controller
     public function allToStore(){
 //        $products=Product::select('id','name','description','maker','quantity','state')->get();
 
-        $products=Product::select('id','price','name','description','maker','quantity','state','discount')->where('state','!=','inactive')->paginate(6);
+        $products=Product::select('id','price','name','description','maker','quantity','state','discount')
+            ->active()->Stock()->paginate(6);
 //        dump($products);
         return view('welcome')->with('products',$products);
     }
