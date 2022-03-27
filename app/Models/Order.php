@@ -38,6 +38,17 @@ class Order extends Model
 //        return $this->products->pluck('total')->sum();
 //    }
 
+    public function scopeSession($query)
+    {
+        $query->where('session_id',"!=", NULL);
+    }
+
+    public function scopeActive($query)
+    {
+        $query->where('state','!=','inactive');
+
+    }
+
     public function getCountAttribute()
     {
         return $this->products->pluck('pivot.quantity')->sum();
@@ -52,10 +63,10 @@ class Order extends Model
         return $this->created_at;
     }
 
-
-
-
-
+    public function getStatusAttribute()
+    {
+        return $this->state=='PENDING'? 'Pendiente':($this->state=='APPROVED'?'Aprobado':'Cerrado');
+    }
 
 
     public static function boot()

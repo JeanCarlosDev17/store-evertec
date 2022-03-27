@@ -62,12 +62,12 @@ class WebcheckoutTest extends TestCase
     public function testItGetInformationFromServiceCorrectly()
     {
 
-        $session_id = 50870;
+        $session_id = 51449;
         $responseGetSession = $response = (new WebcheckoutService())->getInformation($session_id);
 
         $this->assertEquals($session_id,$responseGetSession['requestId']);
         $this->assertArrayHasKey('status',$response);
-        $this->assertEquals('APPROVED',$response['status']['status']);
+        $this->assertEquals('PENDING',$response['status']['status']);
     }
 
     /**

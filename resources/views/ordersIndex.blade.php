@@ -34,7 +34,7 @@
                                 </td>
                                 <td class="align-middle">{{$order->count}}</td>
                                 <td class="align-middle">${{$order->total}}</td>
-                                <td class="align-middle">{{$order->state}}</td>
+                                <td class="align-middle">{{$order->status}}</td>
 <!--                                TODO: cambiar  de  status a state-->
                                 <td class="align-middle">
                                     <a href="{{route('orders.show',[$order->id])}}" class="btn btn-success">Ir</a>

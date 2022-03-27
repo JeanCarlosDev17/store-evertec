@@ -54,12 +54,19 @@ class OrderController extends Controller
                 'state'=>'PENDING'
             ]);
             $cart=$this->getCartFromCookie->execute();
+
+            $error=false;
+            $messages=[];
+            if ($cart->products->isEmpty()){
+                throw ValidationException::withMessages([
+                    'product'=>"Se ha enviado un carrito de compras vacio intente nuevamente añadir y realizar la compra",
+                ]);
+            }
             //toma cada elemento de la collecion pasa por la funcion anomima como parametro $product
             //genera un array $element donde  definimos la key o llave para acceder y los valores que contiene
             //esa llave del array en este caso para poder usar attach necesitamos como llave los id de los
             //productos y el valor  de quantity en ese registro
-            $error=false;
-            $messages=[];
+
             $cartProductWithQuantity=$cart->products
                 ->mapWithKeys(function ($product){
 
@@ -80,15 +87,10 @@ class OrderController extends Controller
             $order->currency='COP';
             $order->save();
             $cart->products()->detach();
-
-
             $data=$this->createDataSession->getCreateSessionData($order);
-
-
             try {
-
                 $session=$this->webcheckoutService->createSession($data);
-//                dump('laaaaaaaaaaaaaaaaaaa sesion',$session);
+
                 $order->session_id= $session['requestId'];
                 $order->process_url=$session['processUrl'];
                 $order->save();

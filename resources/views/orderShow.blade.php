@@ -9,15 +9,25 @@
             <div class="row px-xl-5">
 
                 <div class="col-lg-8 table-responsive mb-5">
+                    <h2>Orden de compra {{$order->refence}} </h2>
+                    <h3>Estado -
+                        <span class="{{$order->state=='PENDING'? 'bg-warning text-dark':
+                                   ($order->state=='APPROVED'?'bg-success text-white':'bg-danger text-white')}}"
+                        >
+                            {{$order->Status}}
 
+                        </span>
+                    </h3>
 
                     <table class="table table-bordered text-center mb-0">
                         <thead class="bg-secondary text-dark">
                         <tr>
+
                             <th>Producto</th>
                             <th>Nombre</th>
                             <th>Precio</th>
                             <th>Cantidad</th>
+
 
 
                         </tr>
@@ -35,6 +45,7 @@
 
                                     {{$product->pivot->quantity}}
                                 </td>
+
 
 
                             </tr>
