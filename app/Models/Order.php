@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Haruncpi\LaravelIdGenerator\IdGenerator;
 
 
 class Order extends Model
@@ -32,10 +33,10 @@ class Order extends Model
         return $this->hasMany(Payment::class);
     }
 
-    public function getTotalAttribute()
-    {
-        return $this->products->pluck('total')->sum();
-    }
+//    public function getTotalAttribute()
+//    {
+//        return $this->products->pluck('total')->sum();
+//    }
 
     public function getCountAttribute()
     {
@@ -53,5 +54,17 @@ class Order extends Model
 
 
 
+
+
+
+
+    public static function boot()
+    {
+        parent::boot();
+        self::creating(function ($order) {
+            $order->reference = IdGenerator::generate(['table' => 'orders','field'=>'reference', 'length' => 30, 'prefix' =>'ORDER-']);
+//            $mode = IdGenerator::generate(['table' => 'orders','field'=>'reference', 'length' => 30, 'prefix' =>'ORDER-']);
+        });
+    }
 
 }

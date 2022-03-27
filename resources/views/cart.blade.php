@@ -108,18 +108,18 @@
                                 @csrf
                                 @auth()
                                     @role('admin')
-                                        <a href="{{route('admin.index')}}" class="btn btn-block btn-primary my-3 py-3">
-                                            Ir a pagar
+                                        <a href="{{route('admin.index')}}" class="btn btn-block btn-primary my-3 py-3 font-semibold">
+                                            Comprar
                                         </a>
                                     @else
-                                        <button type="submit" class="btn btn-block btn-primary my-3 py-3">
-                                            Ir a pagar
+                                        <button type="submit" class="btn btn-block btn-primary my-3 py-3 font-semibold">
+                                            Comprar
                                         </button>
                                     @endrole
                                 @endauth
                                 @guest()
-                                    <a href="{{route('login')}}" class="btn btn-block btn-primary my-3 py-3">
-                                        Ir a pagar
+                                    <a href="{{route('login')}}" class="btn btn-block btn-primary my-3 py-3 font-semibold">
+                                        Comprar
                                     </a>
                                 @endguest
 

@@ -8,7 +8,7 @@
         @else
             <div class="row px-xl-5">
 
-                <div class="col-lg-8 table-responsive mb-5">
+                <div class="col-lg-12 table-responsive mb-5">
 
 
                     <table class="table table-bordered text-center mb-0">
@@ -29,12 +29,12 @@
                             <tr>
                                 <td class="align-middle">
 {{--                                    {{$order->created_at}}--}}
-                                    @dump($order)
+{{--                                    @dump($order)--}}
                                     {{$order->createdAt}}
                                 </td>
                                 <td class="align-middle">{{$order->count}}</td>
                                 <td class="align-middle">${{$order->total}}</td>
-                                <td class="align-middle">{{$order->status}}</td>
+                                <td class="align-middle">{{$order->state}}</td>
 <!--                                TODO: cambiar  de  status a state-->
                                 <td class="align-middle">
                                     <a href="{{route('orders.show',[$order->id])}}" class="btn btn-success">Ir</a>
@@ -51,7 +51,17 @@
 
 
                 </div>
+                <div class="col- pb-1">
+                    <nav aria-label="Page navigation">
+                        <div class="d-flex justify-content-center font-semibold ">
 
+                            @if(count($orders)>0)
+                                {!! $orders->links() !!}
+                            @endif
+                        </div>
+
+                    </nav>
+                </div>
             </div>
         @endif
     </div>

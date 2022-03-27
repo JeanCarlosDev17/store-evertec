@@ -32,11 +32,8 @@
                                 <td class="align-middle">{{$product->name}}</td>
                                 <td class="align-middle">${{$product->formatPrice()}}</td>
                                 <td class="align-middle">
-                                    <input type="number"
-                                           name="quantity"
-                                           class="form-control form-control-sm bg-secondary text-center"
-                                           value="{{$product->pivot->quantity}}"
-                                    >
+
+                                    {{$product->pivot->quantity}}
                                 </td>
 
 
@@ -61,6 +58,12 @@
                                 <h5 class="font-weight-bold">Total</h5>
                                 <h5 class="font-weight-bold">${{$order->total}}</h5>
                             </div>
+
+                            @if($order->state == 'PENDING')
+                                <a href="{{$order->process_url}}" class="btn btn-block btn-primary my-3 py-3">
+                                    Ir a pagar
+                                </a>
+                            @endif
 {{--                            <form action="{{route('orders.store')}}" method="post">--}}
 {{--                                @csrf--}}
 {{--                                @auth()--}}

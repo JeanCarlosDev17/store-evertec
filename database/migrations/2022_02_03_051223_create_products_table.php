@@ -20,7 +20,7 @@ class CreateProductsTable extends Migration
             $table->string('maker',100)->nullable();
             $table->unsignedMediumInteger('quantity');
             $table->enum('state',['active','inactive'])->default('active')->nullable();
-            $table->timestamp('soldOut_at')->nullable();
+            $table->timestamp('sold_out_at')->nullable();
             $table->softDeletes();
             $table->date('expired_at')->nullable();
             $table->timestamps();

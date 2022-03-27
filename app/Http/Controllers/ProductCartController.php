@@ -70,7 +70,7 @@ class ProductCartController extends Controller
      */
     public function update(Request $request, Product $product, Cart $cart,CreateCartCookie $createCartCookie)
     {
-        dump("el maximo es ".$product->quantity, 'y el valor recibido es '.$request->quantity);
+//        dump("el maximo es ".$product->quantity, 'y el valor recibido es '.$request->quantity);
         $validator = Validator::make($request->all(), [
             'quantity' => ['required','integer','max:'.$product->quantity,'min:0',],
             'action'=>['required',Rule::in(['decrease', 'add']),]
@@ -100,7 +100,6 @@ class ProductCartController extends Controller
         return redirect()->back()->cookie($cookie);
 
 
-//        return $request->all();
 
     }
 
