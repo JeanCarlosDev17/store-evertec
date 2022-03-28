@@ -64,9 +64,9 @@ class StoreProductTest extends TestCase
 
         $user=User::where('email','jeancarlosrecio@hotmail.com')->get();
         $response = $this->actingAs($user[0])->post('/admin/products',$data);
-        dump($field);
+//        dump($field);
         if ($field=="images"){
-            dump($response);
+//            dump($response);
         }
         $response->assertSessionHasErrors($field);
 //        $response->assertStatus(400);

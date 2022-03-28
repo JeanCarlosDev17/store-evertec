@@ -4,6 +4,7 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
     @endsection
     @section('content')
+            <x-Admin.validationErrors :errors="$errors"></x-Admin.validationErrors>
         <div class="container-fluid pt-5">
             <div class="row px-xl-5">
                 <div class = "card-wrapper">
@@ -87,19 +88,25 @@
                                 <p style="opacity: 1">{{$product->description}}</p>
                                 <ul>
 {{--                                    <li>Color: <span>Black</span></li>--}}
-                                    <li style="opacity: 1">Available: <span>{{$product->quantity}} in stock</span></li>
+                                    <li style="opacity: 1">
+                                        Available: <span>{{$product->quantity}} in stock</span>
+                                    </li>
 {{--                                    <li>Category: <span>Shoes</span></li>--}}
 {{--                                    <li>Shipping Area: <span>All over the world</span></li>--}}
 {{--                                    <li>Shipping Fee: <span>Free</span></li>--}}
                                 </ul>
                             </div>
 
-                            <div class = "purchase-info row">
-                                <input type = "number" min = "1"  max="{{$product->quantity}}" value = "1">
-                                <button type = "button" class = "btn bg-primary">
-                                    Añadir al Carrito <i class = "fas fa-shopping-cart"></i>
-                                </button>
-{{--                                <button type = "button" class = "btn">Compare</button>--}}
+                            <div class="purchase-info row">
+                                <form method="post" action="{{route('products.cart.store',$product->id)}}">
+                                    @csrf
+{{--                                    <input type="number" min="1" max="{{$product->quantity}}" value="1" name="quantity">--}}
+                                    <button type="submit" class="btn bg-primary">
+                                        Añadir al Carrito <i class="fas fa-shopping-cart"></i>
+                                    </button>
+                                </form>
+
+                                {{--                                <button type = "button" class = "btn">Compare</button>--}}
                             </div>
 
 {{--                            <div class = "social-links">--}}

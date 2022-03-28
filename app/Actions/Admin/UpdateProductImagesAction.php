@@ -40,6 +40,6 @@ class UpdateProductImagesAction
 //
         $product->images()->saveMany($productImages);
         $product->refresh();
-        dump('imagenes del producto Al final', $product->images);
+//        dump('imagenes del producto Al final', $product->images);
     }
 }

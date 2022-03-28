@@ -88,13 +88,16 @@
                     </form>
                 </div>
                 <div class="col-lg-3 col-6 text-right">
-                    <a href="" class="btn border">
-                        <i class="fas fa-heart text-primary"></i>
-                        <span class="badge">0</span>
-                    </a>
-                    <a href="" class="btn border">
+{{--                    <a href="" class="btn border">--}}
+{{--                        <i class="fas fa-heart text-primary"></i>--}}
+{{--                        <span class="badge">0</span>--}}
+{{--                    </a>--}}
+                    <a href="{{route('cart.index')}}" class="btn border">
                         <i class="fas fa-shopping-cart text-primary"></i>
-                        <span class="badge">0</span>
+                        <span class="badge">
+                            @inject('cartQuantity','App\Actions\User\CartQuantity')
+                            {{$cartQuantity->execute()}}
+                        </span>
                     </a>
                 </div>
             </div>
@@ -157,12 +160,45 @@
                                 </div>
 {{--                                <a href="contact.html" class="nav-item nav-link">Contact</a>--}}
                             </div>
-                            <div class="navbar-nav ml-auto py-0">
-                                <a href=" @auth() @role('admin') {{route('admin.index')}} @else {{route('dashboard')}} @endrole @endauth @guest() {{route('login')}}@endguest
-                                    " class="nav-item nav-link">Login</a>
-                                <a href="@auth() @role('admin') {{route('admin.index')}} @else {{route('dashboard')}} @endrole @endauth @guest() {{route('register')}}@endguest
-                                    " class="nav-item nav-link">Registrarse</a>
-                            </div>
+
+                            @guest()
+{{--                                <h1>no login</h1>--}}
+                                <div class="navbar-nav ml-auto py-0">
+                                    <a href=" @auth() @role('admin') {{route('admin.index')}} @else {{route('dashboard')}} @endrole @endauth @guest() {{route('login')}}@endguest
+                                        " class="nav-item nav-link">Login</a>
+                                    <a href="@auth() @role('admin') {{route('admin.index')}} @else {{route('dashboard')}} @endrole @endauth @guest() {{route('register')}}@endguest
+                                        " class="nav-item nav-link">Registrarse</a>
+                                </div>
+
+                            @endguest
+                            @auth()
+{{--                                <h1>logeado</h1>--}}
+
+                                <div class="nav-item dropdown">
+                                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">{{ auth()->user()->name }}</a>
+
+                                    <div class="dropdown-menu rounded-0 m-0">
+{{--                                    <a href="{{route('orders.index')}}" class="dropdown-item">Ordenes</a>--}}
+                                        <x-dropdown-link :href="route('orders.index')">
+                                            {{ __('Ordenes') }}
+                                        </x-dropdown-link>
+{{--                                        <a href="{{route('logout')}}" class="dropdown-item">Cerrar Sesión</a>--}}
+                                        <form method="POST" action="{{ route('logout') }}">
+                                            @csrf
+
+                                            <x-dropdown-link :href="route('logout')"
+                                                             onclick="event.preventDefault();
+                                                this.closest('form').submit();">
+                                                {{ __('Log Out') }}
+                                            </x-dropdown-link>
+                                        </form>
+
+{{--                                        <a href="#" class="dropdown-item">Checkout</a>--}}
+                                    </div>
+                                </div>
+
+
+                            @endauth
                         </div>
                     </nav>
                 </div>

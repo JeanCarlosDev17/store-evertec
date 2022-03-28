@@ -1,4 +1,9 @@
 @extends('nav')
+
+@section('js')
+
+    <script src="https://kit.fontawesome.com/2ccb5d9a99.js" crossorigin="anonymous"></script>
+@stop
 @section('content')
 
 
@@ -19,6 +24,7 @@
 <div class="container-fluid pt-5">
     <div class="row px-xl-5">
 
+        <x-Admin.validationErrors :errors="$errors"></x-Admin.validationErrors>
         <!-- Shop Product Start -->
         <div class="col-lg-12 col-md-12">
             <div class="row pb-3">
@@ -36,26 +42,16 @@
                                 </div>
                             </div>
                         </form>
-{{--                        <div class="dropdown ml-4">--}}
-{{--                            <button class="btn border dropdown-toggle" type="button" id="triggerId" data-toggle="dropdown" aria-haspopup="true"--}}
-{{--                                    aria-expanded="false">--}}
-{{--                                Ordenar por--}}
-{{--                            </button>--}}
-{{--                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="triggerId">--}}
-{{--                                <a class="dropdown-item" href="#">Latest</a>--}}
-{{--                                <a class="dropdown-item" href="#">Popularity</a>--}}
-{{--                                <a class="dropdown-item" href="#">Best Rating</a>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
+
                     </div>
                 </div>
 {{--                @forelse($products->where('code','COD414931') as $product)--}}
 
                 @if(session()->has('products'))
-                    @dump('hola mundo si exito.jpg')
+{{--                    @dump('hola mundo si exito.jpg')--}}
                     @php($products=session('products'))
                 @endif
-                @dump($products)
+{{--                @dump($products)--}}
                 @forelse($products as $product)
 
                     <div class="col-lg-4 col-md-6 col-sm-12 pb-1">
@@ -74,8 +70,20 @@
 
                             </div>
                             <div class="card-footer d-flex justify-content-between bg-light border">
-                                <a href="{{route('products.detail',$product->id)}}" class="btn btn-sm text-dark p-0"><i class="fas fa-eye text-primary mr-1"></i>Ver Detalles</a>
-                                <a href="" class="btn btn-sm text-dark p-0"><i class="fas fa-shopping-cart text-primary mr-1"></i>Añadir al Carrito</a>
+                                <a href="{{route('products.detail',$product->id)}}" class="btn btn-sm text-dark p-0">
+                                    <i class="fas fa-eye text-primary mr-1"></i>Ver Detalles
+                                </a>
+{{--                                <a href="" class="btn btn-sm text-dark p-0"><i class="fas fa-shopping-cart text-primary mr-1"></i>Añadir al Carrito</a>--}}
+{{--                                <a href="@auth() {{route('admin.index')}}  @endauth @guest() {{route('login')}}@endguest--}}
+{{--                                    " class="btn btn-sm text-dark p-0"><i--}}
+{{--                                        class="fas fa-shopping-cart text-primary mr-1"></i>Añadir al Carrito--}}
+{{--                                </a>--}}
+                                <form action="{{route('products.cart.store',$product->id)}}" method="post">
+                                @csrf
+                                    <button type="submit" class="btn btn-sm text-dark p-0">
+                                        <i class="fas fa-shopping-cart text-primary mr-1"></i>Añadir al Carrito
+                                    </button>
+                                </form>
                             </div>
                         </div>
                     </div>

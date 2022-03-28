@@ -1,6 +1,6 @@
 (function ($) {
     "use strict";
-    
+
     // Dropdown on mouse hover
     $(document).ready(function () {
         function toggleNavbarMethod() {
@@ -17,8 +17,8 @@
         toggleNavbarMethod();
         $(window).resize(toggleNavbarMethod);
     });
-    
-    
+
+
     // Back to top button
     $(window).scroll(function () {
         if ($(this).scrollTop() > 100) {
@@ -85,8 +85,10 @@
 
 
     // Product Quantity
+    var clickButton
     $('.quantity button').on('click', function () {
         var button = $(this);
+        clickButton=button;
         var oldValue = button.parent().parent().find('input').val();
         if (button.hasClass('btn-plus')) {
             var newVal = parseFloat(oldValue) + 1;
@@ -98,7 +100,19 @@
             }
         }
         button.parent().parent().find('input').val(newVal);
+        // console.log("Cambio valor hecho")
+        $('#product-quantity').submit();
     });
-    
+
+
+    $('#product-quantity').one('submit', function(e) {
+        e.preventDefault();
+        // console.log("submit hecho desde el botton " )
+        // console.log(clickButton);
+        // and when you done:
+        $(this).submit();
+    });
+
+
 })(jQuery);
 
