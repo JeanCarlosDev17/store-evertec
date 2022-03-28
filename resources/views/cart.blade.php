@@ -39,10 +39,11 @@
                                                             <i class="fa fa-minus"></i>
                                                         </button>
                                                     </div>
-                                                    <input type="number"
+                                                    <input type="text"
                                                            name="quantity"
                                                            class="form-control form-control-sm bg-secondary text-center"
                                                            value="{{$product->pivot->quantity}}"
+                                                           readonly
 
                                                     >
                                                     <div class="input-group-btn">

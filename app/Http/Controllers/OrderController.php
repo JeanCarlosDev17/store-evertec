@@ -32,7 +32,7 @@ class OrderController extends Controller
 
         $user=$request->user();
 
-        return view('ordersIndex')->with('orders',$user->orders()->paginate(6));
+        return view('ordersIndex')->with('orders',$user->orders()->orderBy('id', 'DESC')->paginate(6));
     }
 
     public function create()
@@ -47,7 +47,7 @@ class OrderController extends Controller
 
     public function store(Request $request)
     {
-
+//        dump($request->all());
         return DB::transaction(function () use($request){
             $user=$request->user();
             $order=$user->orders()->create([
@@ -69,7 +69,6 @@ class OrderController extends Controller
 
             $cartProductWithQuantity=$cart->products
                 ->mapWithKeys(function ($product){
-
                     $quantity=$product->pivot->quantity;
                     if ($product->quantity < $quantity)
                     {
@@ -87,6 +86,7 @@ class OrderController extends Controller
             $order->currency='COP';
             $order->save();
             $cart->products()->detach();
+            //conectarse a Checkout
             $data=$this->createDataSession->getCreateSessionData($order);
             try {
                 $session=$this->webcheckoutService->createSession($data);
@@ -102,12 +102,40 @@ class OrderController extends Controller
                 ]);
             }
 
-
-            //conectarse a Checkout
-//
-
-            return  redirect()->route('orders.show',[$order->id]);
+//            return  redirect()->route('orders.show',[$order->id]);
 
         },5);
+    }
+
+
+    public function returnPay(Order $order)
+    {
+        if (isset($order))
+        {
+            $response=$this->webcheckoutService->getInformation($order->session_id);
+            if (!($order->state == $response['status']['status'])){
+                $order->state=$response['status']['status'];
+                if ($response['status']['status']=="REJECTED")
+                {
+                    dump('Retornando a Buyme,  PAGO RECHAZADO');
+                    foreach ($order->products as $product)
+                    {
+                        dump('product antes de retornar el stock',$product->quantity);
+
+                        $product->increment('quantity',$product->pivot->quantity);
+                        dump('product despues de retornar el stock',$product->quantity);
+                    }
+                }
+                $order->save();
+            }
+
+
+
+            return redirect()->route('orders.show',$order->id);
+        }
+        else
+        {
+            return redirect()->route('orders.index');
+        }
     }
 }

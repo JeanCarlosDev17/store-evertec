@@ -17,8 +17,10 @@ class Kernel extends ConsoleKernel
     {
         // $schedule->command('inspire')->hourly();
         $schedule->command('CheckOrdersPayment')
-            ->everyThirtyMinutes();
-//            ->everyMinute();
+//            ->everyThirtyMinutes()
+            ->everyMinute()
+            ->withoutOverlapping()
+            ->runInBackground();
         //php artisan schedule:work
     }
 

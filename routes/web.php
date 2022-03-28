@@ -57,6 +57,7 @@ Route::get('admin/products/{product}', [ProductController::class,'show'])->name(
 Route::resource('products.cart', ProductCartController::class);
 Route::resource('cart', CartController::class);
 Route::resource('orders', OrderController::class)->middleware(['auth','verified','userStateActive','nocache']);
+Route::get('orders/return/{order}', [OrderController::class,'returnPay'])->middleware(['auth','verified','userStateActive','nocache'])->name('orders.return');
 
 
 require __DIR__.'/auth.php';

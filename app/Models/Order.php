@@ -65,7 +65,7 @@ class Order extends Model
 
     public function getStatusAttribute()
     {
-        return $this->state=='PENDING'? 'Pendiente':($this->state=='APPROVED'?'Aprobado':'Cerrado');
+        return $this->state=='PENDING'? 'Pendiente':($this->state=='APPROVED'?'Aprobado':'Pago Fallido');
     }
 
 

@@ -44,10 +44,12 @@ class CheckOrdersPayment extends Command
      */
     public function handle()
     {
-        dump('ejecutado a las '.date("Y-m-d H:i:s"));
+//        dump('ejecutado a las '.date("Y-m-d H:i:s"));
         $orders=Order::where('state','=','PENDING')
             ->where('session_id','!=',NULL)
             ->get();
+//        dump($orders);
+//        dump($orders->isEmpty());
         if (!($orders->isEmpty()))
         {
             foreach ($orders as $order)
@@ -61,23 +63,25 @@ class CheckOrdersPayment extends Command
                         $order->state=$response['status']['status'];
                         $order->save();
                         //notificar al usuario que su compra fue realizada
-//                        dump("TUUUUUUU COMPRA HA SIDO CONFIRMADA YEEIIIIIII");
+                        dump("TUUUUUUU COMPRA HA SIDO CONFIRMADA YEEIIIIIII");
                     }
 
                     if ($response['status']['status'] == 'REJECTED'){
-//                        dump('ehhhh pero que tacaño todavia no me paga');
+//                        dump('ehhhh PAGO RECHAZADO');
                         $order->state=$response['status']['status'];
                         $order->save();
-                        foreach ($order->produts as $product){
-//                            dump('product antes de retornar el stock',$product);
+                        foreach ($order->products as $product)
+                        {
+//                            dump('product antes de retornar el stock',$product->quantity);
                             $product->increment('quantity',$product->pivot->quantity);
-//                            dump('product despues de retornar el stock',$product);
+//                            dump('product despues de retornar el stock',$product->quantity);
                         }
+                        dump('pago rechazado procesado');
                     }
 
                     if ($response['status']['status'] == 'PENDING')
                     {
-//                        dump('ehhhh pero que tacaño todavia no me paga');
+                        dump('ehhhh pero que tacaño todavia no me paga');
                     }
 
 
@@ -87,7 +91,7 @@ class CheckOrdersPayment extends Command
         }else
         {
             dump('vacio ninguna orden pendiente');
-
+//
         }
 
 //        dump($orders);
