@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use App\Models\Order;
+use App\Models\User;
 use App\Request\CreateSessionDataRequest;
 use App\Request\CreateSessionRequest;
 use App\Request\GetInformationRequest;
@@ -35,14 +36,18 @@ class WebcheckoutTest extends TestCase
     public function testItCanCreateSessionFromServiceCorrectly()
     {
         $data = $this->getCreateSessionData();
+        $user=User::factory()->make();
+        $user->save();
+
         $order=new Order();
 
-        $order->user_id=1;
+        $order->user_id=$user->id;
         $order->currency='COP';
         $order->total=10000;
         $order->save();
 
         $data=(new CreateSessionDataRequest())->getCreateSessionData($order);
+
 
         $response = (new WebcheckoutService())->createSession($data);
 
