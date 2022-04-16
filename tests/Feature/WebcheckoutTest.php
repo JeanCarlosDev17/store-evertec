@@ -27,10 +27,10 @@ class WebcheckoutTest extends TestCase
 
         $this->assertAuthSuccess($request);
 
-        $this->assertArrayHasKey('payment',$request);
-        $this->assertArrayHasKey('expiration',$request);
-        $this->assertArrayHasKey('locale',$request);
-        $this->assertArrayHasKey('returnUrl',$request);
+        $this->assertArrayHasKey('payment', $request);
+        $this->assertArrayHasKey('expiration', $request);
+        $this->assertArrayHasKey('locale', $request);
+        $this->assertArrayHasKey('returnUrl', $request);
     }
 
     public function testItCanCreateSessionFromServiceCorrectly()
@@ -51,28 +51,27 @@ class WebcheckoutTest extends TestCase
 
         $response = (new WebcheckoutService())->createSession($data);
 
-        $this->assertArrayHasKey('status',$response);
-        $this->assertEquals('OK',$response['status']['status']);
-        $this->assertArrayHasKey('requestId',$response);
-        $this->assertArrayHasKey('processUrl',$response);
+        $this->assertArrayHasKey('status', $response);
+        $this->assertEquals('OK', $response['status']['status']);
+        $this->assertArrayHasKey('requestId', $response);
+        $this->assertArrayHasKey('processUrl', $response);
 
         $session_id = $response['requestId'];
         $responseGetSession = $response = (new WebcheckoutService())->getInformation($session_id);
 
-        $this->assertEquals($session_id,$responseGetSession['requestId']);
-        $this->assertArrayHasKey('status',$response);
-        $this->assertEquals('PENDING',$response['status']['status']);
+        $this->assertEquals($session_id, $responseGetSession['requestId']);
+        $this->assertArrayHasKey('status', $response);
+        $this->assertEquals('PENDING', $response['status']['status']);
     }
 
     public function testItGetInformationFromServiceCorrectly()
     {
-
         $session_id = 51449;
         $responseGetSession = $response = (new WebcheckoutService())->getInformation($session_id);
 
-        $this->assertEquals($session_id,$responseGetSession['requestId']);
-        $this->assertArrayHasKey('status',$response);
-        $this->assertEquals('PENDING',$response['status']['status']);
+        $this->assertEquals($session_id, $responseGetSession['requestId']);
+        $this->assertArrayHasKey('status', $response);
+        $this->assertEquals('PENDING', $response['status']['status']);
     }
 
     /**

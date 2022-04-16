@@ -15,13 +15,13 @@ class CreateOrdersTable extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->string('reference',50)->unique()->nullable();
-            $table->string('description',150)->nullable();
-            $table->char('currency',4)->nullable();
+            $table->string('reference', 50)->unique()->nullable();
+            $table->string('description', 150)->nullable();
+            $table->char('currency', 4)->nullable();
             $table->unsignedBigInteger('total')->nullable();
-            $table->enum('state',['APPROVED','PENDING','REJECTED'])->default('PENDING');
-            $table->string('process_url',250)->nullable();
-            $table->string('session_id',10)->nullable();
+            $table->enum('state', ['APPROVED','PENDING','REJECTED'])->default('PENDING');
+            $table->string('process_url', 250)->nullable();
+            $table->string('session_id', 10)->nullable();
             $table->foreignId('user_id')->constrained('users');
             $table->timestamps();
         });

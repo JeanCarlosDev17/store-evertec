@@ -21,7 +21,6 @@ class AuthenticationTest extends TestCase
         ParallelTesting::setUpTestDatabase(function ($database, $token) {
             $this->artisan('db:seed');
         });
-
     }
 
     public function test_login_screen_can_be_rendered()

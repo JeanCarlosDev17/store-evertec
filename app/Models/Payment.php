@@ -10,7 +10,7 @@ class Payment extends Model
 {
     use HasFactory;
 
-    public function order():BelongsTo
+    public function order(): BelongsTo
     {
         return $this->belongsTo(Order::class);
     }

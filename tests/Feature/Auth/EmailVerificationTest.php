@@ -22,7 +22,6 @@ class EmailVerificationTest extends TestCase
         ParallelTesting::setUpTestDatabase(function ($database, $token) {
             $this->artisan('db:seed');
         });
-
     }
 
     public function test_email_verification_screen_can_be_rendered()

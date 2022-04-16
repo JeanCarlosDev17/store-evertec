@@ -14,10 +14,10 @@ class CreateSessionDataRequest
                 'description' => $order->description ?? 'una descripcion ',
                 'amount' => [
                     'currency' => $order->currency ,
-                    'total' => substr($order->total,0,255)
+                    'total' => substr($order->total, 0, 255)
                 ]
             ],
-            'returnUrl' => route('orders.return',[$order->id]),
+            'returnUrl' => route('orders.return', [$order->id]),
             'expiration' => date('c', strtotime('+2 days')),
         ];
     }

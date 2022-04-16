@@ -25,7 +25,7 @@ class ProductStoreRequest extends FormRequest
      *
      * @return array
      */
-    public function rules():array
+    public function rules(): array
     {
         return [
             'name'=>'required|min:3|max:150',
@@ -44,7 +44,7 @@ class ProductStoreRequest extends FormRequest
         ];
     }
 
-    public function attributes():array
+    public function attributes(): array
     {
         $files=[];
         $msg=[
@@ -55,13 +55,11 @@ class ProductStoreRequest extends FormRequest
             'quantity'=>'Cantidad en Stock',
 
         ];
-        if (isset($this->images) and is_array($this->images))
-        {
+        if (isset($this->images) and is_array($this->images)) {
             foreach ($this->images as $key => $val) {
-        //            $files += ['images.' . $key => $key+1 .' '.  $val->getClientOriginalName() ];
+                //            $files += ['images.' . $key => $key+1 .' '.  $val->getClientOriginalName() ];
                 $files += ['images.' . $key => $val->getClientOriginalName() ];
-        //                $files['images.' . $key . '.max']  = 'The document ' . $val->getClientOriginalName() . ' may not be greater than :max kilobytes.';
-
+                //                $files['images.' . $key . '.max']  = 'The document ' . $val->getClientOriginalName() . ' may not be greater than :max kilobytes.';
             }
         }
         $msg +=$files;
@@ -69,33 +67,33 @@ class ProductStoreRequest extends FormRequest
 
         return $msg;
     }
-   /* public function messages()
-    {
-        $msg=[];
-        $msg=[];
-        if (isset($this->images))
-        {
-            $files=[];
-            $msg=[];
+    /* public function messages()
+     {
+         $msg=[];
+         $msg=[];
+         if (isset($this->images))
+         {
+             $files=[];
+             $msg=[];
 
-            foreach ($this->images as $key => $val) {
-                $files += ['images.' . $key . '.mimes'=>'The document ' . $val->getClientOriginalName() . ' must be a file of type: :values.'];
+             foreach ($this->images as $key => $val) {
+                 $files += ['images.' . $key . '.mimes'=>'The document ' . $val->getClientOriginalName() . ' must be a file of type: :values.'];
 
 //                $files['images.' . $key . '.max']  = 'The document ' . $val->getClientOriginalName() . ' may not be greater than :max kilobytes.';
 
-            }
+             }
 
 //            dump(([$msg,...$files]));
-        }
-        dump("RESULTADO de los MESSAGES");
-        $msg+=$files;
-        dump($msg);
-        return $msg;
-    }*/
+         }
+         dump("RESULTADO de los MESSAGES");
+         $msg+=$files;
+         dump($msg);
+         return $msg;
+     }*/
 
-    function replace( $string)
+    public function replace($string)
     {
-        $pos = strpos($string,'.' );
+        $pos = strpos($string, '.');
         $string[$pos]=" ";
         $string[$pos+1]= $string[$pos + 1] +1;
         return str_replace('images', 'imagen #', $string);
@@ -115,14 +113,13 @@ class ProductStoreRequest extends FormRequest
 
     protected function failedValidation(Validator $validator)
     {
-        if($this->wantsJson())
-        {
+        if ($this->wantsJson()) {
             $response = response()->json([
                 'success' => false,
                 'message' => 'Ops! Some errors occurred',
                 'errors' => $validator->errors()->all()
-            ],400);
-        }else{
+            ], 400);
+        } else {
             $response = redirect()
                 ->back()
                 ->with('message', 'Ops! Some errors occurred')
@@ -134,7 +131,4 @@ class ProductStoreRequest extends FormRequest
             ->errorBag($this->errorBag)
             ->redirectTo($this->getRedirectUrl());
     }
-
-
-
 }

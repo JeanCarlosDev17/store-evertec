@@ -23,7 +23,7 @@ class UserSeeder extends Seeder
         $userAdmin= new User();
         $userAdmin->name="jean Admin";
         $userAdmin->email="jeancarlosrecio@hotmail.com";
-        $userAdmin->password=(new UserPasswordHash)->generateHash("123456789");
+        $userAdmin->password=(new UserPasswordHash())->generateHash("123456789");
         $userAdmin->remember_token =Str::random(10);
         $userAdmin->email_verified_at= Carbon::now()->toDateTimeString();
         $userAdmin->assignRole('admin');
@@ -32,7 +32,7 @@ class UserSeeder extends Seeder
         $userRegular= new User();
         $userRegular->name="jean UserTest";
         $userRegular->email="jean@mail.com";
-        $userRegular->password=(new UserPasswordHash)->generateHash("123456789");
+        $userRegular->password=(new UserPasswordHash())->generateHash("123456789");
         $userRegular->remember_token =Str::random(10);
         $userRegular->email_verified_at= Carbon::now()->toDateTimeString();
         $userRegular->assignRole('user');

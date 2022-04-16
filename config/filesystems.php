@@ -27,7 +27,7 @@ return [
     | Supported Drivers: "local", "ftp", "sftp", "s3"
     |
     */
-    'images_disk'=>env('FILESYSTEM_IMAGES_DISK','local'),
+    'images_disk'=>env('FILESYSTEM_IMAGES_DISK', 'local'),
     'disks' => [
 
         'local' => [

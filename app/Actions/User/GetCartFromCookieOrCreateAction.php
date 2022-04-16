@@ -13,9 +13,8 @@ class getCartFromCookieOrCreateAction
         $this->getCartFromCookie=$getCartFromCookie;
     }
 
-    public function execute():Cart
+    public function execute(): Cart
     {
-
         $cart=$this->getCartFromCookie->execute();
 //        dump($cart);
         return $cart ?? Cart::create();

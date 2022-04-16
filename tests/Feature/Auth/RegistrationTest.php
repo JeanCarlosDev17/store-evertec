@@ -20,7 +20,6 @@ class RegistrationTest extends TestCase
         ParallelTesting::setUpTestDatabase(function ($database, $token) {
             $this->artisan('db:seed');
         });
-
     }
 
 
@@ -43,8 +42,5 @@ class RegistrationTest extends TestCase
 
         $this->assertAuthenticated();
         $response->assertRedirect(RouteServiceProvider::HOME);
-
     }
-
-
 }

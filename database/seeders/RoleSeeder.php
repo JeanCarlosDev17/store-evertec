@@ -1,6 +1,7 @@
 <?php
 
 namespace Database\Seeders;
+
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 use Illuminate\Database\Seeder;
@@ -28,6 +29,5 @@ class RoleSeeder extends Seeder
         Permission::create(['name' => 'user.destroy'])->assignRole($roleAdmin);
         Permission::create(['name' => 'user.edit'])->assignRole($roleAdmin);
         Permission::create(['name' => 'user.state'])->assignRole($roleAdmin);
-
     }
 }

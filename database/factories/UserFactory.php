@@ -27,7 +27,6 @@ class UserFactory extends Factory
     }
     public function definitionTest()
     {
-
         $user = new User();
         $user->name = $this->faker->name();
         $user->email = $this->faker->unique()->safeEmail();

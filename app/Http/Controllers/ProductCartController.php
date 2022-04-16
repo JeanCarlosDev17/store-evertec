@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers;
 
-
-
 use App\Actions\User\CreateCartCookie;
 use App\Actions\User\getCartFromCookie;
 use App\Actions\User\GetCartFromCookieOrCreateAction;
@@ -33,20 +31,18 @@ class ProductCartController extends Controller
      * @param  \App\Models\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request,
-                          Product $product,
-                          GetCartFromCookieOrCreateAction  $cartFromCookieOrCreateAction,
-                          CreateCartCookie $createCartCookie
-                        )
-    {
-
+    public function store(
+        Request $request,
+        Product $product,
+        GetCartFromCookieOrCreateAction  $cartFromCookieOrCreateAction,
+        CreateCartCookie $createCartCookie
+    ) {
         $cart= $cartFromCookieOrCreateAction->execute();
 
         $quantity=$cart->products()->find($product->id)->pivot->quantity ?? 0;
 
 
-        if ($product->quantity < $quantity+1)
-        {
+        if ($product->quantity < $quantity+1) {
             throw ValidationException::withMessages([
                'product'=>"Se ha alcanzado el stock maximo del producto  {$product->name} no puede agregar mas de {$product->quantity}",
             ]);
@@ -70,13 +66,13 @@ class ProductCartController extends Controller
      * @param  \App\Models\Cart  $cart
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Product $product, Cart $cart,CreateCartCookie $createCartCookie): \Illuminate\Http\Response
+    public function update(Request $request, Product $product, Cart $cart, CreateCartCookie $createCartCookie): \Illuminate\Http\Response
     {
 //        dump("el maximo es ".$product->quantity, 'y el valor recibido es '.$request->quantity);
         $validator = Validator::make($request->all(), [
             'quantity' => ['required','integer','max:'.$product->quantity,'min:0',],
             'action'=>['required',Rule::in(['decrease', 'add']),]
-        ],$messages = [
+        ], $messages = [
             'quantity.max'=>'Se ha alcanzado el stock maximo del producto '. $product->name .', no puede agregar mas de '.$product->quantity,
             'action.in'=>'Acción invalida',
 
@@ -89,7 +85,7 @@ class ProductCartController extends Controller
                 ->withInput();
         }
 
-        if ($request->quantity<1){
+        if ($request->quantity<1) {
             $cart->products()->detach($product->id);
             $cookie=$createCartCookie->execute($cart);
             return redirect()->back()->cookie($cookie);
@@ -100,9 +96,6 @@ class ProductCartController extends Controller
         ]);
         $cookie=$createCartCookie->execute($cart);
         return redirect()->back()->cookie($cookie);
-
-
-
     }
 
     /**
@@ -120,7 +113,4 @@ class ProductCartController extends Controller
         return redirect()->back()->cookie($cookie);
         return $product;
     }
-
-
 }
-

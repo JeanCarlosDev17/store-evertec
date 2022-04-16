@@ -17,35 +17,34 @@ class OrderController extends Controller
     protected getCartFromCookie $getCartFromCookie;
     protected CreateSessionDataRequest $createDataSession;
     protected WebcheckoutService $webcheckoutService;
-    public function __construct(getCartFromCookie $getCartFromCookie,
-                                CreateSessionDataRequest $createSessionDataRequest,
-                                WebcheckoutService $webcheckoutService
-                                )
-    {
+    public function __construct(
+        getCartFromCookie $getCartFromCookie,
+        CreateSessionDataRequest $createSessionDataRequest,
+        WebcheckoutService $webcheckoutService
+    ) {
         $this->getCartFromCookie = $getCartFromCookie;
         $this->createDataSession = $createSessionDataRequest;
         $this->webcheckoutService = $webcheckoutService;
-
     }
 
-    public  function index(Request $request){
-
+    public function index(Request $request)
+    {
         $user=$request->user();
 
-        return view('ordersIndex')->with('orders',$user->orders()->orderBy('id', 'DESC')->paginate(6));
+        return view('ordersIndex')->with('orders', $user->orders()->orderBy('id', 'DESC')->paginate(6));
     }
 
 
 
     public function show(Order $order)
     {
-        return view('orderShow')->with('order',$order);
+        return view('orderShow')->with('order', $order);
     }
 
     public function store(Request $request)
     {
 //        dump($request->all());
-        return DB::transaction(function () use($request){
+        return DB::transaction(function () use ($request) {
             $user=$request->user();
             $order=$user->orders()->create([
                 'state'=>'PENDING'
@@ -54,7 +53,7 @@ class OrderController extends Controller
 
             $error=false;
             $messages=[];
-            if ($cart->products->isEmpty()){
+            if ($cart->products->isEmpty()) {
                 throw ValidationException::withMessages([
                     'product'=>"Se ha enviado un carrito de compras vacio intente nuevamente añadir y realizar la compra",
                 ]);
@@ -65,15 +64,14 @@ class OrderController extends Controller
             //productos y el valor  de quantity en ese registro
 
             $cartProductWithQuantity=$cart->products
-                ->mapWithKeys(function ($product){
+                ->mapWithKeys(function ($product) {
                     $quantity=$product->pivot->quantity;
-                    if ($product->quantity < $quantity)
-                    {
+                    if ($product->quantity < $quantity) {
                         throw ValidationException::withMessages([
                             'product'=>"Se ha alcanzado el stock maximo del producto  {$product->name} , hay disponibles  {$product->quantity} unidades",
                         ]);
                     }
-                    $product->decrement('quantity',$quantity);
+                    $product->decrement('quantity', $quantity);
                     $element[$product->id]=['quantity'=>$quantity];
                     return $element;
                 });
@@ -100,27 +98,23 @@ class OrderController extends Controller
             }
 
 //            return  redirect()->route('orders.show',[$order->id]);
-
-        },5);
+        }, 5);
     }
 
 
     public function returnPay(Order $order)
     {
-        if (isset($order))
-        {
+        if (isset($order)) {
             $response=$this->webcheckoutService->getInformation($order->session_id);
-            if (!($order->state == $response['status']['status'])){
+            if (!($order->state == $response['status']['status'])) {
                 $order->state=$response['status']['status'];
-                if ($response['status']['status']=="REJECTED")
-                {
+                if ($response['status']['status']=="REJECTED") {
                     dump('Retornando a Buyme,  PAGO RECHAZADO');
-                    foreach ($order->products as $product)
-                    {
-                        dump('product antes de retornar el stock',$product->quantity);
+                    foreach ($order->products as $product) {
+                        dump('product antes de retornar el stock', $product->quantity);
 
-                        $product->increment('quantity',$product->pivot->quantity);
-                        dump('product despues de retornar el stock',$product->quantity);
+                        $product->increment('quantity', $product->pivot->quantity);
+                        dump('product despues de retornar el stock', $product->quantity);
                     }
                 }
                 $order->save();
@@ -128,10 +122,8 @@ class OrderController extends Controller
 
 
 
-            return redirect()->route('orders.show',$order->id);
-        }
-        else
-        {
+            return redirect()->route('orders.show', $order->id);
+        } else {
             return redirect()->route('orders.index');
         }
     }

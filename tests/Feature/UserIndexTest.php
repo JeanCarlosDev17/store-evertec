@@ -33,12 +33,13 @@ class UserIndexTest extends TestCase
     /**
      * @test
      */
-    public function authenticatedUserCanListUsers(){
+    public function authenticatedUserCanListUsers()
+    {
 //      $user=new user();
         $user = DB::table('users')
             ->where('email', '=', 'jeancarlosrecio@hotmail.com')
             ->get();
-        
+
         $this->post('/login', [
             'email' => 'jeancarlosrecio@hotmail.com',
             'password' => '123456789',
@@ -54,22 +55,21 @@ class UserIndexTest extends TestCase
 
 
         $userdata=[];
-        foreach ($user as $userArray ){
-
-           $userdata=$userArray;
-
+        foreach ($user as $userArray) {
+            $userdata=$userArray;
         }
-        $responseUsers->each(function ($item) use ($user,$userdata){
+        $responseUsers->each(function ($item) use ($user, $userdata) {
 //            $this->assertEquals($user->id,$item->id);
-            
-            $item->id==$userdata->id ? $this->assertEquals($userdata->id,$item->id):null;
+
+            $item->id==$userdata->id ? $this->assertEquals($userdata->id, $item->id) : null;
         });
     }
 
     /**
      * @test
      */
-    public function anUserNotAuthenticatedNotCanListUsers(){
+    public function anUserNotAuthenticatedNotCanListUsers()
+    {
 //
         $response=$this->get(route('admin.index'));
 

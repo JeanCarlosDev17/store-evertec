@@ -10,12 +10,12 @@ use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Collection;
 use PhpParser\Node\Expr\Array_;
 
-
 class UserEloquent implements UserRepository
 {
     private User $user;
     private UserPasswordHash $userPasswordHash;
-    public function __construct(){
+    public function __construct()
+    {
         $this->user=new User();
         $this->userPasswordHash=new UserPasswordHash();
     }
@@ -33,14 +33,15 @@ class UserEloquent implements UserRepository
     public function indexRoleUser(): Collection
     {
         // TODO: Implement index() method.
-        return $users= User::role('user')->get();;
+        return $users= User::role('user')->get();
+        ;
     }
 
-    public function update(User $user,Request $data): void
+    public function update(User $user, Request $data): void
     {
         // TODO: Implement update() method.
 
-        if (isset($data->newPassword)){
+        if (isset($data->newPassword)) {
             UserPasswordUpdateValidator::validate($data);
 //            $data->validate(['newPassword' => [ 'confirmed', Rules\Password::defaults()],]);
             $user->password=$data->newPassword;
@@ -56,5 +57,4 @@ class UserEloquent implements UserRepository
 
         $user->save();
     }
-
 }

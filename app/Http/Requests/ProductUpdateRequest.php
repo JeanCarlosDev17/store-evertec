@@ -24,7 +24,7 @@ class ProductUpdateRequest extends FormRequest
      *
      * @return array
      */
-    public function rules():array
+    public function rules(): array
     {
         return [
             'name'=>'required|min:3|max:150',
@@ -43,7 +43,7 @@ class ProductUpdateRequest extends FormRequest
         ];
     }
 
-    public function attributes():array
+    public function attributes(): array
     {
         $files=[];
         $msg=[
@@ -54,13 +54,11 @@ class ProductUpdateRequest extends FormRequest
             'quantity'=>'Cantidad en Stock',
 
         ];
-        if (isset($this->images) and is_array($this->images))
-        {
+        if (isset($this->images) and is_array($this->images)) {
             foreach ($this->images as $key => $val) {
                 //            $files += ['images.' . $key => $key+1 .' '.  $val->getClientOriginalName() ];
                 $files += ['images.' . $key => $val->getClientOriginalName() ];
                 //                $files['images.' . $key . '.max']  = 'The document ' . $val->getClientOriginalName() . ' may not be greater than :max kilobytes.';
-
             }
         }
         $msg +=$files;
@@ -92,9 +90,9 @@ class ProductUpdateRequest extends FormRequest
          return $msg;
      }*/
 
-    function replace( $string)
+    public function replace($string)
     {
-        $pos = strpos($string,'.' );
+        $pos = strpos($string, '.');
         $string[$pos]=" ";
         $string[$pos+1]= $string[$pos + 1] +1;
         return str_replace('images', 'imagen #', $string);
@@ -114,14 +112,13 @@ class ProductUpdateRequest extends FormRequest
 
     protected function failedValidation(Validator $validator)
     {
-        if($this->wantsJson())
-        {
+        if ($this->wantsJson()) {
             $response = response()->json([
                 'success' => false,
                 'message' => 'Ops! Some errors occurred',
                 'errors' => $validator->errors()->all()
-            ],400);
-        }else{
+            ], 400);
+        } else {
             $response = redirect()
                 ->back()
                 ->with('message', 'Ops! Some errors occurred')
@@ -134,4 +131,3 @@ class ProductUpdateRequest extends FormRequest
             ->redirectTo($this->getRedirectUrl());
     }
 }
-

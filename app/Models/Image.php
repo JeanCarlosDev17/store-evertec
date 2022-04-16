@@ -25,7 +25,6 @@ class Image extends Model
     }
     public function getExtensionImage(): string
     {
-
         $infoPath = pathinfo(public_path($this->url()));
         $extension = $infoPath['extension'];
 
@@ -33,26 +32,23 @@ class Image extends Model
         return $extension;
     }
 
-    public function getFileName():string
+    public function getFileName(): string
     {
 //        dump("nombre con extension",pathinfo(public_path($this->url()))['basename']);
-        $filename=str_replace('.'.$this->getExtensionImage(),'',pathinfo(public_path($this->url()))['basename']);
+        $filename=str_replace('.'.$this->getExtensionImage(), '', pathinfo(public_path($this->url()))['basename']);
 //        dump("el nombre es ",$filename);
         return $filename;
     }
 
-    public function getFileSize():string
+    public function getFileSize(): string
     {
 //        $size = Storage::size('file.jpg');
         $size= Storage::disk(config('filesystems.images_disk'))->size("{$this->product_id}/{$this->file_name}");
 
         return $size;
-    }public function getFileMime():string
+    }
+    public function getFileMime(): string
     {
-
-
         return $mimetype = Storage::disk(config('filesystems.images_disk'))->mimeType("{$this->product_id}/{$this->file_name}");
     }
 }
-
-

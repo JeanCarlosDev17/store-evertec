@@ -5,9 +5,10 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductCartController;
 use App\Http\Requests\ProductStoreRequest;
 use Illuminate\Support\Facades\Route;
-use \App\Http\Controllers\UserController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProductController;
-use \App\Http\Controllers\UploadController;
+use App\Http\Controllers\UploadController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -33,21 +34,20 @@ Route::get('/dashboard', function () {
 
 //Route::resource('admin/example','\App\Http\Controllers\UserController');
 Route::middleware(['auth', 'verified','role:admin','nocache'])->group(function () {
-    Route::get('/admin',[UserController::class,'index'])->name('admin.index');
-    Route::get('admin/users',[UserController::class,'index'])->name('users.index');
-    Route::post('admin/users',[UserController::class,'store'])->name('users.store');
-    Route::get('admin/users/create',[UserController::class,'create'])->name('users.create');
-    Route::get('admin/users/{user}',[UserController::class,'show'])->name('users.show');
-    Route::put('admin/users/{user}',[UserController::class,'update'])->name('users.update');
-    Route::patch('admin/users/{user}',[UserController::class,'update'])->name('users.patch');
-    Route::delete('admin/users/{user}',[UserController::class,'destroy'])->name('users.destroy');
-    Route::get('admin/users/{user}/edit',[UserController::class,'edit'])->name('users.edit');
-    Route::put('admin/users/{user}/state',[UserController::class,'state'])->name('users.state');
-
+    Route::get('/admin', [UserController::class,'index'])->name('admin.index');
+    Route::get('admin/users', [UserController::class,'index'])->name('users.index');
+    Route::post('admin/users', [UserController::class,'store'])->name('users.store');
+    Route::get('admin/users/create', [UserController::class,'create'])->name('users.create');
+    Route::get('admin/users/{user}', [UserController::class,'show'])->name('users.show');
+    Route::put('admin/users/{user}', [UserController::class,'update'])->name('users.update');
+    Route::patch('admin/users/{user}', [UserController::class,'update'])->name('users.patch');
+    Route::delete('admin/users/{user}', [UserController::class,'destroy'])->name('users.destroy');
+    Route::get('admin/users/{user}/edit', [UserController::class,'edit'])->name('users.edit');
+    Route::put('admin/users/{user}/state', [UserController::class,'state'])->name('users.state');
 });
 Route::prefix('admin')->middleware(['auth', 'verified','role:admin','nocache'])->group(function () {
     Route::resource('products', ProductController::class);
-    Route::put('product/{user}/state',[ProductController::class,'state'])->name('products.state');
+    Route::put('product/{user}/state', [ProductController::class,'state'])->name('products.state');
 });
 
 Route::get('/products/{product}/detail', [ProductController::class,'show'])->name('products.detail');

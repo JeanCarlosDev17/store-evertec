@@ -23,7 +23,8 @@ class RegisteredUserController extends Controller
 {
     private UserRepository $userRepository;
     private ContractUserRepository $contractUserRepository;
-    public function __construct(UserRepository $userRepository,ContractUserRepository $contractUserRepository){
+    public function __construct(UserRepository $userRepository, ContractUserRepository $contractUserRepository)
+    {
         $this->userRepository=$userRepository;
         $this->contractUserRepository=$contractUserRepository;
     }
@@ -32,7 +33,7 @@ class RegisteredUserController extends Controller
      *
      * @return \Illuminate\View\View
      */
-    public function create():View
+    public function create(): View
     {
         return view('auth.register');
     }
@@ -45,9 +46,8 @@ class RegisteredUserController extends Controller
      *
      * @throws \Illuminate\Validation\ValidationException
      */
-    public function store(UserStoreRequest $request):RedirectResponse
+    public function store(UserStoreRequest $request): RedirectResponse
     {
-
         $user= $this->contractUserRepository->Store($request->validated());
         event(new Registered($user));
         Auth::login($user);

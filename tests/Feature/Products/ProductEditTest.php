@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
+
 class ProductEditTest extends TestCase
 {
     use RefreshDatabase;
@@ -21,9 +22,9 @@ class ProductEditTest extends TestCase
     public function test_can_access_to_Edit_products()
     {
         //crear producto y un usuario con factory para cada test
-        $user=User::where('email','jeancarlosrecio@hotmail.com')->first();
+        $user=User::where('email', 'jeancarlosrecio@hotmail.com')->first();
 //        dump($user);
-        $response = $this->actingAs($user)->get(route('products.edit',Product::first()));
+        $response = $this->actingAs($user)->get(route('products.edit', Product::first()));
         $response->assertStatus(200);
         $response->assertViewIs('admin.editProduct');
         $response->viewData('product');

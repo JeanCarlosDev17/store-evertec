@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 
 class CreateSessionRequest extends GetInformationRequest
 {
-
     public array $payment;
     public string $expiration;
     public string $returnUrl;
@@ -26,16 +25,13 @@ class CreateSessionRequest extends GetInformationRequest
 
     public function toArray()
     {
-        return array_merge(parent::auth(),[
+        return array_merge(parent::auth(), [
             'locale' => 'es_CO',
             'payment' => $this->payment,
             'expiration' => $this->expiration,
             'returnUrl' => $this->returnUrl,
             'ipAddress' => app(Request::class)->getClientIp(),
-            'userAgent' => substr(app(Request::class)->header('User-Agent'),0,255)
+            'userAgent' => substr(app(Request::class)->header('User-Agent'), 0, 255)
         ]);
     }
-
-
-
 }
