@@ -35,6 +35,7 @@ class WebcheckoutService implements WebcheckoutContract
 
     private function request(array $data, string $url)
     {
+
         $response = $this->client->request('post', $url, [
             'json' => $data,
             'verify' => false

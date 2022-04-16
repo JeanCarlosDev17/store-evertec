@@ -59,7 +59,7 @@ class CheckOrdersPayment extends Command
                         $order->state=$response['status']['status'];
                         $order->save();
                         //notificar al usuario que su compra fue realizada
-                        dump("TUUUUUUU COMPRA HA SIDO CONFIRMADA YEEIIIIIII");
+                        // dump("TUUUUUUU COMPRA HA SIDO CONFIRMADA YEEIIIIIII");
                     }
 
                     if ($response['status']['status'] == 'REJECTED') {
@@ -71,16 +71,16 @@ class CheckOrdersPayment extends Command
                             $product->increment('quantity', $product->pivot->quantity);
 //                            dump('product despues de retornar el stock',$product->quantity);
                         }
-                        dump('pago rechazado procesado');
+                        // dump('pago rechazado procesado');
                     }
 
                     if ($response['status']['status'] == 'PENDING') {
-                        dump('ehhhh pero que tacaño todavia no me paga');
+                        // dump('ehhhh pero que tacaño todavia no me paga');
                     }
                 }
             }
         } else {
-            dump('vacio ninguna orden pendiente');
+            // dump('vacio ninguna orden pendiente');
 //
         }
 

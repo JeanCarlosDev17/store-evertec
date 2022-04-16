@@ -109,12 +109,12 @@ class OrderController extends Controller
             if (!($order->state == $response['status']['status'])) {
                 $order->state=$response['status']['status'];
                 if ($response['status']['status']=="REJECTED") {
-                    dump('Retornando a Buyme,  PAGO RECHAZADO');
+                    // dump('Retornando a Buyme,  PAGO RECHAZADO');
                     foreach ($order->products as $product) {
-                        dump('product antes de retornar el stock', $product->quantity);
+                        // dump('product antes de retornar el stock', $product->quantity);
 
                         $product->increment('quantity', $product->pivot->quantity);
-                        dump('product despues de retornar el stock', $product->quantity);
+                        // dump('product despues de retornar el stock', $product->quantity);
                     }
                 }
                 $order->save();

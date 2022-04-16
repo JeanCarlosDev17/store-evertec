@@ -36,6 +36,7 @@ class WebcheckoutTest extends TestCase
     public function testItCanCreateSessionFromServiceCorrectly()
     {
         $data = $this->getCreateSessionData();
+
         $user=User::factory()->make();
         $user->save();
 
@@ -47,8 +48,6 @@ class WebcheckoutTest extends TestCase
         $order->save();
 
         $data=(new CreateSessionDataRequest())->getCreateSessionData($order);
-
-
         $response = (new WebcheckoutService())->createSession($data);
 
         $this->assertArrayHasKey('status', $response);
