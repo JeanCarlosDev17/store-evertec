@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+
+
 use App\Actions\User\CreateCartCookie;
 use App\Actions\User\getCartFromCookie;
 use App\Actions\User\GetCartFromCookieOrCreateAction;
@@ -68,7 +70,7 @@ class ProductCartController extends Controller
      * @param  \App\Models\Cart  $cart
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Product $product, Cart $cart,CreateCartCookie $createCartCookie)
+    public function update(Request $request, Product $product, Cart $cart,CreateCartCookie $createCartCookie): \Illuminate\Http\Response
     {
 //        dump("el maximo es ".$product->quantity, 'y el valor recibido es '.$request->quantity);
         $validator = Validator::make($request->all(), [

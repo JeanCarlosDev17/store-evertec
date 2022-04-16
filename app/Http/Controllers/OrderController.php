@@ -35,10 +35,7 @@ class OrderController extends Controller
         return view('ordersIndex')->with('orders',$user->orders()->orderBy('id', 'DESC')->paginate(6));
     }
 
-    public function create()
-    {
 
-    }
 
     public function show(Order $order)
     {
