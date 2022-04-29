@@ -17,5 +17,4 @@ yarn-error.log
 /.vscode
 /storage/images/*.*
 /storage/images
-/storage/*
-/storage/!.gitignore
+
