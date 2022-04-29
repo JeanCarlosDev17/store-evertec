@@ -2,33 +2,28 @@
 
 namespace App\Http\Controllers;
 
-use App\Actions\Admin\UserPasswordUpdateValidator;
 use App\Contracts\Auth\UserRepository as ContractUserRepository;
 use App\Http\Requests\UserUpdateRequest;
-use App\Repositories\UserRepository;
+use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use App\Models\User;
-use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
 
 class UserController extends Controller
 {
-
-
     protected ContractUserRepository $contractUserRepository;
-    public function __construct(ContractUserRepository $contractUserRepository){
-
-        $this->contractUserRepository=$contractUserRepository;
+    public function __construct(ContractUserRepository $contractUserRepository)
+    {
+        $this->contractUserRepository = $contractUserRepository;
     }
 
-    public function index():View
+    public function index(): View
     {
-        $users= $this->contractUserRepository->indexRoleUser(); ;
-        return view('admin.admin')->with('users',($users));
+        $users = $this->contractUserRepository->indexRoleUser();
+
+        return view('admin.admin')->with('users', ($users));
 //        return view('admin',compact($users));
     }
-
 
     /**
      * @return \Illuminate\Http\Response
@@ -37,7 +32,6 @@ class UserController extends Controller
     {
         //
         //
-
     }
 
     public function store(Request $request)
@@ -62,12 +56,11 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(User $user):View
+    public function edit(User $user): View
     {
         //Mostrar vista para editar un registro
 
-        return view('admin.editUser')->with('user',$user);
-
+        return view('admin.editUser')->with('user', $user);
     }
 
     /**
@@ -77,12 +70,11 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UserUpdateRequest $request, User $user):RedirectResponse
+    public function update(UserUpdateRequest $request, User $user): RedirectResponse
     {
-        $this->contractUserRepository->update($user,$request);
+        $this->contractUserRepository->update($user, $request);
 //        return redirect(route('admin.index'));
-        return redirect()->back()->with('result','Actualizado Correctamente');
-
+        return redirect()->back()->with('result', 'Actualizado Correctamente');
     }
 
     /**
@@ -96,7 +88,7 @@ class UserController extends Controller
         //Eliminar un registro
         //$user=$this->getUserDB($id);
         $user->delete();
-        return redirect(route('admin.index'))->with('result','Usuario Eliminado');
+        return redirect(route('admin.index'))->with('result', 'Usuario Eliminado');
     }
 
     /*public function getUserDB(int $id):User
@@ -106,11 +98,9 @@ class UserController extends Controller
            return User::find($id);
     }*/
 
-    public function State(Request $request, User $user):RedirectResponse
+    public function State(Request $request, User $user): RedirectResponse
     {
-
         $this->contractUserRepository->state($user);
         return redirect(route('admin.index'));
     }
-
 }

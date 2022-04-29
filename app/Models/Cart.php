@@ -16,13 +16,13 @@ class Cart extends Model
 //        return $this->belongsTo(User::class,'user_id');
 //    }
 
-    public function products():BelongsToMany
+    public function products(): BelongsToMany
     {
-        return $this->belongsToMany(Product::class,'cart_product')->withPivot('quantity');
+        return $this->belongsToMany(Product::class, 'cart_product')->withPivot('quantity');
     }
 
-    public function getTotalAttribute(){
+    public function getTotalAttribute()
+    {
         return $this->products->pluck('total')->sum();
     }
-
 }

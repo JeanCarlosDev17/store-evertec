@@ -3,11 +3,11 @@
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductCartController;
-use App\Http\Requests\ProductStoreRequest;
-use Illuminate\Support\Facades\Route;
-use \App\Http\Controllers\UserController;
 use App\Http\Controllers\ProductController;
-use \App\Http\Controllers\UploadController;
+use App\Http\Controllers\UploadController;
+use App\Http\Controllers\UserController;
+use Illuminate\Support\Facades\Route;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -22,42 +22,39 @@ use \App\Http\Controllers\UploadController;
 /*Route::get('/', function () {
     return view('auth.login');
 });*/
-Route::get('/', [ProductController::class,'allToStore'])->name('home');
+Route::get('/', [ProductController::class, 'allToStore'])->name('home');
 
-Route::post('upload', [UploadController::class,'store'])->middleware(['auth', 'verified','role:admin','nocache']);
-
+Route::post('upload', [UploadController::class, 'store'])->middleware(['auth', 'verified', 'role:admin', 'nocache']);
 
 Route::get('/dashboard', function () {
     return view('dashboard');
-})->middleware(['auth','verified','userStateActive','nocache'])->name('dashboard');
+})->middleware(['auth', 'verified', 'userStateActive', 'nocache'])->name('dashboard');
 
 //Route::resource('admin/example','\App\Http\Controllers\UserController');
-Route::middleware(['auth', 'verified','role:admin','nocache'])->group(function () {
-    Route::get('/admin',[UserController::class,'index'])->name('admin.index');
-    Route::get('admin/users',[UserController::class,'index'])->name('users.index');
-    Route::post('admin/users',[UserController::class,'store'])->name('users.store');
-    Route::get('admin/users/create',[UserController::class,'create'])->name('users.create');
-    Route::get('admin/users/{user}',[UserController::class,'show'])->name('users.show');
-    Route::put('admin/users/{user}',[UserController::class,'update'])->name('users.update');
-    Route::patch('admin/users/{user}',[UserController::class,'update'])->name('users.patch');
-    Route::delete('admin/users/{user}',[UserController::class,'destroy'])->name('users.destroy');
-    Route::get('admin/users/{user}/edit',[UserController::class,'edit'])->name('users.edit');
-    Route::put('admin/users/{user}/state',[UserController::class,'state'])->name('users.state');
-
+Route::middleware(['auth', 'verified', 'role:admin', 'nocache'])->group(function () {
+    Route::get('/admin', [UserController::class, 'index'])->name('admin.index');
+    Route::get('admin/users', [UserController::class, 'index'])->name('users.index');
+    Route::post('admin/users', [UserController::class, 'store'])->name('users.store');
+    Route::get('admin/users/create', [UserController::class, 'create'])->name('users.create');
+    Route::get('admin/users/{user}', [UserController::class, 'show'])->name('users.show');
+    Route::put('admin/users/{user}', [UserController::class, 'update'])->name('users.update');
+    Route::patch('admin/users/{user}', [UserController::class, 'update'])->name('users.patch');
+    Route::delete('admin/users/{user}', [UserController::class, 'destroy'])->name('users.destroy');
+    Route::get('admin/users/{user}/edit', [UserController::class, 'edit'])->name('users.edit');
+    Route::put('admin/users/{user}/state', [UserController::class, 'state'])->name('users.state');
 });
-Route::prefix('admin')->middleware(['auth', 'verified','role:admin','nocache'])->group(function () {
+Route::prefix('admin')->middleware(['auth', 'verified', 'role:admin', 'nocache'])->group(function () {
     Route::resource('products', ProductController::class);
-    Route::put('product/{user}/state',[ProductController::class,'state'])->name('products.state');
+    Route::put('product/{user}/state', [ProductController::class, 'state'])->name('products.state');
 });
 
-Route::get('/products/{product}/detail', [ProductController::class,'show'])->name('products.detail');
-Route::get('/products/search', [ProductController::class,'search'])->name('products.search');
-Route::get('admin/products/{product}', [ProductController::class,'show'])->name('products.show')->middleware(['role:user','nocache']);
+Route::get('/products/{product}/detail', [ProductController::class, 'show'])->name('products.detail');
+Route::get('/products/search', [ProductController::class, 'search'])->name('products.search');
+Route::get('admin/products/{product}', [ProductController::class, 'show'])->name('products.show')->middleware(['role:user', 'nocache']);
 
 Route::resource('products.cart', ProductCartController::class);
 Route::resource('cart', CartController::class);
-Route::resource('orders', OrderController::class)->middleware(['auth','verified','userStateActive','nocache']);
-Route::get('orders/return/{order}', [OrderController::class,'returnPay'])->middleware(['auth','verified','userStateActive','nocache'])->name('orders.return');
+Route::resource('orders', OrderController::class)->middleware(['auth', 'verified', 'userStateActive', 'nocache']);
+Route::get('orders/return/{order}', [OrderController::class, 'returnPay'])->middleware(['auth', 'verified', 'userStateActive', 'nocache'])->name('orders.return');
 
-
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

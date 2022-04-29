@@ -6,20 +6,19 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateProductsTable extends Migration
 {
-
-    public function up():void
+    public function up(): void
     {
         Schema::create('products', function (Blueprint $table) {
             $table->id();
-            $table->string('code',30)->nullable()->unique();
-            $table->string('name',150)->nullable();
+            $table->string('code', 30)->nullable()->unique();
+            $table->string('name', 150)->nullable();
             $table->text('description')->nullable();
             $table->bigInteger('price');
             $table->Integer('discount')->nullable()->default('0');
 //            $table->json('maker')->nullable();
-            $table->string('maker',100)->nullable();
+            $table->string('maker', 100)->nullable();
             $table->unsignedMediumInteger('quantity');
-            $table->enum('state',['active','inactive'])->default('active')->nullable();
+            $table->enum('state', ['active', 'inactive'])->default('active')->nullable();
             $table->timestamp('sold_out_at')->nullable();
             $table->softDeletes();
             $table->date('expired_at')->nullable();
@@ -27,8 +26,7 @@ class CreateProductsTable extends Migration
         });
     }
 
-
-    public function down():void
+    public function down(): void
     {
         Schema::dropIfExists('products');
     }

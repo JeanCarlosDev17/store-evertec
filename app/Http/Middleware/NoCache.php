@@ -23,6 +23,5 @@ class NoCache
         $response->header('Pragma', 'no-cache');
 
         return $response;
-
     }
 }

@@ -70,7 +70,7 @@
                                 <h5 class="font-weight-bold">${{$order->total}}</h5>
                             </div>
 
-                            @if($order->state == 'PENDING')
+                            @if($order->state != 'APPROVED')
                                 <a href="{{$order->process_url}}" class="btn btn-block btn-primary my-3 py-3">
                                     Ir a pagar
                                 </a>

@@ -4,8 +4,8 @@ namespace App\Providers;
 
 use App\Contracts\Auth\UserRepository;
 use App\Eloquent\Auth\UserEloquent;
-use Illuminate\Support\ServiceProvider;
 use Illuminate\Pagination\Paginator;
+use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -17,7 +17,7 @@ class AppServiceProvider extends ServiceProvider
     public function register()
     {
         //
-        $this->app->singleton(UserRepository::class,UserEloquent::class);
+        $this->app->singleton(UserRepository::class, UserEloquent::class);
     }
 
     /**

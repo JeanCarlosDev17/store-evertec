@@ -3,13 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Actions\User\CreateCartCookie;
-use App\Actions\User\getCartFromCookie;
 use App\Actions\User\GetCartFromCookieOrCreateAction;
-use App\Http\Requests\UpdateProductCartRequest;
 use App\Models\Cart;
 use App\Models\Product;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\ValidationException;
@@ -23,7 +20,6 @@ class ProductCartController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-
     /**
      * Store a newly created resource in storage.
      *
@@ -31,34 +27,29 @@ class ProductCartController extends Controller
      * @param  \App\Models\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request,
-                          Product $product,
-                          GetCartFromCookieOrCreateAction  $cartFromCookieOrCreateAction,
-                          CreateCartCookie $createCartCookie
-                        )
-    {
+    public function store(
+        Request $request,
+        Product $product,
+        GetCartFromCookieOrCreateAction $cartFromCookieOrCreateAction,
+        CreateCartCookie $createCartCookie
+    ) {
+        $cart = $cartFromCookieOrCreateAction->execute();
 
-        $cart= $cartFromCookieOrCreateAction->execute();
+        $quantity = $cart->products()->find($product->id)->pivot->quantity ?? 0;
 
-        $quantity=$cart->products()->find($product->id)->pivot->quantity ?? 0;
-
-
-        if ($product->quantity < $quantity+1)
-        {
+        if ($product->quantity < $quantity + 1) {
             throw ValidationException::withMessages([
                'product'=>"Se ha alcanzado el stock maximo del producto  {$product->name} no puede agregar mas de {$product->quantity}",
             ]);
         }
 
         $cart->products()->syncWithoutDetaching([
-            $product->id => ['quantity'=>$quantity + 1 ]
+            $product->id => ['quantity'=>$quantity + 1],
         ]);
 
-        $cookie=$createCartCookie->execute($cart);
+        $cookie = $createCartCookie->execute($cart);
         return redirect()->back()->cookie($cookie);
     }
-
-
 
     /**
      * Update the specified resource in storage.
@@ -68,14 +59,14 @@ class ProductCartController extends Controller
      * @param  \App\Models\Cart  $cart
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Product $product, Cart $cart,CreateCartCookie $createCartCookie)
+    public function update(Request $request, Product $product, Cart $cart, CreateCartCookie $createCartCookie): \Illuminate\Http\Response
     {
 //        dump("el maximo es ".$product->quantity, 'y el valor recibido es '.$request->quantity);
         $validator = Validator::make($request->all(), [
-            'quantity' => ['required','integer','max:'.$product->quantity,'min:0',],
-            'action'=>['required',Rule::in(['decrease', 'add']),]
-        ],$messages = [
-            'quantity.max'=>'Se ha alcanzado el stock maximo del producto '. $product->name .', no puede agregar mas de '.$product->quantity,
+            'quantity' => ['required', 'integer', 'max:' . $product->quantity, 'min:0'],
+            'action'=>['required', Rule::in(['decrease', 'add'])],
+        ], $messages = [
+            'quantity.max'=>'Se ha alcanzado el stock maximo del producto ' . $product->name . ', no puede agregar mas de ' . $product->quantity,
             'action.in'=>'Acción invalida',
 
         ]);
@@ -87,20 +78,17 @@ class ProductCartController extends Controller
                 ->withInput();
         }
 
-        if ($request->quantity<1){
+        if ($request->quantity < 1) {
             $cart->products()->detach($product->id);
-            $cookie=$createCartCookie->execute($cart);
+            $cookie = $createCartCookie->execute($cart);
             return redirect()->back()->cookie($cookie);
         }
 
         $cart->products()->syncWithoutDetaching([
-            $product->id => ['quantity'=>$request->quantity ]
+            $product->id => ['quantity'=>$request->quantity],
         ]);
-        $cookie=$createCartCookie->execute($cart);
+        $cookie = $createCartCookie->execute($cart);
         return redirect()->back()->cookie($cookie);
-
-
-
     }
 
     /**
@@ -114,11 +102,8 @@ class ProductCartController extends Controller
     {
         $cart->products()->detach($product->id);
 
-        $cookie=$createCartCookie->execute($cart);
+        $cookie = $createCartCookie->execute($cart);
         return redirect()->back()->cookie($cookie);
         return $product;
     }
-
-
 }
-

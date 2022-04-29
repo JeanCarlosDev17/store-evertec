@@ -7,9 +7,11 @@ use Illuminate\Validation\Rules;
 
 class UserPasswordUpdateValidator
 {
-    public static function validate($data){
-        Validator::make($data->all(),
-            ['newPassword' => [ 'confirmed', Rules\Password::defaults()],],
+    public static function validate($data)
+    {
+        Validator::make(
+            $data->all(),
+            ['newPassword' => ['confirmed', Rules\Password::defaults()]],
             [],
             ['newPassword'=>'Nueva Contraseña']
         )->validate();

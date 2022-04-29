@@ -12,7 +12,7 @@ class UserUpdateRequest extends FormRequest
      *
      * @return bool
      */
-    public function authorize():bool
+    public function authorize(): bool
     {
         return true;
     }
@@ -22,16 +22,15 @@ class UserUpdateRequest extends FormRequest
      *
      * @return array
      */
-    public function rules():array
+    public function rules(): array
     {
-
         return [
             'name' => ['required', 'string', 'max:255'],
 
         ];
     }
-    public function attributes():array
+    public function attributes(): array
     {
-        return ['name'=>'Nombre',];
+        return ['name'=>'Nombre'];
     }
 }

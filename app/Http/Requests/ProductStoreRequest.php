@@ -2,10 +2,9 @@
 
 namespace App\Http\Requests;
 
-use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Http\UploadedFile;
-use Illuminate\Validation\Rule;
 use Illuminate\Contracts\Validation\Validator;
+use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 use Illuminate\Validation\ValidationException;
 
 class ProductStoreRequest extends FormRequest
@@ -25,7 +24,7 @@ class ProductStoreRequest extends FormRequest
      *
      * @return array
      */
-    public function rules():array
+    public function rules(): array
     {
         return [
             'name'=>'required|min:3|max:150',
@@ -33,21 +32,21 @@ class ProductStoreRequest extends FormRequest
             'price'=>'required|integer|min:1|max:750000000000000',
             'quantity'=>'required|integer|min:0|max:16770200',
             'maker'=>'max:100',
-            'images' => ['required','array'],
+            'images' => ['required', 'array'],
             //'images'=> 'image|max:2000|dimensions:min_width=100, max_width=800,min_height=200,max_height=400,ratio=3/2 '
             'images.*' => [
                 'image',
                 'max:2500',
                 Rule::dimensions()->maxWidth(600)->maxHeight(600),
-                'mimes:jpg,jpeg,png,bmp'
-            ]
+                'mimes:jpg,jpeg,png,bmp',
+            ],
         ];
     }
 
-    public function attributes():array
+    public function attributes(): array
     {
-        $files=[];
-        $msg=[
+        $files = [];
+        $msg = [
             'name'=>'Nombre del producto',
             'description'=>'Descripción',
             'maker'=>'Marca',
@@ -55,49 +54,47 @@ class ProductStoreRequest extends FormRequest
             'quantity'=>'Cantidad en Stock',
 
         ];
-        if (isset($this->images) and is_array($this->images))
-        {
+        if (isset($this->images) && is_array($this->images)) {
             foreach ($this->images as $key => $val) {
-        //            $files += ['images.' . $key => $key+1 .' '.  $val->getClientOriginalName() ];
-                $files += ['images.' . $key => $val->getClientOriginalName() ];
-        //                $files['images.' . $key . '.max']  = 'The document ' . $val->getClientOriginalName() . ' may not be greater than :max kilobytes.';
-
+                //            $files += ['images.' . $key => $key+1 .' '.  $val->getClientOriginalName() ];
+                $files += ['images.' . $key => $val->getClientOriginalName()];
+                //                $files['images.' . $key . '.max']  = 'The document ' . $val->getClientOriginalName() . ' may not be greater than :max kilobytes.';
             }
         }
-        $msg +=$files;
+        $msg += $files;
 //        dump("ATRIBUTTES",$msg);
 
         return $msg;
     }
-   /* public function messages()
-    {
-        $msg=[];
-        $msg=[];
-        if (isset($this->images))
-        {
-            $files=[];
-            $msg=[];
+    /* public function messages()
+     {
+         $msg=[];
+         $msg=[];
+         if (isset($this->images))
+         {
+             $files=[];
+             $msg=[];
 
-            foreach ($this->images as $key => $val) {
-                $files += ['images.' . $key . '.mimes'=>'The document ' . $val->getClientOriginalName() . ' must be a file of type: :values.'];
+             foreach ($this->images as $key => $val) {
+                 $files += ['images.' . $key . '.mimes'=>'The document ' . $val->getClientOriginalName() . ' must be a file of type: :values.'];
 
 //                $files['images.' . $key . '.max']  = 'The document ' . $val->getClientOriginalName() . ' may not be greater than :max kilobytes.';
 
-            }
+             }
 
 //            dump(([$msg,...$files]));
-        }
-        dump("RESULTADO de los MESSAGES");
-        $msg+=$files;
-        dump($msg);
-        return $msg;
-    }*/
+         }
+         dump("RESULTADO de los MESSAGES");
+         $msg+=$files;
+         dump($msg);
+         return $msg;
+     }*/
 
-    function replace( $string)
+    public function replace($string)
     {
-        $pos = strpos($string,'.' );
-        $string[$pos]=" ";
-        $string[$pos+1]= $string[$pos + 1] +1;
+        $pos = strpos($string, '.');
+        $string[$pos] = ' ';
+        $string[$pos + 1] = $string[$pos + 1] + 1;
         return str_replace('images', 'imagen #', $string);
     }
 
@@ -115,14 +112,13 @@ class ProductStoreRequest extends FormRequest
 
     protected function failedValidation(Validator $validator)
     {
-        if($this->wantsJson())
-        {
+        if ($this->wantsJson()) {
             $response = response()->json([
                 'success' => false,
                 'message' => 'Ops! Some errors occurred',
-                'errors' => $validator->errors()->all()
-            ],400);
-        }else{
+                'errors' => $validator->errors()->all(),
+            ], 400);
+        } else {
             $response = redirect()
                 ->back()
                 ->with('message', 'Ops! Some errors occurred')
@@ -134,7 +130,4 @@ class ProductStoreRequest extends FormRequest
             ->errorBag($this->errorBag)
             ->redirectTo($this->getRedirectUrl());
     }
-
-
-
 }

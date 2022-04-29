@@ -23,8 +23,8 @@ class ProductFactory extends Factory
             'discount'=>0,
             'maker'=>$this->faker->company(),
 //            'quantity'=>$this->faker->randomNumber(1),
-            'quantity'=>$this->faker->numberBetween(1,10),
-            'state'=>$this->faker->randomElement(['active', 'inactive'])
+            'quantity'=>$this->faker->numberBetween(1, 10),
+            'state'=>$this->faker->randomElement(['active', 'inactive']),
         ];
     }
 }

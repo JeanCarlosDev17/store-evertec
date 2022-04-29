@@ -14,7 +14,7 @@ class CartController extends Controller
      */
     public function index(GetCartFromCookie $cartFromCookie)
     {
-        $cart=$cartFromCookie->execute();
+        $cart = $cartFromCookie->execute();
 
 //        dump($cart->products);
         return view('cart')->with(['cart'=>$cart]);

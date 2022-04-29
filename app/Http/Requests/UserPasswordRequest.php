@@ -4,6 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rules;
+
 class UserPasswordRequest extends FormRequest
 {
     /**
@@ -24,7 +25,7 @@ class UserPasswordRequest extends FormRequest
     public function rules(): array
     {
         return [
-            ['newPassword' => [ 'confirmed', Rules\Password::defaults()]],
+            ['newPassword' => ['confirmed', Rules\Password::defaults()]],
         ];
     }
 }
