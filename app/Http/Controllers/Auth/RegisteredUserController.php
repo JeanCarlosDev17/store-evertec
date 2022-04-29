@@ -2,21 +2,15 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Actions\User\UserPasswordHash;
-use App\Eloquent\Auth\UserEloquent;
+use App\Contracts\Auth\UserRepository as ContractUserRepository;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UserStoreRequest;
-use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use App\Repositories\UserRepository;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Validation\Rules;
-use App\Http\Controllers\UserController;
-use App\Contracts\Auth\UserRepository as ContractUserRepository;
 use Illuminate\View\View;
 
 class RegisteredUserController extends Controller
@@ -25,8 +19,8 @@ class RegisteredUserController extends Controller
     private ContractUserRepository $contractUserRepository;
     public function __construct(UserRepository $userRepository, ContractUserRepository $contractUserRepository)
     {
-        $this->userRepository=$userRepository;
-        $this->contractUserRepository=$contractUserRepository;
+        $this->userRepository = $userRepository;
+        $this->contractUserRepository = $contractUserRepository;
     }
     /**
      * Display the registration view.
@@ -48,7 +42,7 @@ class RegisteredUserController extends Controller
      */
     public function store(UserStoreRequest $request): RedirectResponse
     {
-        $user= $this->contractUserRepository->Store($request->validated());
+        $user = $this->contractUserRepository->Store($request->validated());
         event(new Registered($user));
         Auth::login($user);
         //Posterior a la creacion del usuario y el login redirigir a la home de usuarios

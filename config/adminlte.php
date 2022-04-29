@@ -277,7 +277,7 @@ return [
         [
             'text'    => ' Usuarios',
             'icon'    => 'fas fa-users-cog',
-            'url'     => 'admin/users'
+            'url'     => 'admin/users',
             /*'submenu' => [
                 [
                     'text' => 'Usuarios',
@@ -316,8 +316,8 @@ return [
         [
             'text'    => 'Tienda',
             'icon'    => 'fas fa-shopping-cart',
-            'url'     => 'admin/products'
-        ]/*,
+            'url'     => 'admin/products',
+        ], /*,
         ['header' => 'labels'],
         [
             'text'       => 'important',

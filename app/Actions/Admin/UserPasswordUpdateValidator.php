@@ -11,7 +11,7 @@ class UserPasswordUpdateValidator
     {
         Validator::make(
             $data->all(),
-            ['newPassword' => [ 'confirmed', Rules\Password::defaults()],],
+            ['newPassword' => ['confirmed', Rules\Password::defaults()]],
             [],
             ['newPassword'=>'Nueva Contraseña']
         )->validate();

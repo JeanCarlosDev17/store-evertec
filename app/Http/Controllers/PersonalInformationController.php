@@ -2,22 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Actions\User\GetCartFromCookie;
+use App\Models\PersonalInformation;
 use Illuminate\Http\Request;
 
-class CartController extends Controller
+class PersonalInformationController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(GetCartFromCookie $cartFromCookie)
+    public function index()
     {
-        $cart = $cartFromCookie->execute();
-
-//        dump($cart->products);
-        return view('cart')->with(['cart'=>$cart]);
+        //
     }
 
     /**
@@ -44,10 +41,10 @@ class CartController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\PersonalInformation  $personalInformation
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(PersonalInformation $personalInformation)
     {
         //
     }
@@ -55,10 +52,10 @@ class CartController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\PersonalInformation  $personalInformation
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(PersonalInformation $personalInformation)
     {
         //
     }
@@ -67,10 +64,10 @@ class CartController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Models\PersonalInformation  $personalInformation
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, PersonalInformation $personalInformation)
     {
         //
     }
@@ -78,10 +75,10 @@ class CartController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Models\PersonalInformation  $personalInformation
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(PersonalInformation $personalInformation)
     {
         //
     }

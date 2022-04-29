@@ -4,9 +4,8 @@ namespace Tests\Feature;
 
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
-use Tests\TestCase;
 use Illuminate\Support\Facades\DB;
+use Tests\TestCase;
 
 class UserIndexTest extends TestCase
 {
@@ -46,22 +45,20 @@ class UserIndexTest extends TestCase
         ]);
 
         $this->assertAuthenticated();
-        $response=$this->get(route('admin.index'));
+        $response = $this->get(route('admin.index'));
         $response->assertOk();
         $response->assertViewIs('admin.admin');
 
+        $responseUsers = $response->getOriginalContent()['users'];
 
-        $responseUsers=$response->getOriginalContent()['users'];
-
-
-        $userdata=[];
+        $userdata = [];
         foreach ($user as $userArray) {
-            $userdata=$userArray;
+            $userdata = $userArray;
         }
         $responseUsers->each(function ($item) use ($user, $userdata) {
 //            $this->assertEquals($user->id,$item->id);
 
-            $item->id==$userdata->id ? $this->assertEquals($userdata->id, $item->id) : null;
+            $item->id == $userdata->id ? $this->assertEquals($userdata->id, $item->id) : null;
         });
     }
 
@@ -71,8 +68,7 @@ class UserIndexTest extends TestCase
     public function anUserNotAuthenticatedNotCanListUsers()
     {
 //
-        $response=$this->get(route('admin.index'));
-
+        $response = $this->get(route('admin.index'));
 
         $response->assertRedirect('login');
     }

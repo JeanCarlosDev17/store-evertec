@@ -13,7 +13,6 @@ class PasswordConfirmationTest extends TestCase
     public function boot()
     {
 
-
         // Executed when a test database is created...
         ParallelTesting::setUpTestDatabase(function ($database, $token) {
             $this->artisan('db:seed');

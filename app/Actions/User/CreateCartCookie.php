@@ -10,6 +10,6 @@ class CreateCartCookie
 {
     public function execute(Cart $cart): CookieSymfony
     {
-        return Cookie::make('cart', $cart->id, 7*24*60);
+        return Cookie::make('cart', $cart->id, 7 * 24 * 60);
     }
 }

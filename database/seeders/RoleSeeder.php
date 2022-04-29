@@ -2,9 +2,9 @@
 
 namespace Database\Seeders;
 
-use Spatie\Permission\Models\Role;
-use Spatie\Permission\Models\Permission;
 use Illuminate\Database\Seeder;
+use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
 
 class RoleSeeder extends Seeder
 {
@@ -19,7 +19,7 @@ class RoleSeeder extends Seeder
         $roleUser = Role::create(['name' => 'user']);
         Permission::create(['name' => 'dashboard'])->assignRole($roleUser);
         $roleAdmin = Role::create(['name' => 'admin']);
-        Permission::create(['name' => 'admin.index'])->assignRole($roleAdmin);//ver admin dashboard
+        Permission::create(['name' => 'admin.index'])->assignRole($roleAdmin); //ver admin dashboard
         Permission::create(['name' => 'user.index'])->assignRole($roleAdmin);
         Permission::create(['name' => 'user.store'])->assignRole($roleAdmin);
         Permission::create(['name' => 'user.create'])->assignRole($roleAdmin);

@@ -3,8 +3,8 @@
 namespace App\Contracts\Auth;
 
 use App\Models\User;
-use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Http\Request;
 
 interface UserRepository
 {

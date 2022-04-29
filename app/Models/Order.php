@@ -3,17 +3,17 @@
 namespace App\Models;
 
 use Carbon\Carbon;
+use Haruncpi\LaravelIdGenerator\IdGenerator;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Haruncpi\LaravelIdGenerator\IdGenerator;
 
 class Order extends Model
 {
     use HasFactory;
 
-    protected $fillable=[
+    protected $fillable = [
         'user_id',
         'status',
     ];
@@ -39,7 +39,7 @@ class Order extends Model
 
     public function scopeSession($query)
     {
-        $query->where('session_id', "!=", null);
+        $query->where('session_id', '!=', null);
     }
 
     public function scopeActive($query)
@@ -62,15 +62,14 @@ class Order extends Model
 
     public function getStatusAttribute()
     {
-        return $this->state=='PENDING' ? 'Pendiente' : ($this->state=='APPROVED' ? 'Aprobado' : 'Pago Fallido');
+        return $this->state == 'PENDING' ? 'Pendiente' : ($this->state == 'APPROVED' ? 'Aprobado' : 'Pago Fallido');
     }
-
 
     public static function boot()
     {
         parent::boot();
         self::creating(function ($order) {
-            $order->reference = IdGenerator::generate(['table' => 'orders','field'=>'reference', 'length' => 30, 'prefix' =>'ORDER-']);
+            $order->reference = IdGenerator::generate(['table' => 'orders', 'field'=>'reference', 'length' => 30, 'prefix' =>'ORDER-']);
 //            $mode = IdGenerator::generate(['table' => 'orders','field'=>'reference', 'length' => 30, 'prefix' =>'ORDER-']);
         });
     }

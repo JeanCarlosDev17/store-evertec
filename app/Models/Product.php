@@ -6,9 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use phpDocumentor\Reflection\Types\Integer;
 
 class Product extends Model
 {
@@ -25,7 +23,6 @@ class Product extends Model
         return $this->hasOne(Image::class)->oldestOfMany();
     }
 
-
     public function carts(): BelongsToMany
     {
         return $this->belongsToMany(Cart::class, 'cart_product')->withPivot('quantity');
@@ -36,7 +33,6 @@ class Product extends Model
         return $this->belongsToMany(Order::class, 'order_product')->withPivot('quantity');
     }
 
-
     public function getImageUrl(): string
     {
         return $this->image ? asset($this->image->url()) : asset('img/productDefault.png');
@@ -45,7 +41,7 @@ class Product extends Model
     {
 //        dd("precio ".$this->price." descuento ".($this->discount/100)."% es = " .($this->price*($this->discount/100)) ." y el precio final es  ".$this->price-($this->price*($this->discount/100)));
 
-        return $this->price-($this->price*($this->discount/100));
+        return $this->price - ($this->price * ($this->discount / 100));
     }
 
     public function formatPrice()

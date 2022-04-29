@@ -18,14 +18,13 @@ class CreateProductsTable extends Migration
 //            $table->json('maker')->nullable();
             $table->string('maker', 100)->nullable();
             $table->unsignedMediumInteger('quantity');
-            $table->enum('state', ['active','inactive'])->default('active')->nullable();
+            $table->enum('state', ['active', 'inactive'])->default('active')->nullable();
             $table->timestamp('sold_out_at')->nullable();
             $table->softDeletes();
             $table->date('expired_at')->nullable();
             $table->timestamps();
         });
     }
-
 
     public function down(): void
     {

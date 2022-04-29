@@ -8,8 +8,6 @@ use App\Request\CreateSessionDataRequest;
 use App\Request\CreateSessionRequest;
 use App\Request\GetInformationRequest;
 use App\Services\WebcheckoutService;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 class WebcheckoutTest extends TestCase
@@ -37,18 +35,19 @@ class WebcheckoutTest extends TestCase
     {
         $data = $this->getCreateSessionData();
 
-        $user=User::factory()->make();
+        $user = User::factory()->make();
         $user->save();
 
-        $order=new Order();
+        $order = new Order();
 
-        $order->user_id=$user->id;
-        $order->currency='COP';
-        $order->total=10000;
+        $order->user_id = $user->id;
+        $order->currency = 'COP';
+        $order->total = 10000;
         $order->save();
 
-        $data=(new CreateSessionDataRequest())->getCreateSessionData($order);
+        $data = (new CreateSessionDataRequest())->getCreateSessionData($order);
         $response = (new WebcheckoutService())->createSession($data);
+        dd($response);
 
         $this->assertArrayHasKey('status', $response);
         $this->assertEquals('OK', $response['status']['status']);
@@ -94,8 +93,8 @@ class WebcheckoutTest extends TestCase
                 'description' => 'conexion con webcheckout desde un test',
                 'amount' => [
                     'currency' => 'COP',
-                    'total' => '10000'
-                ]
+                    'total' => '10000',
+                ],
             ],
             'returnUrl' => route('dashboard'),
             'expiration' => date('c', strtotime('+2 days')),

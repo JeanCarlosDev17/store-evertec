@@ -27,14 +27,13 @@ class CheckOrdersPayment extends Command
      *
      * @return void
      */
-
     protected WebcheckoutService $webcheckoutService;
 
     public function __construct()
     {
         parent::__construct();
 
-        $this->webcheckoutService=new WebcheckoutService();
+        $this->webcheckoutService = new WebcheckoutService();
     }
 
     /**
@@ -45,7 +44,7 @@ class CheckOrdersPayment extends Command
     public function handle()
     {
 //        dump('ejecutado a las '.date("Y-m-d H:i:s"));
-        $orders=Order::where('state', '=', 'PENDING')
+        $orders = Order::where('state', '=', 'PENDING')
             ->where('session_id', '!=', null)
             ->get();
 //        dump($orders);
@@ -53,10 +52,10 @@ class CheckOrdersPayment extends Command
         if (!($orders->isEmpty())) {
             foreach ($orders as $order) {
                 if (isset($order->session_id)) {
-                    $response=$this->webcheckoutService->getInformation($order->session_id);
+                    $response = $this->webcheckoutService->getInformation($order->session_id);
 //                    dump("Orden  ". $order->reference. " Estado actual ".$response['status']['status']);
                     if ($response['status']['status'] == 'APPROVED') {
-                        $order->state=$response['status']['status'];
+                        $order->state = $response['status']['status'];
                         $order->save();
                         //notificar al usuario que su compra fue realizada
                         // dump("TUUUUUUU COMPRA HA SIDO CONFIRMADA YEEIIIIIII");
@@ -64,7 +63,7 @@ class CheckOrdersPayment extends Command
 
                     if ($response['status']['status'] == 'REJECTED') {
 //                        dump('ehhhh PAGO RECHAZADO');
-                        $order->state=$response['status']['status'];
+                        $order->state = $response['status']['status'];
                         $order->save();
                         foreach ($order->products as $product) {
 //                            dump('product antes de retornar el stock',$product->quantity);

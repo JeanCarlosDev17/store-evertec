@@ -12,13 +12,13 @@ class UploadController extends Controller
         if ($request->hasFile('images')) {
             $productImages = $request->file('images');
             foreach ($productImages as $productImage) {
-                $filename=$productImage->getClientOriginalName();
-                $folder=uniqid().'-'.now()->timestamp;
-                $productImage->storeAs('tmp/'.$folder, $filename);
-                $productUrl = $folder .'/'. $filename;
+                $filename = $productImage->getClientOriginalName();
+                $folder = uniqid() . '-' . now()->timestamp;
+                $productImage->storeAs('tmp/' . $folder, $filename);
+                $productUrl = $folder . '/' . $filename;
                 return $productUrl;
             }
         }
-        return "";
+        return '';
     }
 }

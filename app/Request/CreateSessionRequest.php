@@ -2,7 +2,6 @@
 
 namespace App\Request;
 
-use App\Contracts\WebcheckoutRequestContract;
 use Illuminate\Http\Request;
 
 class CreateSessionRequest extends GetInformationRequest
@@ -20,7 +19,7 @@ class CreateSessionRequest extends GetInformationRequest
 
     public static function url(?int $session_id): string
     {
-        return config('webcheckout.url').'/api/session';
+        return config('webcheckout.url') . '/api/session';
     }
 
     public function toArray()
@@ -31,7 +30,7 @@ class CreateSessionRequest extends GetInformationRequest
             'expiration' => $this->expiration,
             'returnUrl' => $this->returnUrl,
             'ipAddress' => app(Request::class)->getClientIp(),
-            'userAgent' => substr(app(Request::class)->header('User-Agent'), 0, 255)
+            'userAgent' => substr(app(Request::class)->header('User-Agent'), 0, 255),
         ]);
     }
 }

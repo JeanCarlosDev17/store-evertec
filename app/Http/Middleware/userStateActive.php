@@ -18,7 +18,7 @@ class userStateActive
      */
     public function handle(Request $request, Closure $next)
     {
-        if (auth()->user()->user_state !=1) {
+        if (auth()->user()->user_state != 1) {
             Auth::logout();
             $validator = Validator::make([], [], $messages = []);
             $validator->errors()->add(

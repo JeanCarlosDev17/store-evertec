@@ -5,8 +5,6 @@ namespace Tests\Feature\Auth;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Illuminate\Support\Facades\Artisan;
 
 class RegistrationTest extends TestCase
 {
@@ -15,13 +13,11 @@ class RegistrationTest extends TestCase
     public function boot()
     {
 
-
         // Executed when a test database is created...
         ParallelTesting::setUpTestDatabase(function ($database, $token) {
             $this->artisan('db:seed');
         });
     }
-
 
     public function test_registration_screen_can_be_rendered()
     {

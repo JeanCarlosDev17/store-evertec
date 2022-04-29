@@ -31,6 +31,6 @@ class UserUpdateRequest extends FormRequest
     }
     public function attributes(): array
     {
-        return ['name'=>'Nombre',];
+        return ['name'=>'Nombre'];
     }
 }

@@ -5,12 +5,12 @@ namespace App\Actions\User;
 use App\Models\Cart;
 use Illuminate\Support\Facades\Cookie;
 
-class getCartFromCookie
+class GetCartFromCookie
 {
     public function execute()
     {
-        $cartId=Cookie::get('cart');
-        $cart=Cart::find($cartId);
+        $cartId = Cookie::get('cart');
+        $cart = Cart::find($cartId);
         return $cart;
     }
 }

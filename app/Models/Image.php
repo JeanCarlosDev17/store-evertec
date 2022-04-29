@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Http\File;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Http\Request;
 
 class Image extends Model
 {
@@ -35,7 +34,7 @@ class Image extends Model
     public function getFileName(): string
     {
 //        dump("nombre con extension",pathinfo(public_path($this->url()))['basename']);
-        $filename=str_replace('.'.$this->getExtensionImage(), '', pathinfo(public_path($this->url()))['basename']);
+        $filename = str_replace('.' . $this->getExtensionImage(), '', pathinfo(public_path($this->url()))['basename']);
 //        dump("el nombre es ",$filename);
         return $filename;
     }
@@ -43,7 +42,7 @@ class Image extends Model
     public function getFileSize(): string
     {
 //        $size = Storage::size('file.jpg');
-        $size= Storage::disk(config('filesystems.images_disk'))->size("{$this->product_id}/{$this->file_name}");
+        $size = Storage::disk(config('filesystems.images_disk'))->size("{$this->product_id}/{$this->file_name}");
 
         return $size;
     }

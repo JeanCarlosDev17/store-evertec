@@ -24,7 +24,7 @@ class ProductFactory extends Factory
             'maker'=>$this->faker->company(),
 //            'quantity'=>$this->faker->randomNumber(1),
             'quantity'=>$this->faker->numberBetween(1, 10),
-            'state'=>$this->faker->randomElement(['active', 'inactive'])
+            'state'=>$this->faker->randomElement(['active', 'inactive']),
         ];
     }
 }

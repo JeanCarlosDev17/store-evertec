@@ -5,7 +5,6 @@ namespace Tests\Feature\Products;
 use App\Models\Product;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
@@ -38,11 +37,11 @@ class ProductUpdateTest extends TestCase
             'quantity'=>'120',
             'images'=>[
                 UploadedFile::fake()->image('imageProductTest.jpg', 500, 500)->size(500),
-            ]
+            ],
         ];
-        $user=User::where('email', 'jeancarlosrecio@hotmail.com')->get();
+        $user = User::where('email', 'jeancarlosrecio@hotmail.com')->get();
         $response = $this->actingAs($user[0])->post('/admin/products', $dataInsert);
-        $product=Product::where('name', 'Product Test Inicial')->get();
+        $product = Product::where('name', 'Product Test Inicial')->get();
         $this->assertDatabaseHas('products', Arr::except($dataInsert, ['images']));
         $dataUpdate = [
 
@@ -53,10 +52,10 @@ class ProductUpdateTest extends TestCase
             'quantity'=>'1207',
             'images'=>[
                 UploadedFile::fake()->image('imageProductTest.jpg', 500, 500)->size(500),
-            ]
+            ],
         ];
 
-        $response = $this->actingAs($user[0])->put('admin/products/'.$product[0]->id, $dataUpdate);
+        $response = $this->actingAs($user[0])->put('admin/products/' . $product[0]->id, $dataUpdate);
         $this->assertDatabaseHas('products', Arr::except($dataUpdate, ['images']));
 //        $response->assertSessionHas('result', 'Producto Actualizado exitosamente!');
         $response
@@ -65,8 +64,6 @@ class ProductUpdateTest extends TestCase
                 'success' => 'Producto Actualizado exitosamente!',
             ]);
     }
-
-
 
     /**
      * @param array $data
@@ -84,14 +81,14 @@ class ProductUpdateTest extends TestCase
             'quantity'=>'120',
             'images'=>[
                 UploadedFile::fake()->image('imageProductTest.jpg', 500, 500)->size(500),
-            ]
+            ],
         ];
-        $user=User::where('email', 'jeancarlosrecio@hotmail.com')->get();
+        $user = User::where('email', 'jeancarlosrecio@hotmail.com')->get();
         $response = $this->actingAs($user[0])->post('/admin/products', $dataInsert);
-        $product=Product::where('name', 'Product Test Inicial')->get();
+        $product = Product::where('name', 'Product Test Inicial')->get();
         $this->assertDatabaseHas('products', Arr::except($dataInsert, ['images']));
 
-        $response = $this->actingAs($user[0])->put('admin/products/'.$product[0]->id, $dataUpdate);
+        $response = $this->actingAs($user[0])->put('admin/products/' . $product[0]->id, $dataUpdate);
         $response->assertSessionHasErrors($field);
     }
 
@@ -101,62 +98,62 @@ class ProductUpdateTest extends TestCase
         return [
             'validate name required'=>[
                 'data'=>array_replace($this->productData(), ['name'=>null]),
-                'field'=>'name'
+                'field'=>'name',
             ],
             'validate name min3'=>[
                 'data'=>array_replace($this->productData(), ['name'=>'jj']),
-                'field'=>'name'
+                'field'=>'name',
             ],
             'validate name max 150'=>[
                 'data'=>array_replace($this->productData(), ['name'=>Str::random(151)]),
-                'field'=>'name'
+                'field'=>'name',
             ],
 //            'description'=>'required|min:5|max:255',
             'validate description required'=>[
                 'data'=>array_replace($this->productData(), ['description'=>null]),
-                'field'=>'description'
+                'field'=>'description',
             ],
             'validate description min 5'=>[
                 'data'=>array_replace($this->productData(), ['description'=>'jj']),
-                'field'=>'description'
+                'field'=>'description',
             ],
             'validate description max price'=>[
                 'data'=>array_replace($this->productData(), ['description'=>Str::random(256)]),
-                'field'=>'description'
+                'field'=>'description',
             ],
 //            'price'=>'required|integer|min:1|max:750000000000000',
             'validate price required'=>[
                 'data'=>array_replace($this->productData(), ['price'=>null]),
-                'field'=>'price'
+                'field'=>'price',
             ],
             'validate price integer'=>[
                 'data'=>array_replace($this->productData(), ['price'=>'jj']),
-                'field'=>'price'
+                'field'=>'price',
             ],
             'validate price min 1'=>[
                 'data'=>array_replace($this->productData(), ['price'=>'0']),
-                'field'=>'price'
+                'field'=>'price',
             ],
             'validate price max 750000000000000'=>[
                 'data'=>array_replace($this->productData(), ['price'=>'750000000000001']),
-                'field'=>'price'
+                'field'=>'price',
             ],
 //            'quantity'=>'required|integer|min:0|max:16770200',
             'validate quantity required'=>[
                 'data'=>array_replace($this->productData(), ['quantity'=>null]),
-                'field'=>'quantity'
+                'field'=>'quantity',
             ],
             'validate quantity integer'=>[
                 'data'=>array_replace($this->productData(), ['quantity'=>'jj']),
-                'field'=>'quantity'
+                'field'=>'quantity',
             ],
             'validate quantity min 0'=>[
                 'data'=>array_replace($this->productData(), ['quantity'=>'-1']),
-                'field'=>'quantity'
+                'field'=>'quantity',
             ],
             'validate quantity max 16770201'=>[
                 'data'=>array_replace($this->productData(), ['quantity'=>'16770201']),
-                'field'=>'quantity'
+                'field'=>'quantity',
             ],
         ];
     }
@@ -172,7 +169,7 @@ class ProductUpdateTest extends TestCase
             'quantity'=>'1207',
             'images'=>[
                 UploadedFile::fake()->image('imageProductTest.jpg', 500, 500)->size(500),
-            ]
+            ],
         ];
         return $data;
     }

@@ -19,3 +19,4 @@ yarn-error.log
 /storage/images
 /storage/*
 /storage/!.gitignore
+.php-cs-fixer.cache
