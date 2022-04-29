@@ -15,8 +15,4 @@ npm-debug.log
 yarn-error.log
 /.idea
 /.vscode
-/storage/images/*.*
-/storage/images
-/storage/*
-/storage/!.gitignore
 .php-cs-fixer.cache
