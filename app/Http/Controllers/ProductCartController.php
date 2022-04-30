@@ -104,6 +104,6 @@ class ProductCartController extends Controller
 
         $cookie = $createCartCookie->execute($cart);
         return redirect()->back()->cookie($cookie);
-        return $product;
+
     }
 }

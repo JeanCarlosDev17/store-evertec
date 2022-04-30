@@ -6,6 +6,7 @@ use App\Actions\User\getCartFromCookie;
 use App\Models\Order;
 use App\Request\CreateSessionDataRequest;
 use App\Services\WebcheckoutService;
+use HttpException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\ValidationException;
