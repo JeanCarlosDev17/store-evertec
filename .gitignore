@@ -12,9 +12,12 @@ docker-compose.override.yml
 Homestead.json
 Homestead.yaml
 npm-debug.log
-yarn-error.log
+yarn-error.logw
 /.idea
 /.vscode
 /storage/images/*.*
 /storage/images
 .php-cs-fixer.cache
+
+./.php-cs-fixer.cache
+

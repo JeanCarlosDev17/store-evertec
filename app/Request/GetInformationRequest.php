@@ -9,9 +9,9 @@ class GetInformationRequest implements WebcheckoutRequestContract
 {
     public function auth()
     {
-        dump("login",config('webcheckout.login'));
-        dump("TRANKEY",config('webcheckout.tranKey'));
-        dump("url",config('webcheckout.url'));
+//        dump("login",config('webcheckout.login'));
+//        dump("TRANKEY",config('webcheckout.tranKey'));
+//        dump("url",config('webcheckout.url'));
 
         $seed = date('c');
         $nonce = Str::random(8);

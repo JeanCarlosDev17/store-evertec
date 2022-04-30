@@ -47,7 +47,7 @@ class WebcheckoutTest extends TestCase
 
         $data = (new CreateSessionDataRequest())->getCreateSessionData($order);
         $response = (new WebcheckoutService())->createSession($data);
-        dd($response);
+//        dd($response);
 
         $this->assertArrayHasKey('status', $response);
         $this->assertEquals('OK', $response['status']['status']);
