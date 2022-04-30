@@ -33,7 +33,6 @@ class ProductUpdateRequest extends FormRequest
             'quantity'=>'required|integer|min:0|max:16770200',
             'maker'=>'max:100',
             'images' => ['required', 'array'],
-            
             'images.*' => [
                 'image',
                 'max:2500',
@@ -52,13 +51,10 @@ class ProductUpdateRequest extends FormRequest
             'maker'=>'Marca',
             'price'=>'Precio',
             'quantity'=>'Cantidad en Stock',
-
         ];
         if (isset($this->images) && is_array($this->images)) {
             foreach ($this->images as $key => $val) {
-
                 $files += ['images.' . $key => $val->getClientOriginalName()];
-
             }
         }
         $msg += $files;

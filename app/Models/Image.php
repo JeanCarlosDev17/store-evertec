@@ -40,12 +40,10 @@ class Image extends Model
     public function getFileSize(): string
     {
 
-        $size = Storage::disk(config(FILE_DISK))->size("{$this->product_id}/{$this->file_name}");
-
-        return $size;
+        return Storage::disk(config(FILE_DISK))->size("{$this->product_id}/{$this->file_name}");
     }
     public function getFileMime(): string
     {
-        return $mimetype = Storage::disk(config(FILE_DISK))->mimeType("{$this->product_id}/{$this->file_name}");
+        return  Storage::disk(config(FILE_DISK))->mimeType("{$this->product_id}/{$this->file_name}");
     }
 }
