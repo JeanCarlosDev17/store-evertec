@@ -10,7 +10,6 @@ class GetCartFromCookie
     public function execute()
     {
         $cartId = Cookie::get('cart');
-        $cart = Cart::find($cartId);
-        return $cart;
+        return Cart::find($cartId);
     }
 }

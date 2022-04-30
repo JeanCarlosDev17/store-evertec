@@ -13,20 +13,7 @@ use Illuminate\Validation\ValidationException;
 
 class ProductCartController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @param  \App\Models\Product  $product
-     * @return \Illuminate\Http\Response
-     */
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Product  $product
-     * @return \Illuminate\Http\Response
-     */
     public function store(
         Request $request,
         Product $product,
@@ -51,17 +38,9 @@ class ProductCartController extends Controller
         return redirect()->back()->cookie($cookie);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Product  $product
-     * @param  \App\Models\Cart  $cart
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, Product $product, Cart $cart, CreateCartCookie $createCartCookie): \Illuminate\Http\Response
     {
-//        dump("el maximo es ".$product->quantity, 'y el valor recibido es '.$request->quantity);
+
         $validator = Validator::make($request->all(), [
             'quantity' => ['required', 'integer', 'max:' . $product->quantity, 'min:0'],
             'action'=>['required', Rule::in(['decrease', 'add'])],
@@ -70,7 +49,7 @@ class ProductCartController extends Controller
             'action.in'=>'Acción invalida',
 
         ]);
-//        dump($validator);
+
         if ($validator->fails()) {
             return redirect()
                 ->back()
@@ -91,13 +70,7 @@ class ProductCartController extends Controller
         return redirect()->back()->cookie($cookie);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Product  $product
-     * @param  \App\Models\Cart  $cart
-     * @return \Illuminate\Http\Response
-     */
+
     public function destroy(Product $product, Cart $cart, CreateCartCookie $createCartCookie)
     {
         $cart->products()->detach($product->id);
