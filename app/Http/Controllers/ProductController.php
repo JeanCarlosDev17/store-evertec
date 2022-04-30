@@ -142,7 +142,7 @@ class ProductController extends Controller
         if ($validator->fails()) {
             $result = '';
             return view('welcome')->with('products', []);
-            return redirect()->withErrors($validator);
+
         }
         $search = $request['search'];
         $products = Product::select('id', 'price', 'name', 'description', 'maker', 'quantity', 'state', 'discount')
