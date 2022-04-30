@@ -41,7 +41,7 @@ class OrderController extends Controller
 
     public function store(Request $request)
     {
-//        dump($request->all());
+
         return DB::transaction(function () use ($request) {
             $user = $request->user();
             $order = $user->orders()->create([
@@ -49,8 +49,8 @@ class OrderController extends Controller
             ]);
             $cart = $this->getCartFromCookie->execute();
 
-            $error = false;
-            $messages = [];
+
+
             if ($cart->products->isEmpty()) {
                 throw ValidationException::withMessages([
                     'product'=>'Se ha enviado un carrito de compras vacio intente nuevamente añadir y realizar la compra',
@@ -89,13 +89,13 @@ class OrderController extends Controller
                 $order->save();
                 return redirect($session['processUrl']);
             } catch (HttpException $ex) {
-//                echo $ex;
+
                 throw ValidationException::withMessages([
                     'product'=>$ex,
                 ]);
             }
 
-//            return  redirect()->route('orders.show',[$order->id]);
+
         }, 5);
     }
 
@@ -106,12 +106,12 @@ class OrderController extends Controller
             if (!($order->state == $response['status']['status'])) {
                 $order->state = $response['status']['status'];
                 if ($response['status']['status'] == 'REJECTED') {
-                    // dump('Retornando a Buyme,  PAGO RECHAZADO');
+                    // Retornando a Buyme,  PAGO RECHAZADO'
                     foreach ($order->products as $product) {
-                        // dump('product antes de retornar el stock', $product->quantity);
+
 
                         $product->increment('quantity', $product->pivot->quantity);
-                        // dump('product despues de retornar el stock', $product->quantity);
+
                     }
                 }
                 $order->save();
