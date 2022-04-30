@@ -103,7 +103,7 @@ class OrderController extends Controller
     {
         if (isset($order)) {
             $response = $this->webcheckoutService->getInformation($order->session_id);
-            if (!($order->state == $response['status']['status'])) {
+            if (($order->state != $response['status']['status'])) {
                 $order->state = $response['status']['status'];
                 if ($response['status']['status'] == 'REJECTED') {
                     // Retornando a Buyme,  PAGO RECHAZADO'

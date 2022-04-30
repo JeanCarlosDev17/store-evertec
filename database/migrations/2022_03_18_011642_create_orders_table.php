@@ -20,7 +20,6 @@ class CreateOrdersTable extends Migration
             $table->string('description', 150)->nullable();
             $table->char('currency', 4)->nullable();
             $table->unsignedBigInteger('total')->nullable();
-//            $table->enum('state', ['APPROVED','PENDING','REJECTED'])->default('PENDING');
             $table->enum('state', ((new requestState())->toArray()))->default((new requestState())::PENDING);
             $table->string('process_url', 250)->nullable();
             $table->string('session_id', 10)->nullable();

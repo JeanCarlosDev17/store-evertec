@@ -33,7 +33,6 @@ class ProductStoreRequest extends FormRequest
             'quantity'=>'required|integer|min:0|max:16770200',
             'maker'=>'max:100',
             'images' => ['required', 'array'],
-            //'images'=> 'image|max:2000|dimensions:min_width=100, max_width=800,min_height=200,max_height=400,ratio=3/2 '
             'images.*' => [
                 'image',
                 'max:2500',
@@ -56,39 +55,15 @@ class ProductStoreRequest extends FormRequest
         ];
         if (isset($this->images) && is_array($this->images)) {
             foreach ($this->images as $key => $val) {
-                //            $files += ['images.' . $key => $key+1 .' '.  $val->getClientOriginalName() ];
                 $files += ['images.' . $key => $val->getClientOriginalName()];
-                //                $files['images.' . $key . '.max']  = 'The document ' . $val->getClientOriginalName() . ' may not be greater than :max kilobytes.';
             }
         }
         $msg += $files;
-//        dump("ATRIBUTTES",$msg);
+
 
         return $msg;
     }
-    /* public function messages()
-     {
-         $msg=[];
-         $msg=[];
-         if (isset($this->images))
-         {
-             $files=[];
-             $msg=[];
 
-             foreach ($this->images as $key => $val) {
-                 $files += ['images.' . $key . '.mimes'=>'The document ' . $val->getClientOriginalName() . ' must be a file of type: :values.'];
-
-//                $files['images.' . $key . '.max']  = 'The document ' . $val->getClientOriginalName() . ' may not be greater than :max kilobytes.';
-
-             }
-
-//            dump(([$msg,...$files]));
-         }
-         dump("RESULTADO de los MESSAGES");
-         $msg+=$files;
-         dump($msg);
-         return $msg;
-     }*/
 
     public function replace($string)
     {
@@ -98,17 +73,6 @@ class ProductStoreRequest extends FormRequest
         return str_replace('images', 'imagen #', $string);
     }
 
-    /*protected function failedValidation(Validator $validator)
-    {
-        if ($this->expectsJson()) {
-            $errors = (new ValidationException($validator))->errors();
-            throw new HttpResponseException(
-                response()->json(['data' => $errors], 422)
-            );
-        }
-
-        parent::failedValidation($validator);
-    }*/
 
     protected function failedValidation(Validator $validator)
     {

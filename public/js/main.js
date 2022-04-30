@@ -87,8 +87,8 @@
     // Product Quantity
     var clickButton
     $('.quantity button').on('click', function () {
-        var button = $(this);
-        clickButton=button;
+        clickButton = $(this);
+
         var oldValue = button.parent().parent().find('input').val();
         if (button.hasClass('btn-plus')) {
             var newVal = parseFloat(oldValue) + 1;
@@ -107,9 +107,6 @@
 
     $('#product-quantity').one('submit', function(e) {
         e.preventDefault();
-        // console.log("submit hecho desde el botton " )
-        // console.log(clickButton);
-        // and when you done:
         $(this).submit();
     });
 

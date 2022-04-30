@@ -39,7 +39,6 @@ class Product extends Model
     }
     public function priceDiscount(): int
     {
-//        dd("precio ".$this->price." descuento ".($this->discount/100)."% es = " .($this->price*($this->discount/100)) ." y el precio final es  ".$this->price-($this->price*($this->discount/100)));
 
         return $this->price - ($this->price * ($this->discount / 100));
     }

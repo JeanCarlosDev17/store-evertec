@@ -5,7 +5,7 @@ let formsState=document.querySelectorAll('form.state');
 let formsProductEdit=document.querySelectorAll('form.editProduct');
 let formsProductDelete=document.querySelectorAll('form.deleteProduct');
 let formsProductState=document.querySelectorAll('form.stateProduct');
-// console.log(formsProductDelete);
+
 const swalWithBootstrapButtons = Swal.mixin({
     customClass: {
         confirmButton: 'btn btn-success',
@@ -58,7 +58,7 @@ formsDelete.forEach(form => {
             reverseButtons: true
         }).then((result) => {
             if (result.isConfirmed) {
-                // console.log("confirmado");
+
                 form.submit();
             } else if (
                 /* Read more about handling dismissals below */
@@ -79,7 +79,7 @@ formsDelete.forEach(form => {
 formsState.forEach(form => {
     let buttonWarning=form.querySelectorAll('button.btn-warning');
     let action=buttonWarning.length>0 ? 'Desactivar':'Activar';
-    // console.log(action);
+
     form.addEventListener('submit',(event)=>{
 
         swalWithBootstrapButtons.fire({
@@ -92,7 +92,7 @@ formsState.forEach(form => {
             reverseButtons: true
         }).then((result) => {
             if (result.isConfirmed) {
-                // console.log("confirmado");
+
                 form.submit();
             } else if (
                 /* Read more about handling dismissals below */
@@ -154,7 +154,6 @@ formsProductDelete.forEach(form => {
             reverseButtons: true
         }).then((result) => {
             if (result.isConfirmed) {
-                // console.log("confirmado");
                 form.submit();
             } else if (
                 /* Read more about handling dismissals below */
@@ -175,7 +174,7 @@ formsProductDelete.forEach(form => {
 formsProductState.forEach(form => {
     let buttonWarning=form.querySelectorAll('button.btn-warning');
     let action=buttonWarning.length>0 ? 'Desactivar':'Activar';
-    // console.log(action);
+
     form.addEventListener('submit',(event)=>{
 
         swalWithBootstrapButtons.fire({
@@ -188,7 +187,7 @@ formsProductState.forEach(form => {
             reverseButtons: true
         }).then((result) => {
             if (result.isConfirmed) {
-                // console.log("confirmado");
+
                 form.submit();
             } else if (
                 /* Read more about handling dismissals below */

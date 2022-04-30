@@ -16,7 +16,6 @@ class ProductController extends Controller
     public function index()
     {
 
-//        $products=Product::select('id','name','description','maker','quantity','state')->paginate(6);
         $products = Product::select('id', 'name', 'description', 'maker', 'quantity', 'state')->get();
         return view('admin.products')->with('products', $products);
     }
@@ -39,7 +38,7 @@ class ProductController extends Controller
         $productImagesAction->execute($request->images, $product);
         $result = 'Producto guardado exitosamente!';
         return response()->json(['success'=>$result]);
-//        return redirect()->back()->with('result',$result);
+
     }
 
     /**
@@ -74,19 +73,13 @@ class ProductController extends Controller
      */
     public function update(ProductUpdateRequest $request, Product $product, UpdateProductImagesAction $updateProductImagesAction)
     {
-//        dump($request->all());
-//
+
         $product->name = $request->input('name');
         $product->description = $request->input('description');
         $product->price = $request->input('price');
         $product->maker = $request->input('maker');
         $product->quantity = $request->input('quantity');
         $product->save();
-//        $result='Producto Actualizado exitosamente!';
-//        return redirect()->back()->with('result',$result);
-//
-//
-//        dump("imagenes",$request->images);
         $updateProductImagesAction->execute($request->images, $product);
         $result = 'Producto Actualizado exitosamente!';
         return response()->json(['success'=>$result]);
@@ -104,12 +97,7 @@ class ProductController extends Controller
         return redirect()->back()->with('result', 'Producto Eliminado');
     }
 
-    /*public function state(Product $product){
-        dump($product);
-    }*/
-    /*
 
-    */
     public function State(Request $request, int $id)
     {
         $product = Product::find($id);
@@ -121,18 +109,11 @@ class ProductController extends Controller
     }
     public function allToStore()
     {
-//        $products=Product::select('id','name','description','maker','quantity','state')->get();
-
         $products = Product::select('id', 'price', 'name', 'description', 'maker', 'quantity', 'state', 'discount')
             ->active()->Stock()->paginate(6);
-//        dump($products);
         return view('welcome')->with('products', $products);
     }
 
-//    public function createimages(Request $request,Product $product){
-//        $result='Producto creado exitosamente!';
-//        return redirect()->back()->with('result',$result);
-//    }
 
     public function search(Request $request)
     {
@@ -148,15 +129,12 @@ class ProductController extends Controller
         $products = Product::select('id', 'price', 'name', 'description', 'maker', 'quantity', 'state', 'discount')
             ->where([['state', '!=', 'inactive'], ['name', 'LIKE', '%' . $search . '%']])
             ->paginate(6);
-//        dump($products);
+
         if (count($products) < 1) {
             $result = 'Sin resultados';
         } else {
             $result = '';
         }
-//        dump($products);
-//        return redirect()->back()->with('products',$products);
-//        return vii  ->with('products',$products);
         return view('welcome')->with(['products'=>$products, 'result'=>$result]);
     }
 }

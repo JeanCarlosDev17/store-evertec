@@ -22,7 +22,7 @@ class UserController extends Controller
         $users = $this->contractUserRepository->indexRoleUser();
 
         return view('admin.admin')->with('users', ($users));
-//        return view('admin',compact($users));
+
     }
 
     /**
@@ -73,7 +73,6 @@ class UserController extends Controller
     public function update(UserUpdateRequest $request, User $user): RedirectResponse
     {
         $this->contractUserRepository->update($user, $request);
-//        return redirect(route('admin.index'));
         return redirect()->back()->with('result', 'Actualizado Correctamente');
     }
 
@@ -86,17 +85,11 @@ class UserController extends Controller
     public function destroy(User $user)
     {
         //Eliminar un registro
-        //$user=$this->getUserDB($id);
         $user->delete();
         return redirect(route('admin.index'))->with('result', 'Usuario Eliminado');
     }
 
-    /*public function getUserDB(int $id):User
-    {
-//            dd(User::find($id));
-
-           return User::find($id);
-    }*/
+  
 
     public function State(Request $request, User $user): RedirectResponse
     {

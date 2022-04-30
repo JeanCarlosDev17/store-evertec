@@ -32,10 +32,7 @@ class Order extends Model
         return $this->hasMany(Payment::class);
     }
 
-//    public function getTotalAttribute()
-//    {
-//        return $this->products->pluck('total')->sum();
-//    }
+
 
     public function scopeSession($query)
     {
@@ -70,7 +67,6 @@ class Order extends Model
         parent::boot();
         self::creating(function ($order) {
             $order->reference = IdGenerator::generate(['table' => 'orders', 'field'=>'reference', 'length' => 30, 'prefix' =>'ORDER-']);
-//            $mode = IdGenerator::generate(['table' => 'orders','field'=>'reference', 'length' => 30, 'prefix' =>'ORDER-']);
         });
     }
 }

@@ -16,7 +16,6 @@ class CartController extends Controller
     {
         $cart = $cartFromCookie->execute();
 
-//        dump($cart->products);
         return view('cart')->with(['cart'=>$cart]);
     }
 

@@ -15,7 +15,6 @@ class CreateProductsTable extends Migration
             $table->text('description')->nullable();
             $table->bigInteger('price');
             $table->Integer('discount')->nullable()->default('0');
-//            $table->json('maker')->nullable();
             $table->string('maker', 100)->nullable();
             $table->unsignedMediumInteger('quantity');
             $table->enum('state', ['active', 'inactive'])->default('active')->nullable();
