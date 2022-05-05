@@ -16,7 +16,7 @@ yarn-error.logw
 /.idea
 /.vscode
 /storage/images/*.*
-/storage/images
+/storage/images/**
 /storage/images/*.*
 /storage/debugbar/*.*
 /storage/framework/*.*

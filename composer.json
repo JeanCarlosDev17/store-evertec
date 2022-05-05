@@ -25,7 +25,7 @@
         "friendsofphp/php-cs-fixer": "^3.8",
         "laravel/breeze": "^1.6",
         "laravel/sail": "^1.0.1",
-        "mockery/mockery": "^1.4.4",
+        "mockery/mockery": "^1.5",
         "nunomaduro/collision": "^5.10",
         "phpunit/phpunit": "^9.5.10"
     },
@@ -58,7 +58,8 @@
         "test": "vendor/bin/phpunit --verbose --testdox",
         "test-ci": "XDEBUG_MODE=coverage vendor/bin/phpunit --stop-on-error --stop-on-failure --testdox --coverage-clover phpunit.coverage.xml --log-junit phpunit.report.xml",
         "phpcs": "vendor/bin/php-cs-fixer fix --config=.php-cs-fixer.php",
-        "phpcs_validate" : "vendor/bin/php-cs-fixer fix --dry-run --diff"
+        "phpcs_validate" : "vendor/bin/php-cs-fixer fix --dry-run --diff",
+        "coverage": "vendor/bin/phpunit --verbose --testdox --coverage-html ./test/coverage"
     },
     "extra": {
         "laravel": {
