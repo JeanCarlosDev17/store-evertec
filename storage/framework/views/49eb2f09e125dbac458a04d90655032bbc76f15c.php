@@ -10,8 +10,10 @@
         <div class="col-10 ml-4">
             <h1>Modificar Producto</h1>
 
-            <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
-<?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'components.admin.validationErrors','data' => ['errors' => $errors]]); ?>
+            <?php if (isset($component)) {
+    $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component;
+} ?>
+<?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'components.admin.validationErrors', 'data' => ['errors' => $errors]]); ?>
 <?php $component->withName('admin.validationErrors'); ?>
 <?php if ($component->shouldRender()): ?>
 <?php $__env->startComponent($component->resolveView(), $component->data()); ?>
@@ -21,8 +23,10 @@
 <?php $component = $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4; ?>
 <?php unset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4); ?>
 <?php endif; ?>
-            <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
-<?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'components.admin.validationSuccess','data' => []]); ?>
+            <?php if (isset($component)) {
+    $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component;
+} ?>
+<?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'components.admin.validationSuccess', 'data' => []]); ?>
 <?php $component->withName('admin.validationSuccess'); ?>
 <?php if ($component->shouldRender()): ?>
 <?php $__env->startComponent($component->resolveView(), $component->data()); ?>
@@ -41,7 +45,7 @@
 
                 </div>
                 <div id="listErrors" class="alert-description text-sm text-red-600">
-                    <?php $__currentLoopData = $errors->all(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $error): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                    <?php $__currentLoopData = $errors->all(); $__env->addLoop($__currentLoopData); foreach ($__currentLoopData as $error): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                         <li><?php echo e($error); ?></li>
                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                 </div>
@@ -51,28 +55,28 @@
             </div>
 
 
-            <form id="formProductUpdate" action="<?php echo e(route('products.update',$product->id)); ?>" method="post" enctype="multipart/form-data">
+            <form id="formProductUpdate" action="<?php echo e(route('products.update', $product->id)); ?>" method="post" enctype="multipart/form-data">
                 <?php echo csrf_field(); ?>
                 <?php echo method_field('PUT'); ?>
 
                 <div class="row mb-3">
                     <label for="inputName" class="col-sm-3 col-form-label">Nombre</label>
                     <div class="col-sm-9">
-                        <input type="text"  class="<?php echo \Illuminate\Support\Arr::toCssClasses(['form-control','is-invalid'=>$errors->has('name')]) ?>" id="inputName" name="name" required value="<?php echo e($product->name); ?>">
+                        <input type="text"  class="<?php echo \Illuminate\Support\Arr::toCssClasses(['form-control', 'is-invalid'=>$errors->has('name')]) ?>" id="inputName" name="name" required value="<?php echo e($product->name); ?>">
 
                     </div>
                 </div>
                 <div class="row mb-3">
                     <label for="inputDescription" class="col-sm-3 col-form-label">Descripción</label>
                     <div class="col-sm-9">
-                        <textarea class="<?php echo \Illuminate\Support\Arr::toCssClasses(['form-control','is-invalid'=>$errors->has('description')]) ?>" id="textAdescription" rows="3" name="description"><?php echo e($product->description); ?></textarea>
+                        <textarea class="<?php echo \Illuminate\Support\Arr::toCssClasses(['form-control', 'is-invalid'=>$errors->has('description')]) ?>" id="textAdescription" rows="3" name="description"><?php echo e($product->description); ?></textarea>
                     </div>
                 </div>
 
                 <div class="row mb-3">
                     <label for="inputPrice" class="col-sm-3 col-form-label">Precio</label>
                     <div class="col-sm-9">
-                        <input type="number" class="<?php echo \Illuminate\Support\Arr::toCssClasses(['form-control','is-invalid'=>$errors->has('price')]) ?>" id="inputPrice"  min="1" required  name="price" step="1" value="<?php echo e($product->price); ?>">
+                        <input type="number" class="<?php echo \Illuminate\Support\Arr::toCssClasses(['form-control', 'is-invalid'=>$errors->has('price')]) ?>" id="inputPrice"  min="1" required  name="price" step="1" value="<?php echo e($product->price); ?>">
                                
                     </div>
 
@@ -80,7 +84,7 @@
                 <div class="row mb-3">
                     <label for="inputMaker" class="col-sm-3 col-form-label">Marca</label>
                     <div class="col-sm-9">
-                        <input type="text" class="<?php echo \Illuminate\Support\Arr::toCssClasses(['form-control','is-invalid'=>$errors->has('maker')]) ?>"  id="inputMaker"  name="maker" value="<?php echo e($product->maker); ?>">
+                        <input type="text" class="<?php echo \Illuminate\Support\Arr::toCssClasses(['form-control', 'is-invalid'=>$errors->has('maker')]) ?>"  id="inputMaker"  name="maker" value="<?php echo e($product->maker); ?>">
 
                     </div>
 
@@ -89,7 +93,7 @@
                 <div class="row mb-3">
                     <label for="input" class="col-sm-3 col-form-label">Cantidad en Stock</label>
                     <div class="col-sm-9">
-                        <input type="number" class="<?php echo \Illuminate\Support\Arr::toCssClasses(['form-control','is-invalid'=>$errors->has('quantity')]) ?>" min="0" max="16770200" required  name="quantity" value="<?php echo e($product->quantity); ?>">
+                        <input type="number" class="<?php echo \Illuminate\Support\Arr::toCssClasses(['form-control', 'is-invalid'=>$errors->has('quantity')]) ?>" min="0" max="16770200" required  name="quantity" value="<?php echo e($product->quantity); ?>">
                     </div>
                 </div>
                 <div class="row mb-3">
@@ -205,7 +209,7 @@
 
             $(document).ready(function() {
 
-                <?php $__empty_1 = true; $__currentLoopData = $product->images; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $image): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
+                <?php $__empty_1 = true; $__currentLoopData = $product->images; $__env->addLoop($__currentLoopData); foreach ($__currentLoopData as $image): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
 
                 
                 pond.addFile( <?php echo json_encode($image->url(), 15, 512) ?> )

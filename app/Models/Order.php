@@ -32,8 +32,6 @@ class Order extends Model
         return $this->hasMany(Payment::class);
     }
 
-
-
     public function scopeSession($query)
     {
         $query->where('session_id', '!=', null);

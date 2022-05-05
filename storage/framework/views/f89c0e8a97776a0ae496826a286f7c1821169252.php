@@ -62,7 +62,7 @@
 
 <!-- Header-->
 
-    <?php if( (Request::route()->getName()  !='login' ) && (Request::route()->getName()  != 'register')): ?>
+    <?php if ((Request::route()->getName() != 'login') && (Request::route()->getName() != 'register')): ?>
         <!-- Topbar Start -->
         <div class="container-fluid">
 
@@ -162,17 +162,17 @@
 
                             </div>
 
-                            <?php if(auth()->guard()->guest()): ?>
+                            <?php if (auth()->guard()->guest()): ?>
 
                                 <div class="navbar-nav ml-auto py-0">
-                                    <a href=" <?php if(auth()->guard()->check()): ?> <?php if(auth()->check() && auth()->user()->hasRole('admin')): ?> <?php echo e(route('admin.index')); ?> <?php else: ?> <?php echo e(route('dashboard')); ?> <?php endif; ?> <?php endif; ?> <?php if(auth()->guard()->guest()): ?> <?php echo e(route('login')); ?><?php endif; ?>
+                                    <a href=" <?php if (auth()->guard()->check()): ?> <?php if (auth()->check() && auth()->user()->hasRole('admin')): ?> <?php echo e(route('admin.index')); ?> <?php else: ?> <?php echo e(route('dashboard')); ?> <?php endif; ?> <?php endif; ?> <?php if (auth()->guard()->guest()): ?> <?php echo e(route('login')); ?><?php endif; ?>
                                         " class="nav-item nav-link">Login</a>
-                                    <a href="<?php if(auth()->guard()->check()): ?> <?php if(auth()->check() && auth()->user()->hasRole('admin')): ?> <?php echo e(route('admin.index')); ?> <?php else: ?> <?php echo e(route('dashboard')); ?> <?php endif; ?> <?php endif; ?> <?php if(auth()->guard()->guest()): ?> <?php echo e(route('register')); ?><?php endif; ?>
+                                    <a href="<?php if (auth()->guard()->check()): ?> <?php if (auth()->check() && auth()->user()->hasRole('admin')): ?> <?php echo e(route('admin.index')); ?> <?php else: ?> <?php echo e(route('dashboard')); ?> <?php endif; ?> <?php endif; ?> <?php if (auth()->guard()->guest()): ?> <?php echo e(route('register')); ?><?php endif; ?>
                                         " class="nav-item nav-link">Registrarse</a>
                                 </div>
 
                             <?php endif; ?>
-                            <?php if(auth()->guard()->check()): ?>
+                            <?php if (auth()->guard()->check()): ?>
 
 
                                 <div class="nav-item dropdown">
@@ -180,8 +180,10 @@
 
                                     <div class="dropdown-menu rounded-0 m-0">
 
-                                        <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
-<?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'components.dropdown-link','data' => ['href' => route('orders.index')]]); ?>
+                                        <?php if (isset($component)) {
+    $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component;
+} ?>
+<?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'components.dropdown-link', 'data' => ['href' => route('orders.index')]]); ?>
 <?php $component->withName('dropdown-link'); ?>
 <?php if ($component->shouldRender()): ?>
 <?php $__env->startComponent($component->resolveView(), $component->data()); ?>
@@ -198,13 +200,15 @@
                                         <form method="POST" action="<?php echo e(route('logout')); ?>">
                                             <?php echo csrf_field(); ?>
 
-                                            <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
-<?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'components.dropdown-link','data' => ['href' => route('logout'),'onclick' => 'event.preventDefault();
+                                            <?php if (isset($component)) {
+    $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component;
+} ?>
+<?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'components.dropdown-link', 'data' => ['href' => route('logout'), 'onclick' => 'event.preventDefault();
                                                 this.closest(\'form\').submit();']]); ?>
 <?php $component->withName('dropdown-link'); ?>
 <?php if ($component->shouldRender()): ?>
 <?php $__env->startComponent($component->resolveView(), $component->data()); ?>
-<?php $component->withAttributes(['href' => \Illuminate\View\Compilers\BladeCompiler::sanitizeComponentAttribute(route('logout')),'onclick' => 'event.preventDefault();
+<?php $component->withAttributes(['href' => \Illuminate\View\Compilers\BladeCompiler::sanitizeComponentAttribute(route('logout')), 'onclick' => 'event.preventDefault();
                                                 this.closest(\'form\').submit();']); ?>
                                                 <?php echo e(__('Log Out')); ?>
 
@@ -234,7 +238,7 @@
         <div class="container-fluid">
             <div class="row align-items-center py-3 px-xl-5">
                 <div class="col-lg-4 d-none d-lg-block">
-                    <a href="<?php if(auth()->guard()->check()): ?> <?php if(auth()->check() && auth()->user()->hasRole('user')): ?> <?php echo e(route('dashboard')); ?> <?php else: ?> / <?php endif; ?> <?php endif; ?> <?php if(auth()->guard()->guest()): ?> / <?php endif; ?>" class="text-decoration-none">
+                    <a href="<?php if (auth()->guard()->check()): ?> <?php if (auth()->check() && auth()->user()->hasRole('user')): ?> <?php echo e(route('dashboard')); ?> <?php else: ?> / <?php endif; ?> <?php endif; ?> <?php if (auth()->guard()->guest()): ?> / <?php endif; ?>" class="text-decoration-none">
                         <h1 class="m-0 display-5 font-weight-semi-bold h2"><span class="text-primary font-weight-bold border px-3 mr-1">Buy</span>Me</h1>
                     </a>
                 </div>
@@ -243,9 +247,9 @@
                 <div class=" col-lg-2 d-none d-lg-block  ml-auto" >
 
                     <div class="">
-                        <a href=" <?php if(auth()->guard()->check()): ?> <?php if(auth()->check() && auth()->user()->hasRole('admin')): ?> <?php echo e(route('admin.index')); ?> <?php else: ?> <?php echo e(route('dashboard')); ?> <?php endif; ?> <?php endif; ?> <?php if(auth()->guard()->guest()): ?> <?php echo e(route('login')); ?><?php endif; ?>
+                        <a href=" <?php if (auth()->guard()->check()): ?> <?php if (auth()->check() && auth()->user()->hasRole('admin')): ?> <?php echo e(route('admin.index')); ?> <?php else: ?> <?php echo e(route('dashboard')); ?> <?php endif; ?> <?php endif; ?> <?php if (auth()->guard()->guest()): ?> <?php echo e(route('login')); ?><?php endif; ?>
                             " class="nav-item ">Login</a>
-                        <a href="<?php if(auth()->guard()->check()): ?> <?php if(auth()->check() && auth()->user()->hasRole('admin')): ?> <?php echo e(route('admin.index')); ?> <?php else: ?> <?php echo e(route('dashboard')); ?> <?php endif; ?> <?php endif; ?> <?php if(auth()->guard()->guest()): ?> <?php echo e(route('register')); ?><?php endif; ?>
+                        <a href="<?php if (auth()->guard()->check()): ?> <?php if (auth()->check() && auth()->user()->hasRole('admin')): ?> <?php echo e(route('admin.index')); ?> <?php else: ?> <?php echo e(route('dashboard')); ?> <?php endif; ?> <?php endif; ?> <?php if (auth()->guard()->guest()): ?> <?php echo e(route('register')); ?><?php endif; ?>
                             " class="nav-item ">Register</a>
                     </div>
                 </div>
@@ -309,7 +313,7 @@
 
     <!-- Footer-->
 
-    <?php if( (Request::route()->getName()  !='login' ) && (Request::route()->getName()  != 'register')): ?>
+    <?php if ((Request::route()->getName() != 'login') && (Request::route()->getName() != 'register')): ?>
         <!-- Footer Start -->
         <div class="container-fluid bg-secondary text-dark mt-5 pt-5">
             <div class="row px-xl-5 pt-5">

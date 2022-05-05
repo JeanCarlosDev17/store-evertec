@@ -24,8 +24,10 @@
 <div class="container-fluid pt-5">
     <div class="row px-xl-5">
 
-        <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
-<?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'components.Admin.validationErrors','data' => ['errors' => $errors]]); ?>
+        <?php if (isset($component)) {
+    $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component;
+} ?>
+<?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'components.Admin.validationErrors', 'data' => ['errors' => $errors]]); ?>
 <?php $component->withName('Admin.validationErrors'); ?>
 <?php if ($component->shouldRender()): ?>
 <?php $__env->startComponent($component->resolveView(), $component->data()); ?>
@@ -57,12 +59,12 @@
                 </div>
 
 
-                <?php if(session()->has('products')): ?>
+                <?php if (session()->has('products')): ?>
 
-                    <?php ($products=session('products')); ?>
+                    <?php ($products = session('products')); ?>
                 <?php endif; ?>
 
-                <?php $__empty_1 = true; $__currentLoopData = $products; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $product): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
+                <?php $__empty_1 = true; $__currentLoopData = $products; $__env->addLoop($__currentLoopData); foreach ($__currentLoopData as $product): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
 
                     <div class="col-lg-4 col-md-6 col-sm-12 pb-1">
                         <div class="card product-item border-0 mb-4">
@@ -80,7 +82,7 @@
 
                             </div>
                             <div class="card-footer d-flex justify-content-between bg-light border">
-                                <a href="<?php echo e(route('products.detail',$product->id)); ?>" class="btn btn-sm text-dark p-0">
+                                <a href="<?php echo e(route('products.detail', $product->id)); ?>" class="btn btn-sm text-dark p-0">
                                     <i class="fas fa-eye text-primary mr-1"></i>Ver Detalles
                                 </a>
 
@@ -88,7 +90,7 @@
 
 
 
-                                <form action="<?php echo e(route('products.cart.store',$product->id)); ?>" method="post">
+                                <form action="<?php echo e(route('products.cart.store', $product->id)); ?>" method="post">
                                 <?php echo csrf_field(); ?>
                                     <button type="submit" class="btn btn-sm text-dark p-0">
                                         <i class="fas fa-shopping-cart text-primary mr-1"></i>Añadir al Carrito
@@ -99,15 +101,15 @@
                     </div>
                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
                     <h2>vacio</h2>
-                    <?php if($errors->isEmpty()): ?>
-                        <?php if(session()->has('result')): ?>
+                    <?php if ($errors->isEmpty()): ?>
+                        <?php if (session()->has('result')): ?>
                             <h2><?php echo e(session('result')); ?></h2>
-                        <?php elseif(! (session()->has('result'))): ?>
+                        <?php elseif (!(session()->has('result'))): ?>
                             <h2>Oops No hay productos relacionados, Actualizaciones Pronto...</h2>
                         <?php endif; ?>
 
                     <?php else: ?>
-                        <?php $__currentLoopData = $errors->all(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $error): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                        <?php $__currentLoopData = $errors->all(); $__env->addLoop($__currentLoopData); foreach ($__currentLoopData as $error): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                             <li><?php echo e($error); ?></li>
                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 
@@ -119,7 +121,7 @@
                     <nav aria-label="Page navigation">
                         <div class="d-flex justify-content-center">
 
-                            <?php if(count($products)>0): ?>
+                            <?php if (count($products) > 0): ?>
                                 <?php echo $products->links(); ?>
 
                             <?php endif; ?>

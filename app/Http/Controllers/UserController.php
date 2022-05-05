@@ -22,7 +22,6 @@ class UserController extends Controller
         $users = $this->contractUserRepository->indexRoleUser();
 
         return view('admin.admin')->with('users', ($users));
-
     }
 
     /**
@@ -88,8 +87,6 @@ class UserController extends Controller
         $user->delete();
         return redirect(route('admin.index'))->with('result', 'Usuario Eliminado');
     }
-
-  
 
     public function State(Request $request, User $user): RedirectResponse
     {

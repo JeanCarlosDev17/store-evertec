@@ -15,7 +15,6 @@ class ProductController extends Controller
 {
     public function index()
     {
-
         $products = Product::select('id', 'name', 'description', 'maker', 'quantity', 'state')->get();
         return view('admin.products')->with('products', $products);
     }
@@ -38,7 +37,6 @@ class ProductController extends Controller
         $productImagesAction->execute($request->images, $product);
         $result = 'Producto guardado exitosamente!';
         return response()->json(['success'=>$result]);
-
     }
 
     /**
@@ -73,7 +71,6 @@ class ProductController extends Controller
      */
     public function update(ProductUpdateRequest $request, Product $product, UpdateProductImagesAction $updateProductImagesAction)
     {
-
         $product->name = $request->input('name');
         $product->description = $request->input('description');
         $product->price = $request->input('price');
@@ -97,7 +94,6 @@ class ProductController extends Controller
         return redirect()->back()->with('result', 'Producto Eliminado');
     }
 
-
     public function State(Request $request, int $id)
     {
         $product = Product::find($id);
@@ -114,7 +110,6 @@ class ProductController extends Controller
         return view('welcome')->with('products', $products);
     }
 
-
     public function search(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -123,7 +118,6 @@ class ProductController extends Controller
         if ($validator->fails()) {
             $result = '';
             return view('welcome')->with('products', []);
-
         }
         $search = $request['search'];
         $products = Product::select('id', 'price', 'name', 'description', 'maker', 'quantity', 'state', 'discount')

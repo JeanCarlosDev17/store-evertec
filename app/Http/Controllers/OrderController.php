@@ -41,15 +41,12 @@ class OrderController extends Controller
 
     public function store(Request $request)
     {
-
         return DB::transaction(function () use ($request) {
             $user = $request->user();
             $order = $user->orders()->create([
                 'state'=>'PENDING',
             ]);
             $cart = $this->getCartFromCookie->execute();
-
-
 
             if ($cart->products->isEmpty()) {
                 throw ValidationException::withMessages([
@@ -89,13 +86,10 @@ class OrderController extends Controller
                 $order->save();
                 return redirect($session['processUrl']);
             } catch (HttpException $ex) {
-
                 throw ValidationException::withMessages([
                     'product'=>$ex,
                 ]);
             }
-
-
         }, 5);
     }
 
@@ -108,10 +102,7 @@ class OrderController extends Controller
                 if ($response['status']['status'] == 'REJECTED') {
                     // Retornando a Buyme,  PAGO RECHAZADO'
                     foreach ($order->products as $product) {
-
-
                         $product->increment('quantity', $product->pivot->quantity);
-
                     }
                 }
                 $order->save();

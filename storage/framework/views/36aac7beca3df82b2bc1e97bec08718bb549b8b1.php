@@ -4,11 +4,13 @@
 } ?>
 <?php $__defined_vars = get_defined_vars(); ?>
 <?php foreach ($attributes as $__key => $__value) {
-    if (array_key_exists($__key, $__defined_vars)) unset($$__key);
+    if (array_key_exists($__key, $__defined_vars)) {
+        unset($$__key);
+    }
 } ?>
 <?php unset($__defined_vars); ?>
 
-<?php if($status): ?>
+<?php if ($status): ?>
     <div <?php echo e($attributes->merge(['class' => 'font-medium text-sm text-green-600'])); ?>>
         <?php echo e($status); ?>
 

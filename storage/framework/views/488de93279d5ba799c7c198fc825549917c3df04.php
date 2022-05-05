@@ -4,7 +4,9 @@
 } ?>
 <?php $__defined_vars = get_defined_vars(); ?>
 <?php foreach ($attributes as $__key => $__value) {
-    if (array_key_exists($__key, $__defined_vars)) unset($$__key);
+    if (array_key_exists($__key, $__defined_vars)) {
+        unset($$__key);
+    }
 } ?>
 <?php unset($__defined_vars); ?>
 
@@ -21,7 +23,7 @@
 
 
 
-<?php if($errors->any()): ?>
+<?php if ($errors->any()): ?>
     <div class="alert flex flex-row items-center bg-red-200 p-5 border-b-2 rounded border-red-300 my-5 mb-4">
         <div class="alert-icon flex items-center bg-red-100 border-2 border-red-500 justify-center h-10 w-10 flex-shrink-0 rounded-full">
             <span class="text-red-500">
@@ -38,7 +40,7 @@
 
             </div>
             <div class="alert-description text-sm text-red-600">
-                <?php $__currentLoopData = $errors->all(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $error): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                <?php $__currentLoopData = $errors->all(); $__env->addLoop($__currentLoopData); foreach ($__currentLoopData as $error): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                     <li><?php echo e($error); ?></li>
                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
             </div>

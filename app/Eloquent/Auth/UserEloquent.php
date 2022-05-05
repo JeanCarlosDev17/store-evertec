@@ -31,14 +31,11 @@ class UserEloquent implements UserRepository
 
     public function indexRoleUser(): Collection
     {
-
         return  User::role('user')->get();
     }
 
     public function update(User $user, Request $data): void
     {
-
-
         if (isset($data->newPassword)) {
             UserPasswordUpdateValidator::validate($data);
 

@@ -43,7 +43,6 @@ class CheckOrdersPayment extends Command
      */
     public function handle()
     {
-
         $orders = Order::where('state', '=', 'PENDING')
             ->where('session_id', '!=', null)
             ->get();
@@ -60,7 +59,6 @@ class CheckOrdersPayment extends Command
                     }
 
                     if ($response['status']['status'] == 'REJECTED') {
-
                         $order->state = $response['status']['status'];
                         $order->save();
                         foreach ($order->products as $product) {
@@ -78,7 +76,6 @@ class CheckOrdersPayment extends Command
             //ninguna orden pendiente
 //
         }
-
 
         return 0;
     }

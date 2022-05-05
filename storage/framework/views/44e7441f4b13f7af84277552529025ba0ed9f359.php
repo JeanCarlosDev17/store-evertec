@@ -13,31 +13,31 @@
     <div class="wrapper">
 
         
-        <?php if($layoutHelper->isLayoutTopnavEnabled()): ?>
+        <?php if ($layoutHelper->isLayoutTopnavEnabled()): ?>
             <?php echo $__env->make('adminlte::partials.navbar.navbar-layout-topnav', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
         <?php else: ?>
             <?php echo $__env->make('adminlte::partials.navbar.navbar', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
         <?php endif; ?>
 
         
-        <?php if(!$layoutHelper->isLayoutTopnavEnabled()): ?>
+        <?php if (!$layoutHelper->isLayoutTopnavEnabled()): ?>
             <?php echo $__env->make('adminlte::partials.sidebar.left-sidebar', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
         <?php endif; ?>
 
         
-        <?php if(empty($iFrameEnabled)): ?>
+        <?php if (empty($iFrameEnabled)): ?>
             <?php echo $__env->make('adminlte::partials.cwrapper.cwrapper-default', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
         <?php else: ?>
             <?php echo $__env->make('adminlte::partials.cwrapper.cwrapper-iframe', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
         <?php endif; ?>
 
         
-        <?php if (! empty(trim($__env->yieldContent('footer')))): ?>
+        <?php if (!empty(trim($__env->yieldContent('footer')))): ?>
             <?php echo $__env->make('adminlte::partials.footer.footer', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
         <?php endif; ?>
 
         
-        <?php if(config('adminlte.right_sidebar')): ?>
+        <?php if (config('adminlte.right_sidebar')): ?>
             <?php echo $__env->make('adminlte::partials.sidebar.right-sidebar', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
         <?php endif; ?>
 

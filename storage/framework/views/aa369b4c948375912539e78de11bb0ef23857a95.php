@@ -1,10 +1,10 @@
 <?php $__env->startComponent('mail::message'); ?>
 
-<?php if(! empty($greeting)): ?>
+<?php if (!empty($greeting)): ?>
 # <?php echo e($greeting); ?>
 
 <?php else: ?>
-<?php if($level === 'error'): ?>
+<?php if ($level === 'error'): ?>
 # <?php echo app('translator')->get('Whoops!'); ?>
 <?php else: ?>
 # <?php echo app('translator')->get('Hello!'); ?>
@@ -12,14 +12,14 @@
 <?php endif; ?>
 
 
-<?php $__currentLoopData = $introLines; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $line): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+<?php $__currentLoopData = $introLines; $__env->addLoop($__currentLoopData); foreach ($__currentLoopData as $line): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
 <?php echo e($line); ?>
 
 
 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 
 
-<?php if(isset($actionText)): ?>
+<?php if (isset($actionText)): ?>
 <?php
     switch ($level) {
         case 'success':
@@ -37,14 +37,14 @@
 <?php endif; ?>
 
 
-<?php $__currentLoopData = $outroLines; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $line): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+<?php $__currentLoopData = $outroLines; $__env->addLoop($__currentLoopData); foreach ($__currentLoopData as $line): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
 <?php echo e($line); ?>
 
 
 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 
 
-<?php if(! empty($salutation)): ?>
+<?php if (!empty($salutation)): ?>
 <?php echo e($salutation); ?>
 
 <?php else: ?>
@@ -54,10 +54,10 @@
 <?php endif; ?>
 
 
-<?php if(isset($actionText)): ?>
+<?php if (isset($actionText)): ?>
 <?php $__env->slot('subcopy'); ?>
 <?php echo app('translator')->get(
-    "If you're having trouble clicking the \":actionText\" button, copy and paste the URL below\n".
+    "If you're having trouble clicking the \":actionText\" button, copy and paste the URL below\n" .
     'into your web browser:',
     [
         'actionText' => $actionText,

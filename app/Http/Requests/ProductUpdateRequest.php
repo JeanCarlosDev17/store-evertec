@@ -59,10 +59,8 @@ class ProductUpdateRequest extends FormRequest
         }
         $msg += $files;
 
-
         return $msg;
     }
-
 
     public function replace($string)
     {
@@ -71,8 +69,6 @@ class ProductUpdateRequest extends FormRequest
         $string[$pos + 1] = $string[$pos + 1] + 1;
         return str_replace('images', 'imagen #', $string);
     }
-
-
 
     protected function failedValidation(Validator $validator)
     {

@@ -13,7 +13,6 @@ use Illuminate\Validation\ValidationException;
 
 class ProductCartController extends Controller
 {
-
     public function store(
         Request $request,
         Product $product,
@@ -40,7 +39,6 @@ class ProductCartController extends Controller
 
     public function update(Request $request, Product $product, Cart $cart, CreateCartCookie $createCartCookie): \Illuminate\Http\Response
     {
-
         $validator = Validator::make($request->all(), [
             'quantity' => ['required', 'integer', 'max:' . $product->quantity, 'min:0'],
             'action'=>['required', Rule::in(['decrease', 'add'])],
@@ -70,13 +68,11 @@ class ProductCartController extends Controller
         return redirect()->back()->cookie($cookie);
     }
 
-
     public function destroy(Product $product, Cart $cart, CreateCartCookie $createCartCookie)
     {
         $cart->products()->detach($product->id);
 
         $cookie = $createCartCookie->execute($cart);
         return redirect()->back()->cookie($cookie);
-
     }
 }

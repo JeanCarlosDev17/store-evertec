@@ -14,11 +14,9 @@ class UpdateProductImagesAction
         $productImages = collect();
 
         foreach ($product->images as $image) {
-
             Storage::disk(config('filesystems.images_disk'))->delete($product->id . '/' . $image->file_name);
             $image->delete();
         }
-
 
         foreach ($files as $file) {
             $image = new Image();
@@ -27,11 +25,9 @@ class UpdateProductImagesAction
             $file->storeAs($product->id, $image->file_name, config('filesystems.images_disk'));
             //path , name , disk
             $productImages->push($image);
-
         }
 //
         $product->images()->saveMany($productImages);
         $product->refresh();
-
     }
 }

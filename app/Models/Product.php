@@ -39,7 +39,6 @@ class Product extends Model
     }
     public function priceDiscount(): int
     {
-
         return $this->price - ($this->price * ($this->discount / 100));
     }
 

@@ -4,7 +4,9 @@
 } ?>
 <?php $__defined_vars = get_defined_vars(); ?>
 <?php foreach ($attributes as $__key => $__value) {
-    if (array_key_exists($__key, $__defined_vars)) unset($$__key);
+    if (array_key_exists($__key, $__defined_vars)) {
+        unset($$__key);
+    }
 } ?>
 <?php unset($__defined_vars); ?>
 <div class="table-responsive-md">
@@ -26,16 +28,16 @@
         </thead>
         <tbody>
 
-        <?php $__empty_1 = true; $__currentLoopData = $users; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $user): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
+        <?php $__empty_1 = true; $__currentLoopData = $users; $__env->addLoop($__currentLoopData); foreach ($__currentLoopData as $user): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
 
             <tr>
                 <td><?php echo e($user->id); ?></td>
                 <td><?php echo e($user->name); ?></td>
                 <td><?php echo e($user->email); ?></td>
-                <td><?php echo e($user->hasRole('admin')? "Administrador":"Usuario"); ?></td>
-                <td><?php echo e($user->user_state==1 ? "Activo":"Inactivo"); ?></td>
+                <td><?php echo e($user->hasRole('admin') ? 'Administrador' : 'Usuario'); ?></td>
+                <td><?php echo e($user->user_state == 1 ? 'Activo' : 'Inactivo'); ?></td>
                 <td>
-                    <form action="<?php echo e(route('users.edit',$user->id)); ?>" class="edit" method="get">
+                    <form action="<?php echo e(route('users.edit', $user->id)); ?>" class="edit" method="get">
 
                         <?php echo csrf_field(); ?>
                         <?php echo method_field('GET'); ?>
@@ -45,7 +47,7 @@
                 </td>
 
 
-                <td><form action="<?php echo e(route('users.destroy',$user->id)); ?>" class="delete" method="post">
+                <td><form action="<?php echo e(route('users.destroy', $user->id)); ?>" class="delete" method="post">
                         <?php echo csrf_field(); ?>
                         <?php echo method_field('DELETE'); ?>
 
@@ -56,10 +58,10 @@
 
                 <td class="d-flex justify-content-center ">
 
-                    <form action="<?php echo e(route('users.state',$user->id)); ?>" class="state" method="post">
+                    <form action="<?php echo e(route('users.state', $user->id)); ?>" class="state" method="post">
                         <?php echo csrf_field(); ?>
                         <?php echo method_field('PUT'); ?>
-                        <button type="submit"  href="" class="btn btn-<?php echo e($user->user_state==1 ? "warning":"success"); ?> text-center  " style="max-width:min-content ">
+                        <button type="submit"  href="" class="btn btn-<?php echo e($user->user_state == 1 ? 'warning' : 'success'); ?> text-center  " style="max-width:min-content ">
                             <i class="fas fa-toggle-on font-weight-bold  " style="color: black"> </i>
                         </button>
                     </form>
