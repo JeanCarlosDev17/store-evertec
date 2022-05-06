@@ -20,7 +20,6 @@ class ProductUpdateTest extends TestCase
     use RefreshDatabase;
     public function boot()
     {
-
         ParallelTesting::setUpTestDatabase(function () {
             $this->artisan('db:seed');
         });

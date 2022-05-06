@@ -19,7 +19,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-
 Route::get('/', [ProductController::class, 'allToStore'])->name('home');
 
 Route::post('upload', [UploadController::class, 'store'])->middleware(['auth', 'verified', 'role:admin', 'nocache']);
@@ -27,7 +26,6 @@ Route::post('upload', [UploadController::class, 'store'])->middleware(['auth', '
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified', 'userStateActive', 'nocache'])->name('dashboard');
-
 
 Route::middleware(['auth', 'verified', 'role:admin', 'nocache'])->group(function () {
     Route::get('/admin', [UserController::class, 'index'])->name('admin.index');
