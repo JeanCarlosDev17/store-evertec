@@ -9,30 +9,29 @@ use Tests\TestCase;
 
 class AuthenticationTest extends TestCase
 {
-//    use RefreshDatabase;
     use RefreshDatabase;
+
+    public const LOGIN = '/login';
 
     public function boot()
     {
 
         // Executed when a test database is created...
-        ParallelTesting::setUpTestDatabase(function ($database, $token) {
+        ParallelTesting::setUpTestDatabase(function () {
             $this->artisan('db:seed');
         });
     }
 
     public function test_login_screen_can_be_rendered()
     {
-        $response = $this->get('/login');
+        $response = $this->get(self::LOGIN);
 
         $response->assertStatus(200);
     }
 
     public function test_users_can_authenticate_using_the_login_screen()
     {
-//        $user = User::factory()->create();
-
-        $response = $this->post('/login', [
+        $response = $this->post(self::LOGIN, [
             'email' => 'jean@mail.com',
             'password' => '123456789',
         ]);
@@ -43,9 +42,7 @@ class AuthenticationTest extends TestCase
 
     public function test_User_Admin_Can_Authenticate()
     {
-//        $user = User::factory()->create();
-
-        $response = $this->post('/login', [
+        $response = $this->post(self::LOGIN, [
             'email' => 'jeancarlosrecio@hotmail.com',
             'password' => '123456789',
         ]);
@@ -56,9 +53,7 @@ class AuthenticationTest extends TestCase
 
     public function test_users_can_not_authenticate_with_invalid_password()
     {
-        //$user = User::factory()->create();
-
-        $response = $this->post('/login', [
+        $this->post(self::LOGIN, [
             'email' => 'jeancarlosrecio@hotmail.com',
             'password' => '123456asdasdasd789',
         ]);

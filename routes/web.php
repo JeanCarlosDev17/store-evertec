@@ -19,9 +19,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-/*Route::get('/', function () {
-    return view('auth.login');
-});*/
+
 Route::get('/', [ProductController::class, 'allToStore'])->name('home');
 
 Route::post('upload', [UploadController::class, 'store'])->middleware(['auth', 'verified', 'role:admin', 'nocache']);
@@ -30,7 +28,7 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified', 'userStateActive', 'nocache'])->name('dashboard');
 
-//Route::resource('admin/example','\App\Http\Controllers\UserController');
+
 Route::middleware(['auth', 'verified', 'role:admin', 'nocache'])->group(function () {
     Route::get('/admin', [UserController::class, 'index'])->name('admin.index');
     Route::get('admin/users', [UserController::class, 'index'])->name('users.index');

@@ -1,4 +1,4 @@
-// hola mundo desde el pond
+
 require('./bootstrap');
 
 import Alpine from 'alpinejs';
@@ -8,9 +8,7 @@ import FilePondPluginFileValidateType from 'filepond-plugin-file-validate-type';
 import FilePondPluginFileValidateSize from 'filepond-plugin-file-validate-size';
 import FilePondPluginImageExifOrientation from 'filepond-plugin-image-exif-orientation';
 import FilePondPluginImagePreview from 'filepond-plugin-image-preview';
-import FilePondPluginImageEdit from 'filepond-plugin-image-edit';
 import FilePondPluginImageCrop from 'filepond-plugin-image-crop';
-import FilePondPluginImageTransform from 'filepond-plugin-image-transform';
 import FilePondPluginImageResize from 'filepond-plugin-image-resize';
 import FilePondPluginImageValidateSize from 'filepond-plugin-image-validate-size';
 
@@ -25,15 +23,9 @@ const inputElement = document.querySelector('input[type="file"]');
 FilePond.registerPlugin(
     FilePondPluginFileValidateType,
     FilePondPluginFileValidateSize,
-    // corrects mobile image orientation
     FilePondPluginImageExifOrientation,
-    // previews the image
     FilePondPluginImagePreview,
-    // crops the image to a certain aspect ratio
     FilePondPluginImageCrop,
-    // FilePondPluginImageEdit,
-    // // applies crop and resize information on the client
-    // FilePondPluginImageTransform,
     FilePondPluginImageResize,
     FilePondPluginImageValidateSize
 );

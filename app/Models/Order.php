@@ -57,7 +57,15 @@ class Order extends Model
 
     public function getStatusAttribute()
     {
-        return $this->state == 'PENDING' ? 'Pendiente' : ($this->state == 'APPROVED' ? 'Aprobado' : 'Pago Fallido');
+        $state = '';
+        if ($this->state == 'PENDING') {
+            $state = 'Pendiente';
+        } elseif ($this->state == 'APPROVED') {
+            $state = 'Aprobado';
+        } else {
+            $state = 'Pago Fallido';
+        }
+        return $state;
     }
 
     public static function boot()

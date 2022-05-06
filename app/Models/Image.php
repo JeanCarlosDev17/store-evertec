@@ -30,8 +30,7 @@ class Image extends Model
 
     public function getFileName(): string
     {
-        $filename = str_replace('.' . $this->getExtensionImage(), '', pathinfo(public_path($this->url()))['basename']);
-        return $filename;
+        return str_replace('.' . $this->getExtensionImage(), '', pathinfo(public_path($this->url()))['basename']);
     }
 
     public function getFileSize(): string

@@ -19,8 +19,8 @@ class StoreProductTest extends TestCase
     use RefreshDatabase;
     public function boot()
     {
-        // Executed when a test database is created...
-        ParallelTesting::setUpTestDatabase(function ($database, $token) {
+
+        ParallelTesting::setUpTestDatabase(function () {
             $this->artisan('db:seed');
         });
     }
@@ -46,7 +46,6 @@ class StoreProductTest extends TestCase
                 'success' => 'Producto guardado exitosamente!',
             ]);
 
-//        $response->assertRedirect();
         $this->assertDatabaseHas('products', Arr::except($data, ['images']));
     }
 
@@ -57,21 +56,13 @@ class StoreProductTest extends TestCase
      */
     public function test_validations_store_product(array $data, string $field): void
     {
-//        dump($data);
-
         $user = User::where('email', 'jeancarlosrecio@hotmail.com')->get();
         $response = $this->actingAs($user[0])->post('/admin/products', $data);
-//        dump($field);
-        if ($field == 'images') {
-//            dump($response);
-        }
         $response->assertSessionHasErrors($field);
-//        $response->assertStatus(400);
     }
 
     public function invalidDataProvider()
     {
-//         'name'=>'required|min:3|max:150',
         return [
             'validate name required'=>[
                 'data'=>array_replace($this->productData(), ['name'=>null]),

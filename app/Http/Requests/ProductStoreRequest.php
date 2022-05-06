@@ -51,7 +51,6 @@ class ProductStoreRequest extends FormRequest
             'maker'=>'Marca',
             'price'=>'Precio',
             'quantity'=>'Cantidad en Stock',
-
         ];
         if (isset($this->images) && is_array($this->images)) {
             foreach ($this->images as $key => $val) {
@@ -59,7 +58,6 @@ class ProductStoreRequest extends FormRequest
             }
         }
         $msg += $files;
-
         return $msg;
     }
 

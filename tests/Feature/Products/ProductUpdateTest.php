@@ -20,8 +20,8 @@ class ProductUpdateTest extends TestCase
     use RefreshDatabase;
     public function boot()
     {
-        // Executed when a test database is created...
-        ParallelTesting::setUpTestDatabase(function ($database, $token) {
+
+        ParallelTesting::setUpTestDatabase(function () {
             $this->artisan('db:seed');
         });
     }
@@ -40,7 +40,7 @@ class ProductUpdateTest extends TestCase
             ],
         ];
         $user = User::where('email', 'jeancarlosrecio@hotmail.com')->get();
-        $response = $this->actingAs($user[0])->post('/admin/products', $dataInsert);
+        $this->actingAs($user[0])->post('/admin/products', $dataInsert);
         $product = Product::where('name', 'Product Test Inicial')->get();
         $this->assertDatabaseHas('products', Arr::except($dataInsert, ['images']));
         $dataUpdate = [
@@ -57,7 +57,6 @@ class ProductUpdateTest extends TestCase
 
         $response = $this->actingAs($user[0])->put('admin/products/' . $product[0]->id, $dataUpdate);
         $this->assertDatabaseHas('products', Arr::except($dataUpdate, ['images']));
-//        $response->assertSessionHas('result', 'Producto Actualizado exitosamente!');
         $response
             ->assertStatus(200)
             ->assertJsonFragment([
@@ -84,7 +83,7 @@ class ProductUpdateTest extends TestCase
             ],
         ];
         $user = User::where('email', 'jeancarlosrecio@hotmail.com')->get();
-        $response = $this->actingAs($user[0])->post('/admin/products', $dataInsert);
+        $this->actingAs($user[0])->post('/admin/products', $dataInsert);
         $product = Product::where('name', 'Product Test Inicial')->get();
         $this->assertDatabaseHas('products', Arr::except($dataInsert, ['images']));
 
@@ -160,7 +159,7 @@ class ProductUpdateTest extends TestCase
 
     public function productData(): array
     {
-        $data = [
+        return [
 
             'name'=>'Product Test Inicial ACTUALIZADO',
             'description'=>'a description test ACTUALIZADO',
@@ -171,6 +170,5 @@ class ProductUpdateTest extends TestCase
                 UploadedFile::fake()->image('imageProductTest.jpg', 500, 500)->size(500),
             ],
         ];
-        return $data;
     }
 }

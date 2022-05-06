@@ -32,36 +32,6 @@ class WebcheckoutTest extends TestCase
         $this->assertArrayHasKey('returnUrl', $request);
     }
 
-    /*public function testItCanCreateSessionFromServiceCorrectly()
-    {
-        $data = $this->getCreateSessionData();
-
-        $user = User::factory()->make();
-        $user->save();
-
-        $order = new Order();
-
-        $order->user_id = $user->id;
-        $order->currency = 'COP';
-        $order->total = 10000;
-        $order->save();
-
-        $data = (new CreateSessionDataRequest())->getCreateSessionData($order);
-        $response = (new WebcheckoutService())->createSession($data);
-
-        $this->assertArrayHasKey('status', $response);
-        $this->assertEquals('OK', $response['status']['status']);
-        $this->assertArrayHasKey('requestId', $response);
-        $this->assertArrayHasKey('processUrl', $response);
-
-        $session_id = $response['requestId'];
-        $responseGetSession = $response = (new WebcheckoutService())->getInformation($session_id);
-
-        $this->assertEquals($session_id, $responseGetSession['requestId']);
-        $this->assertArrayHasKey('status', $response);
-        $this->assertEquals('PENDING', $response['status']['status']);
-    }*/
-
     public function testItCanCreateSessionFromMockServiceCorrectly()
     {
         /*+@var \Mockery\MockeryInterface $mock */
@@ -69,14 +39,11 @@ class WebcheckoutTest extends TestCase
 
         $user = User::factory()->make();
         $user->save();
-
         $order = new Order();
-
         $order->user_id = $user->id;
         $order->currency = 'COP';
         $order->total = 10000;
         $order->save();
-
         $data = (new CreateSessionDataRequest())->getCreateSessionData($order);
 
         $mock = Mockery::mock(WebcheckoutService::class);
@@ -86,7 +53,6 @@ class WebcheckoutTest extends TestCase
                ->andReturn($this->mockResponseCreateSession($data));
 
         $response = $mock->createSession($data);
-
         $this->assertArrayHasKey('status', $response);
         $this->assertEquals('PENDING', $response['status']['status']);
         $this->assertArrayHasKey('requestId', $response);
@@ -96,8 +62,6 @@ class WebcheckoutTest extends TestCase
              ->once()
             ->with($session_id)
             ->andReturn($this->mockServiceGetInformationApporved($session_id));
-
-//        $responseGetSession = $response = (new WebcheckoutService())->getInformation($session_id);
         $responseGetSession = $mock->getInformation($session_id);
 
         $this->assertEquals($session_id, $responseGetSession['requestId']);
@@ -113,7 +77,6 @@ class WebcheckoutTest extends TestCase
             ->once()
             ->with($session_id)
             ->andReturn($this->mockServiceGetInformationApporved($session_id));
-
         $responseGetSession = $mock->getInformation($session_id);
 
         $this->assertEquals($session_id, $responseGetSession['requestId']);

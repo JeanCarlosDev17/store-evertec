@@ -28,14 +28,13 @@
 
                             <tr>
                                 <td class="align-middle">
-{{--                                    {{$order->created_at}}--}}
-{{--                                    @dump($order)--}}
+
                                     {{$order->createdAt}}
                                 </td>
                                 <td class="align-middle">{{$order->count}}</td>
                                 <td class="align-middle">${{$order->total}}</td>
                                 <td class="align-middle">{{$order->status}}</td>
-<!--                                TODO: cambiar  de  status a state-->
+
                                 <td class="align-middle">
                                     <a href="{{route('orders.show',[$order->id])}}" class="btn btn-success">Ir</a>
 
@@ -46,10 +45,6 @@
                         @endforeach
                         </tbody>
                     </table>
-
-
-
-
                 </div>
                 <div class="col- pb-1">
                     <nav aria-label="Page navigation">

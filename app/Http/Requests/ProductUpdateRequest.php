@@ -58,7 +58,6 @@ class ProductUpdateRequest extends FormRequest
             }
         }
         $msg += $files;
-
         return $msg;
     }
 
