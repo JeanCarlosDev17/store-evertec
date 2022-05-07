@@ -32,10 +32,10 @@ jobs:
         mkdir -p database
         touch database/database.sqlite
     - name: Execute tests (Unit and Feature tests) via PHPUnit
-        env:
-          DB_CONNECTION: sqlite
-          DB_DATABASE: database/database.sqlite
-        run: composer test-ci
+      env:
+        DB_CONNECTION: sqlite
+        DB_DATABASE: database/database.sqlite
+      run: composer test-c
     - name: Excecute phpcs
       run: composer phpcs_validate
     - name: Prepare paths for SonarQube analysis
@@ -45,7 +45,7 @@ jobs:
     - name: SonarCloud Scan
       uses: sonarsource/sonarcloud-github-action@master
       env:
-      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
 
