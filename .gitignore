@@ -21,7 +21,6 @@ yarn-error.logw
 /storage/debugbar/*.*
 /storage/framework/*.*
 /storage/framework/views/*.*
-/storage/framework/sessions/**
 /storage/framework/sessions/*.*
 .php-cs-fixer.cache
 
