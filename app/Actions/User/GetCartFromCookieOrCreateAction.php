@@ -12,6 +12,7 @@ class GetCartFromCookieOrCreateAction
         $this->getCartFromCookie = $getCartFromCookie;
     }
 
+//    Extrae a partir de la cookie el carrito si la cookie no existe el carrito tampoco entonces se crea uno
     public function execute(): Cart
     {
         $cart = $this->getCartFromCookie->execute();

@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Constants\RequestState;
 use App\Models\Order;
 use App\Services\WebcheckoutService;
 use Illuminate\Console\Command;
@@ -43,7 +44,7 @@ class CheckOrdersPayment extends Command
      */
     public function handle()
     {
-        $orders = Order::where('state', '=', 'PENDING')
+        $orders = Order::where('state', '=', RequestState::PENDING)
             ->where('session_id', '!=', null)
             ->get();
 
@@ -51,30 +52,20 @@ class CheckOrdersPayment extends Command
             foreach ($orders as $order) {
                 if (isset($order->session_id)) {
                     $response = $this->webcheckoutService->getInformation($order->session_id);
-
-                    if ($response['status']['status'] == 'APPROVED') {
+                    if ($response['status']['status'] == RequestState::APPROVED) {
                         $order->state = $response['status']['status'];
                         $order->save();
-                        //notificar al usuario que su compra fue realizada
+                        //TODO:notificar al usuario que su compra fue realizada
                     }
-
-                    if ($response['status']['status'] == 'REJECTED') {
+                    if ($response['status']['status'] == RequestState::REJECTED) {
                         $order->state = $response['status']['status'];
                         $order->save();
                         foreach ($order->products as $product) {
                             $product->increment('quantity', $product->pivot->quantity);
                         }
-                        // pago rechazado procesado
-                    }
-
-                    if ($response['status']['status'] == 'PENDING') {
-                        //sigue en pendiente
                     }
                 }
             }
-        } else {
-            //ninguna orden pendiente
-//
         }
 
         return 0;

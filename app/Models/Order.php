@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Constants\RequestState;
 use Carbon\Carbon;
 use Haruncpi\LaravelIdGenerator\IdGenerator;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -58,9 +59,9 @@ class Order extends Model
     public function getStatusAttribute()
     {
         $state = '';
-        if ($this->state == 'PENDING') {
+        if ($this->state == RequestState::PENDING) {
             $state = 'Pendiente';
-        } elseif ($this->state == 'APPROVED') {
+        } elseif ($this->state == RequestState::APPROVED) {
             $state = 'Aprobado';
         } else {
             $state = 'Pago Fallido';

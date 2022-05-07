@@ -13,7 +13,6 @@ class UserIndexTest extends TestCase
 
     public function boot()
     {
-        // Executed when a test database is created...
         ParallelTesting::setUpTestDatabase(function ($database, $token) {
             $this->artisan('db:seed');
         });
@@ -56,8 +55,6 @@ class UserIndexTest extends TestCase
             $userdata = $userArray;
         }
         $responseUsers->each(function ($item) use ($user, $userdata) {
-//            $this->assertEquals($user->id,$item->id);
-
             $item->id == $userdata->id ? $this->assertEquals($userdata->id, $item->id) : null;
         });
     }
