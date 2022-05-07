@@ -3,13 +3,6 @@ name: Laravel
 on:
   push:
     branches: [ main, develop ]
-ines (43 sloc)  1.44 KB
-   
-name: Laravel
-
-on:
-  push:
-    branches: [ main, develop ]
   pull_request:
     branches: [ main, develop ]
 
