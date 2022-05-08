@@ -29,7 +29,6 @@ jobs:
         mkdir -p database/framework/cache
         mkdir -p database/framework/sessions
         php artisan key:generate
-        php artisan config:cache
     - name: Directory Permissions
       run: chmod -R 777 storage bootstrap/cache
     - name: Create Database
