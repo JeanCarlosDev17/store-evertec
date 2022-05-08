@@ -35,7 +35,9 @@ jobs:
       env:
         DB_CONNECTION: sqlite
         DB_DATABASE: database/database.sqlite
-      run: composer test-ci
+        run: vendor/bin/phpunit --coverage-clover=coverage.xml
+    - name: Fix code coverage paths
+      run: sed -i 's@'$GITHUB_WORKSPACE'@/github/workspace/@g' coverage.xml
     - name: Excecute phpcs
       run: composer phpcs_validate
     - name: Prepare paths for SonarQube analysis
