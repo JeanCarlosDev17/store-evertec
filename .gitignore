@@ -19,10 +19,6 @@ yarn-error.logw
 /storage/images/**
 /storage/images/*.*
 /storage/debugbar/*.*
-
-
-
 .php-cs-fixer.cache
-
 ./.php-cs-fixer.cache
 
