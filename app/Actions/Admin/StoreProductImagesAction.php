@@ -14,7 +14,6 @@ class StoreProductImagesAction
         foreach ($files as $file) {
             $image = new Image();
             $image->file_name = (string)Str::uuid() . '.' . $file->getClientOriginalExtension();
-
             $file->storeAs($product->id, $image->file_name, config('filesystems.images_disk'));
             //path , name , disk
             $productImages->push($image);

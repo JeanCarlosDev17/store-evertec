@@ -39,17 +39,6 @@ class UserController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show(User $id)
-    {
-        //Consultar un registro individualmente
-    }
-
-    /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
@@ -57,18 +46,9 @@ class UserController extends Controller
      */
     public function edit(User $user): View
     {
-        //Mostrar vista para editar un registro
-
         return view('admin.editUser')->with('user', $user);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(UserUpdateRequest $request, User $user): RedirectResponse
     {
         $this->contractUserRepository->update($user, $request);

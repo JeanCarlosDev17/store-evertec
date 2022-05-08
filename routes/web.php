@@ -4,7 +4,6 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductCartController;
 use App\Http\Controllers\ProductController;
-use App\Http\Controllers\UploadController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -20,8 +19,6 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [ProductController::class, 'allToStore'])->name('home');
-
-Route::post('upload', [UploadController::class, 'store'])->middleware(['auth', 'verified', 'role:admin', 'nocache']);
 
 Route::get('/dashboard', function () {
     return view('dashboard');

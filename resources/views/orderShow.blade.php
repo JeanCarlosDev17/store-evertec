@@ -11,8 +11,8 @@
                 <div class="col-lg-8 table-responsive mb-5">
                     <h2>Orden de compra {{$order->refence}} </h2>
                     <h3>Estado -
-                        <span class="{{$order->state=='PENDING'? 'bg-warning text-dark':
-                                   ($order->state=='APPROVED'?'bg-success text-white':'bg-danger text-white')}}"
+                        <span class="{{$order->state==\App\Constants\RequestState::PENDING  ? 'bg-warning text-dark':
+                                   ($order->state== \App\Constants\RequestState::APPROVED?'bg-success text-white':'bg-danger text-white')}}"
                         >
                             {{$order->Status}}
 
@@ -70,7 +70,7 @@
                                 <h5 class="font-weight-bold">${{$order->total}}</h5>
                             </div>
 
-                            @if($order->state != 'APPROVED')
+                            @if(\App\Constants\RequestState::APPROVED != $order->state)
                                 <a href="{{$order->process_url}}" class="btn btn-block btn-primary my-3 py-3">
                                     Ir a pagar
                                 </a>

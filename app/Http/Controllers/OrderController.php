@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Actions\User\getCartFromCookie;
+use App\Constants\RequestState;
 use App\Models\Order;
 use App\Request\CreateSessionDataRequest;
 use App\Services\WebcheckoutService;
@@ -44,7 +45,7 @@ class OrderController extends Controller
         return DB::transaction(function () use ($request) {
             $user = $request->user();
             $order = $user->orders()->create([
-                'state'=>'PENDING',
+                'state'=>RequestState::PENDING,
             ]);
             $cart = $this->getCartFromCookie->execute();
 
@@ -53,10 +54,6 @@ class OrderController extends Controller
                     'product'=>'Se ha enviado un carrito de compras vacio intente nuevamente añadir y realizar la compra',
                 ]);
             }
-            //toma cada elemento de la collecion pasa por la funcion anomima como parametro $product
-            //genera un array $element donde  definimos la key o llave para acceder y los valores que contiene
-            //esa llave del array en este caso para poder usar attach necesitamos como llave los id de los
-            //productos y el valor  de quantity en ese registro
 
             $cartProductWithQuantity = $cart->products
                 ->mapWithKeys(function ($product) {
@@ -76,7 +73,6 @@ class OrderController extends Controller
             $order->currency = 'COP';
             $order->save();
             $cart->products()->detach();
-            //conectarse a Checkout
             $data = $this->createDataSession->getCreateSessionData($order);
             try {
                 $session = $this->webcheckoutService->createSession($data);
@@ -99,8 +95,7 @@ class OrderController extends Controller
             $response = $this->webcheckoutService->getInformation($order->session_id);
             if (($order->state != $response['status']['status'])) {
                 $order->state = $response['status']['status'];
-                if ($response['status']['status'] == 'REJECTED') {
-                    // Retornando a Buyme,  PAGO RECHAZADO'
+                if ($response['status']['status'] == RequestState::REJECTED) {
                     foreach ($order->products as $product) {
                         $product->increment('quantity', $product->pivot->quantity);
                     }

@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Constants\RequestState;
 use App\Models\Order;
 use App\Models\User;
 use App\Request\CreateSessionDataRequest;
@@ -35,7 +36,6 @@ class WebcheckoutTest extends TestCase
     public function testItCanCreateSessionFromMockServiceCorrectly()
     {
         /*+@var \Mockery\MockeryInterface $mock */
-        $data = $this->getCreateSessionData();
 
         $user = User::factory()->make();
         $user->save();
@@ -54,7 +54,7 @@ class WebcheckoutTest extends TestCase
 
         $response = $mock->createSession($data);
         $this->assertArrayHasKey('status', $response);
-        $this->assertEquals('PENDING', $response['status']['status']);
+        $this->assertEquals(RequestState::PENDING, $response['status']['status']);
         $this->assertArrayHasKey('requestId', $response);
         $this->assertArrayHasKey('processUrl', $response);
         $session_id = $response['requestId'];
@@ -66,7 +66,7 @@ class WebcheckoutTest extends TestCase
 
         $this->assertEquals($session_id, $responseGetSession['requestId']);
         $this->assertArrayHasKey('status', $responseGetSession);
-        $this->assertEquals('APPROVED', $responseGetSession['status']['status']);
+        $this->assertEquals(RequestState::APPROVED, $responseGetSession['status']['status']);
     }
 
     public function testItGetInformationFromServiceCorrectly()
@@ -81,7 +81,7 @@ class WebcheckoutTest extends TestCase
 
         $this->assertEquals($session_id, $responseGetSession['requestId']);
         $this->assertArrayHasKey('status', $responseGetSession);
-        $this->assertEquals('APPROVED', $responseGetSession['status']['status']);
+        $this->assertEquals(RequestState::APPROVED, $responseGetSession['status']['status']);
     }
 
     /**
@@ -117,7 +117,7 @@ class WebcheckoutTest extends TestCase
     {
         return [
                     'status'=> [
-                        'status'=> 'PENDING',
+                        'status'=> RequestState::PENDING,
                         'reason'=> 'PC',
                         'message'=> 'La petición se ha procesado correctamente',
                         'date'=> date('c'),
@@ -131,7 +131,7 @@ class WebcheckoutTest extends TestCase
         return [
                     'requestId'=> $id,
                     'status'=> [
-                        'status'=> 'APPROVED',
+                        'status'=> RequestState::APPROVED,
                         'reason'=> '00',
                         'message'=> 'La petición ha sido aprobada exitosamente',
                         'date'=> '2021-11-30T15:49:47-05:00',
@@ -174,7 +174,7 @@ class WebcheckoutTest extends TestCase
                     'payment' => [
                        [
                            'status' => [
-                           'status' => 'APPROVED',
+                           'status' => RequestState::APPROVED,
                            'reason' => '00',
                            'message' => 'Aprobada',
                            'date' => '2021-11-30T15:49:36-05:00',

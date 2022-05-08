@@ -36,9 +36,9 @@ class UserEloquent implements UserRepository
 
     public function update(User $user, Request $data): void
     {
+//        Valida en caso que el usuario ingrese una nueva contraseña
         if (isset($data->newPassword)) {
             UserPasswordUpdateValidator::validate($data);
-
             $user->password = $data->newPassword;
         }
         $user->name = $data->name;

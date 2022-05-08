@@ -21,7 +21,6 @@ class ProductController extends Controller
 
     public function create(): View
     {
-        //
         return view('admin.addProduct');
     }
 
@@ -39,36 +38,17 @@ class ProductController extends Controller
         return response()->json(['success'=>$result]);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Product  $product
-     * @return \Illuminate\Http\Response
-     */
     public function show(Product $product)
     {
         //
         return view('productShowDetails')->with('product', $product);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Product  $product
-     * @return \Illuminate\Http\Response
-     */
     public function edit(Product $product): View
     {
         return view('admin.editProduct')->with('product', $product);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Product  $product
-     * @return \Illuminate\Http\Response
-     */
     public function update(ProductUpdateRequest $request, Product $product, UpdateProductImagesAction $updateProductImagesAction)
     {
         $product->name = $request->input('name');
@@ -82,12 +62,6 @@ class ProductController extends Controller
         return response()->json(['success'=>$result]);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Product  $product
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Product $product)
     {
         $product->delete();
@@ -103,6 +77,7 @@ class ProductController extends Controller
         $product->save();
         return redirect(route('products.index'));
     }
+
     public function allToStore()
     {
         $products = Product::select('id', 'price', 'name', 'description', 'maker', 'quantity', 'state', 'discount')
