@@ -31,6 +31,9 @@ jobs:
         mkdir -p database
         touch database/database.sqlite
     
+    - name: Run tests with phpunit/phpunit
+      run: vendor/bin/phpunit --coverage-clover=coverage.xml
+      
     - name: Excecute phpcs
       run: composer phpcs_validate
     - name: Prepare paths for SonarQube analysis
@@ -47,8 +50,6 @@ jobs:
     - name: Install dependencies with composer
       run: composer update --no-ansi --no-interaction --no-progress
 
-    - name: Run tests with phpunit/phpunit
-      run: vendor/bin/phpunit --coverage-clover=coverage.xml
 
     - name: Fix code coverage paths
       run: sed -i 's@'$GITHUB_WORKSPACE'@/github/workspace/@g' coverage.xml
