@@ -23,11 +23,10 @@ jobs:
 
     steps:
     
-    - name: Set up MySQL
+    - name: Verify MySQL connection from host
       run: |
-        sudo /etc/init.d/mysql start
-        mysql -e 'CREATE DATABASE store-evertec-test' -u root -p root
-        mysql -u root -p root -e 'show databases;'
+        sudo apt-get install -y mysql-client
+        mysql --host 127.0.0.1 --port 32574 -uroot -proot -e "SHOW DATABASES"
 
     - name: Git checkout
       uses: actions/checkout@v2
