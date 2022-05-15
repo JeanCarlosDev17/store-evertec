@@ -24,8 +24,8 @@
         <?php echo $__env->renderEach('adminlte::partials.navbar.menu-item', $adminlte->menu('navbar-right'), 'item'); ?>
 
         
-        <?php if (Auth::user()): ?>
-            <?php if (config('adminlte.usermenu_enabled')): ?>
+        <?php if(Auth::user()): ?>
+            <?php if(config('adminlte.usermenu_enabled')): ?>
                 <?php echo $__env->make('adminlte::partials.navbar.menu-item-dropdown-user-menu', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
             <?php else: ?>
                 <?php echo $__env->make('adminlte::partials.navbar.menu-item-logout-link', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
@@ -33,7 +33,7 @@
         <?php endif; ?>
 
         
-        <?php if (config('adminlte.right_sidebar')): ?>
+        <?php if(config('adminlte.right_sidebar')): ?>
             <?php echo $__env->make('adminlte::partials.navbar.menu-item-right-sidebar-toggler', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
         <?php endif; ?>
     </ul>

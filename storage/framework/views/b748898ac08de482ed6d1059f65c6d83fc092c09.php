@@ -23,7 +23,7 @@
     <?php echo $__env->yieldContent('adminlte_css_pre'); ?>
 
     
-    <?php if (!config('adminlte.enabled_laravel_mix')): ?>
+    <?php if(!config('adminlte.enabled_laravel_mix')): ?>
         <link rel="stylesheet" href="<?php echo e(asset('vendor/fontawesome-free/css/all.min.css')); ?>">
         <link rel="stylesheet" href="<?php echo e(asset('vendor/overlayScrollbars/css/OverlayScrollbars.min.css')); ?>">
 
@@ -37,8 +37,8 @@
     <?php endif; ?>
 
     
-    <?php if (config('adminlte.livewire')): ?>
-        <?php if (app()->version() >= 7): ?>
+    <?php if(config('adminlte.livewire')): ?>
+        <?php if(app()->version() >= 7): ?>
             @livewireStyles
         <?php else: ?>
             <livewire:styles />
@@ -49,9 +49,9 @@
     <?php echo $__env->yieldContent('adminlte_css'); ?>
 
     
-    <?php if (config('adminlte.use_ico_only')): ?>
+    <?php if(config('adminlte.use_ico_only')): ?>
         <link rel="shortcut icon" href="<?php echo e(asset('favicons/favicon.ico')); ?>" />
-    <?php elseif (config('adminlte.use_full_favicon')): ?>
+    <?php elseif(config('adminlte.use_full_favicon')): ?>
         <link rel="shortcut icon" href="<?php echo e(asset('favicons/favicon.ico')); ?>" />
         <link rel="apple-touch-icon" sizes="57x57" href="<?php echo e(asset('favicons/apple-icon-57x57.png')); ?>">
         <link rel="apple-touch-icon" sizes="60x60" href="<?php echo e(asset('favicons/apple-icon-60x60.png')); ?>">
@@ -79,7 +79,7 @@
     <?php echo $__env->yieldContent('body'); ?>
 
     
-    <?php if (!config('adminlte.enabled_laravel_mix')): ?>
+    <?php if(!config('adminlte.enabled_laravel_mix')): ?>
         <script src="<?php echo e(asset('vendor/jquery/jquery.min.js')); ?>"></script>
         <script src="<?php echo e(asset('vendor/bootstrap/js/bootstrap.bundle.min.js')); ?>"></script>
         <script src="<?php echo e(asset('vendor/overlayScrollbars/js/jquery.overlayScrollbars.min.js')); ?>"></script>
@@ -93,8 +93,8 @@
     <?php endif; ?>
 
     
-    <?php if (config('adminlte.livewire')): ?>
-        <?php if (app()->version() >= 7): ?>
+    <?php if(config('adminlte.livewire')): ?>
+        <?php if(app()->version() >= 7): ?>
             @livewireScripts
         <?php else: ?>
             <livewire:scripts />

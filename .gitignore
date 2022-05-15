@@ -21,4 +21,7 @@ yarn-error.logw
 /storage/debugbar/*.*
 .php-cs-fixer.cache
 ./.php-cs-fixer.cache
-
+storage/app/public
+public/publicStorage
+storage/app/*.*
+storage/app/**

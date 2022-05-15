@@ -4,11 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Actions\Admin\StoreProductImagesAction;
 use App\Actions\Admin\UpdateProductImagesAction;
+use App\Exports\ProductsExport;
+use App\Http\Requests\ExportDateRequest;
 use App\Http\Requests\ProductStoreRequest;
 use App\Http\Requests\ProductUpdateRequest;
+use App\Jobs\NotifyCompleteExportToUser;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
 use Illuminate\View\View;
 
 class ProductController extends Controller
@@ -105,5 +109,17 @@ class ProductController extends Controller
             $result = '';
         }
         return view('welcome')->with(['products'=>$products, 'result'=>$result]);
+    }
+
+    public function export(ExportDateRequest $request)
+    {
+        $filepath = 'Products_' . Str::uuid()->toString() . '.xlsx';
+
+        (new ProductsExport($request->get('start'), $request->get('end')))
+              ->store($filepath,'public')->chain([
+                  new NotifyCompleteExportToUser(auth()->user(), asset('storage/'.$filepath)),
+            ]);
+        dump("controlador link",asset('storage/'.$filepath));
+        return redirect()->back()->with('result', 'Exporte en proceso, te enviaremos un email cuando finalice ');
     }
 }

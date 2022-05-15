@@ -15,7 +15,7 @@
 
                 
                 <input class="form-control form-control-navbar" type="search"
-                    <?php if (isset($item['id'])): ?> id="<?php echo e($item['id']); ?>" <?php endif; ?>
+                    <?php if(isset($item['id'])): ?> id="<?php echo e($item['id']); ?>" <?php endif; ?>
                     name="<?php echo e($item['input_name']); ?>"
                     placeholder="<?php echo e($item['text']); ?>"
                     aria-label="<?php echo e($item['text']); ?>">

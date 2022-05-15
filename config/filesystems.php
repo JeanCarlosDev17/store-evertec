@@ -28,6 +28,7 @@ return [
     |
     */
     'images_disk'=>env('FILESYSTEM_IMAGES_DISK', 'local'),
+    'exports_disk'=>env('FILESYSTEM_EXPORTS_DISK', 'local'),
     'disks' => [
 
         'local' => [
@@ -38,6 +39,11 @@ return [
             'driver' => 'local',
             'root' => storage_path('images'),
             'url' => env('APP_URL') . '/images',
+        ],
+        'exports' => [
+            'driver' => 'local',
+            'root' => storage_path('exports'),
+            'url' => env('APP_URL') . '/exports',
         ],
         'public' => [
             'driver' => 'local',
@@ -73,6 +79,7 @@ return [
     'links' => [
         public_path('storage') => storage_path('app/public'),
         public_path('images') => storage_path('/images'),
+        public_path('exports') => storage_path('/exports'),
     ],
 
 ];

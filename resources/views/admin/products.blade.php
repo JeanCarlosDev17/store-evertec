@@ -19,32 +19,33 @@
     <div>
         <p>Bienvenido al panel de administración  de productos</p>
         <a href="{{route('products.create')}}" class="btn btn-outline-success mb-4">AGREGAR PRODUCTO</a>
+        <div class="row">
+            <form action="{{route('products.export')}}" class="flex">
+                <button type="submit" class="btn btn-outline-info mb-4">EXPORTAR PRODUCTOS</button>
+                <span>desde</span>
+                <input type="date" name="start" class="mx-2 mb-4"  required>
+                <span>hasta</span>
+                <input type="date" name="end" class="mx-2 mb-4" required>
+
+            </form>
+        </div>
+        <a href="{{route('products.create')}}" class="btn  mb-4">IMPORTAR PRODUCTOS</a>
+        <div class="row">
+            <form action="{{route('products.create')}}" class="flex">
+                <button type="submit" class="btn btn-outline-dark mb-4">REPORTE PRODUCTOS</button>
+                <span>desde</span>
+                <input type="date" name="start" class="mx-2 mb-4" required>
+                <span>hasta</span>
+                <input type="date" name="end" class="mx-2 mb-4" required>
+
+            </form>
+        </div>
         <x-admin.indexProducts :products="$products">
 
         </x-admin.indexProducts>
 
     </div>
 
-{{--    <!-- Modal -->--}}
-{{--    <div class="modal fade" id="modalAlert" tabindex="-1" aria-labelledby="modalAlertLabel" aria-hidden="true">--}}
-{{--        <div class="modal-dialog modal-dialog-centered">--}}
-{{--            <div class="modal-content">--}}
-{{--                <div class="modal-header">--}}
-{{--                    <h5 class="modal-title" id="modalAlertLabel">Modal title</h5>--}}
-{{--                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">--}}
-{{--                        <span aria-hidden="true">&times;</span>--}}
-{{--                    </button>--}}
-{{--                </div>--}}
-{{--                <div class="modal-body">--}}
-{{--                    BORRADO CORRECTAMENTE--}}
-{{--                </div>--}}
-{{--                <div class="modal-footer">--}}
-{{--                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>--}}
-{{--                    <button type="button" class="btn btn-primary">Save changes</button>--}}
-{{--                </div>--}}
-{{--            </div>--}}
-{{--        </div>--}}
-{{--    </div>--}}
 
 @stop
 
@@ -104,14 +105,7 @@
 
 
 
-{{--    <script >--}}
 
-{{--        $(document).ready(function() {--}}
-{{--            $("#success-alert").fadeTo(4500, 500).slideUp(500, function(){--}}
-{{--                $("#success-alert").slideUp(500);--}}
-{{--            });--}}
-{{--        })--}}
-{{--    </script>--}}
 
 
 @stop

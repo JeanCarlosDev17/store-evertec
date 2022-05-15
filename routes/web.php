@@ -36,10 +36,18 @@ Route::middleware(['auth', 'verified', 'role:admin', 'nocache'])->group(function
     Route::get('admin/users/{user}/edit', [UserController::class, 'edit'])->name('users.edit');
     Route::put('admin/users/{user}/state', [UserController::class, 'state'])->name('users.state');
 });
+
+Route::get('/admin/products/export', [ProductController::class, 'export'])
+    ->middleware(['auth', 'verified', 'role:admin'])
+    ->name('products.export');
+
 Route::prefix('admin')->middleware(['auth', 'verified', 'role:admin', 'nocache'])->group(function () {
     Route::resource('products', ProductController::class);
     Route::put('product/{user}/state', [ProductController::class, 'state'])->name('products.state');
 });
+
+
+
 
 Route::get('/products/{product}/detail', [ProductController::class, 'show'])->name('products.detail');
 Route::get('/products/search', [ProductController::class, 'search'])->name('products.search');
