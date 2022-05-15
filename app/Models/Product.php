@@ -12,7 +12,22 @@ class Product extends Model
 {
     use HasFactory;
     use SoftDeletes;
-
+    protected $fillable = [
+        'id',
+        'code',
+        'name',
+        'description',
+        'price',
+        'discount',
+        'maker',
+        'quantity',
+        'state',
+        'sold_out_at',
+        'deleted_at',
+        'expired_at',
+        'created_at',
+        'updated_at',
+    ];
     public function images(): HasMany
     {
         return $this->hasMany(Image::class);

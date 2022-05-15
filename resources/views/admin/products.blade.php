@@ -10,6 +10,8 @@
 
 {{--    <x-admin.modalSuccess ></x-admin.modalSuccess>--}}
     <x-admin.validationSuccess ></x-admin.validationSuccess>
+    <x-admin.validationErrors :errors="$errors"></x-admin.validationErrors>
+
     <h1>Administrador</h1>
 @stop
 
@@ -19,27 +21,7 @@
     <div>
         <p>Bienvenido al panel de administración  de productos</p>
         <a href="{{route('products.create')}}" class="btn btn-outline-success mb-4">AGREGAR PRODUCTO</a>
-        <div class="row">
-            <form action="{{route('products.export')}}" class="flex">
-                <button type="submit" class="btn btn-outline-info mb-4">EXPORTAR PRODUCTOS</button>
-                <span>desde</span>
-                <input type="date" name="start" class="mx-2 mb-4"  required>
-                <span>hasta</span>
-                <input type="date" name="end" class="mx-2 mb-4" required>
 
-            </form>
-        </div>
-        <a href="{{route('products.create')}}" class="btn  mb-4">IMPORTAR PRODUCTOS</a>
-        <div class="row">
-            <form action="{{route('products.create')}}" class="flex">
-                <button type="submit" class="btn btn-outline-dark mb-4">REPORTE PRODUCTOS</button>
-                <span>desde</span>
-                <input type="date" name="start" class="mx-2 mb-4" required>
-                <span>hasta</span>
-                <input type="date" name="end" class="mx-2 mb-4" required>
-
-            </form>
-        </div>
         <x-admin.indexProducts :products="$products">
 
         </x-admin.indexProducts>

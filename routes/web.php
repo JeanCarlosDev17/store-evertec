@@ -41,6 +41,14 @@ Route::get('/admin/products/export', [ProductController::class, 'export'])
     ->middleware(['auth', 'verified', 'role:admin'])
     ->name('products.export');
 
+Route::post('/admin/products/import', [ProductController::class, 'import'])
+    ->middleware(['auth', 'verified', 'role:admin'])
+    ->name('products.import');
+
+Route::get('admin/reports',function(){
+    return view('admin.reports');
+});
+
 Route::prefix('admin')->middleware(['auth', 'verified', 'role:admin', 'nocache'])->group(function () {
     Route::resource('products', ProductController::class);
     Route::put('product/{user}/state', [ProductController::class, 'state'])->name('products.state');

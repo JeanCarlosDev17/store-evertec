@@ -264,16 +264,8 @@ return [
             'icon' => 'fas fa-home',
         ],
         ['header' => 'AJUSTES'],
-        [
-            'text' => 'profile',
-            'url'  => 'admin/settings',
-            'icon' => 'fas fa-fw fa-user',
-        ],
-        [
-            'text' => 'change_password',
-            'url'  => 'admin/settings',
-            'icon' => 'fas fa-fw fa-lock',
-        ],
+
+
         [
             'text'    => ' Usuarios',
             'icon'    => 'fas fa-users-cog',
@@ -317,7 +309,13 @@ return [
             'text'    => 'Tienda',
             'icon'    => 'fas fa-shopping-cart',
             'url'     => 'admin/products',
-        ], /*,
+        ],
+        [
+            'text' => 'Reportes',
+            'url'  => 'admin/reports',
+            'icon' => 'fas fa-file-excel',
+        ],
+        /*,
         ['header' => 'labels'],
         [
             'text'       => 'important',

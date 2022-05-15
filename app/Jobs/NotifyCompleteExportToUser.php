@@ -30,7 +30,7 @@ class NotifyCompleteExportToUser implements ShouldQueue
      */
     public function handle()
     {
-        dump('job',$this->filePath);
+
         $this->user->notify(new ExportProductsDone($this->filePath));
         \Log::info('Finalizo la exportacion');
         \Log::info('Notificacion enviada a'. $this->user->email);

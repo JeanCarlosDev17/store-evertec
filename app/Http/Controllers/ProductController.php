@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Actions\Admin\ImportProductsAction;
 use App\Actions\Admin\StoreProductImagesAction;
 use App\Actions\Admin\UpdateProductImagesAction;
 use App\Exports\ProductsExport;
 use App\Http\Requests\ExportDateRequest;
+use App\Http\Requests\ImportedExcelRequest;
 use App\Http\Requests\ProductStoreRequest;
 use App\Http\Requests\ProductUpdateRequest;
 use App\Jobs\NotifyCompleteExportToUser;
@@ -116,10 +118,19 @@ class ProductController extends Controller
         $filepath = 'Products_' . Str::uuid()->toString() . '.xlsx';
 
         (new ProductsExport($request->get('start'), $request->get('end')))
-              ->store($filepath,'public')->chain([
-                  new NotifyCompleteExportToUser(auth()->user(), asset('storage/'.$filepath)),
-            ]);
-        dump("controlador link",asset('storage/'.$filepath));
+            ->store($filepath, 'public')
+            ->chain(
+                [
+                    new NotifyCompleteExportToUser(auth()->user(), asset('storage/' . $filepath)),
+                ]
+            );
+
         return redirect()->back()->with('result', 'Exporte en proceso, te enviaremos un email cuando finalice ');
+    }
+
+    public function import(ImportedExcelRequest $request, ImportProductsAction $importProductsAction)
+    {
+        $importProductsAction->execute($request->file('file'));
+        return redirect()->back()->with('result', 'importe en proceso, te enviaremos un email cuando finalice ');
     }
 }

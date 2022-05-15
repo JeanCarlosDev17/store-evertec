@@ -3,30 +3,19 @@
 namespace App\Notifications;
 
 use Illuminate\Bus\Queueable;
+use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class ExportProductsDone extends Notification
+class NotifyUserOfCompletedImport extends Notification
 {
     use Queueable;
 
-    protected $link;
-    /**
-     * Create a new notification instance.
-     *
-     * @return void
-     */
-    public function __construct($link)
+
+    public function __construct()
     {
-        $this->link = $link;
     }
 
-    /**
-     * Get the notification's delivery channels.
-     *
-     * @param  mixed  $notifiable
-     * @return array
-     */
     public function via($notifiable)
     {
         return ['mail'];
@@ -40,12 +29,11 @@ class ExportProductsDone extends Notification
      */
     public function toMail($notifiable)
     {
-
-        return (new MailMessage())
-                    ->subject('StoreEvertec Tu Exporte de productos ha sido completado')
-                    ->line('El exporte de los productos a finalizado con exito')
-                    ->action('Ver Exporte', $this->link)
-                    ->line('Nos vemos la proxima!');
+        return (new MailMessage)
+                    ->subject('StoreEvertec Tu Importe de productos ha sido completado')
+                    ->line('Store Evertec Importe finalizado.')
+//                    ->action('Su importe ha finalizado')
+                    ->line('Nos vemos pronto!');
     }
 
     /**
