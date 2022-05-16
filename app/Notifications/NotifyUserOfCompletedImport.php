@@ -3,14 +3,12 @@
 namespace App\Notifications;
 
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
 class NotifyUserOfCompletedImport extends Notification
 {
     use Queueable;
-
 
     public function __construct()
     {
@@ -29,7 +27,7 @@ class NotifyUserOfCompletedImport extends Notification
      */
     public function toMail($notifiable)
     {
-        return (new MailMessage)
+        return (new MailMessage())
                     ->subject('StoreEvertec Tu Importe de productos ha sido completado')
                     ->line('Store Evertec Importe finalizado.')
 //                    ->action('Su importe ha finalizado')

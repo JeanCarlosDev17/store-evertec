@@ -28,6 +28,5 @@ class ExportDateRequest extends FormRequest
             'start' => 'required|date',
             'end' => 'required|date',
         ];
-
     }
 }

@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\Contracts\Auth\UserRepository;
 use App\Eloquent\Auth\UserEloquent;
 use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -28,6 +29,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         //
+        Schema::defaultStringLength(191);
         Paginator::useBootstrap();
     }
 }

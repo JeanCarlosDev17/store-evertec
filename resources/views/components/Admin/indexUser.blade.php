@@ -1,6 +1,7 @@
 @props(['users'])
 <div class="table-responsive-md">
     <table class="table table-striped table-bordered dt-responsive display " id="users" cellspacing="0" width="100%" style="width: 100% !important;">
+
     @csrf
         @csrf
         <thead>
@@ -12,7 +13,7 @@
             <th scope="col">Estado</th>
             <th scope="col">Editar</th>
             <th scope="col">Eliminar</th>
-            <th scope="col">Activar/Desactivar</th>
+            <th scope="col">Activar</th>
 
         </tr>
         </thead>

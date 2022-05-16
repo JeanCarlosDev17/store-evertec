@@ -265,7 +265,6 @@ return [
         ],
         ['header' => 'AJUSTES'],
 
-
         [
             'text'    => ' Usuarios',
             'icon'    => 'fas fa-users-cog',
@@ -304,6 +303,11 @@ return [
                     'url'  => '#',
                 ],
             ],*/
+        ],
+        [
+            'text'    => 'Roles',
+            'icon'    => 'fas fa-users-cog',
+            'url'     => 'admin/roles',
         ],
         [
             'text'    => 'Tienda',

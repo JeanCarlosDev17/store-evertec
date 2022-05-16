@@ -21,10 +21,16 @@ class UserEloquent implements UserRepository
 
     public function Store(array $data): User
     {
+        dump($data);
         $this->user->name = $data['name'];
         $this->user->email = $data['email'];
         $this->user->password = $this->userPasswordHash->generateHash($data['password']);
-        $this->user->assignRole('user');
+        if (isset($data['role'])) {
+            $this->user->assignRole($data['role']);
+        } else {
+            $this->user->assignRole('user');
+        }
+
         $this->user->save();
         return $this->user;
     }
@@ -33,7 +39,10 @@ class UserEloquent implements UserRepository
     {
         return  User::role('user')->get();
     }
-
+    public function index(): Collection
+    {
+        return  User::get();
+    }
     public function update(User $user, Request $data): void
     {
 //        Valida en caso que el usuario ingrese una nueva contraseña
@@ -42,7 +51,7 @@ class UserEloquent implements UserRepository
             $user->password = $data->newPassword;
         }
         $user->name = $data->name;
-
+        $user->syncRoles([$data['role']]);
         $user->save();
     }
 

@@ -13,6 +13,7 @@
         @section('content')
             <div>
                 <p>Bienvenido al panel de administración </p>
+                <a href="{{route('users.create')}}" class="btn btn-outline-success mb-4">Crear Usuario</a>
                 <x-admin.validationSuccess ></x-admin.validationSuccess>
                 <x-admin.indexUser :users="$users">
 

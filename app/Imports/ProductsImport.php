@@ -5,12 +5,10 @@ namespace App\Imports;
 use App\Models\Product;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Maatwebsite\Excel\Concerns\Importable;
-use Maatwebsite\Excel\Concerns\SkipsOnFailure;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithChunkReading;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 use Maatwebsite\Excel\Concerns\WithUpserts;
-use Maatwebsite\Excel\Validators\Failure;
 
 class ProductsImport implements WithHeadingRow, ToModel, WithUpserts, ShouldQueue, WithChunkReading
 {
@@ -37,7 +35,6 @@ class ProductsImport implements WithHeadingRow, ToModel, WithUpserts, ShouldQueu
     {
         return 'code';
     }
-
 
     public function chunkSize(): int
     {

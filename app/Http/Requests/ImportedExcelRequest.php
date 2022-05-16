@@ -6,15 +6,15 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class ImportedExcelRequest extends FormRequest
 {
-    public function authorize():bool
+    public function authorize(): bool
     {
         return true;
     }
 
-    public function rules():array
+    public function rules(): array
     {
         return [
-            'file' => 'required|file|mimes:csv,xlsx'
+            'file' => 'required|file|mimes:csv,xlsx',
         ];
     }
 }

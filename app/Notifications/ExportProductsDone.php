@@ -40,7 +40,6 @@ class ExportProductsDone extends Notification
      */
     public function toMail($notifiable)
     {
-
         return (new MailMessage())
                     ->subject('StoreEvertec Tu Exporte de productos ha sido completado')
                     ->line('El exporte de los productos a finalizado con exito')
